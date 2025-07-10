@@ -41,7 +41,7 @@ return {
 			integrations = {
 				cmp = true,
 				gitsigns = true,
-				nvimtree = true,
+                neotree = true,
 				treesitter = true,
 				notify = false,
 				mini = {
