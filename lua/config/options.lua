@@ -19,7 +19,7 @@ opt.smartcase = true
 
 vim.opt.fillchars:append({ eob = " " }) -- hide tildies
 vim.opt.clipboard = "unnamedplus" -- make it use system clipboard
-
+vim.opt.laststatus = 2
 opt.wrap = false
 
 vim.opt.termguicolors = true
