@@ -15,8 +15,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- sourcing options
+-- sourcing options and keymaps
 require("config.options")
+require("config.keymaps")
 
 -- Setup lazy.nvim
 require("lazy").setup({
