@@ -6,7 +6,7 @@ set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 set("n", "<leader><leader>x", "<cmd>!chmod +x %<CR>", { silent = false })
 set("n", "J", "mzJ`z")
 
-set("n", "<leader>=", ":keepjumps normal! magg=G`a<CR>")
+set("n", "<leader>=", ":keepjumps normal! magg=G`azz<CR>")
 
 set("n", "<leader>l", ":Lazy<CR>")
 -- set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")

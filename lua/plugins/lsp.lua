@@ -2,40 +2,34 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
         {
-            "williamboman/mason.nvim",
+            "mason-org/mason.nvim",
             opts = {
                 ui = { border = "rounded" },
             },
         },
+        { "mason-org/mason-lspconfig.nvim" },
         {
-            "williamboman/mason-lspconfig.nvim",
-            opts = {},
-        },
-        {
-            "jose-elias-alvarez/null-ls.nvim",
-        },
-        -- Optional: fidget to show LSP progress
-        {
-            "j-hui/fidget.nvim",
-            opts = {},
-        },
-        -- Blink completion
-        {
+            "saghen/blink.cmp",
+            dependencies = { "rafamadriz/friendly-snippets" },
+            version = "1.*",
+            opts = {
+                keymap = { preset = "default" },
+                appearance = { nerd_font_variant = "mono" },
+                completion = { documentation = { auto_show = false } },
+                sources = {
+                    default = { "lsp", "path", "snippets", "buffer" },
+                },
+            },
+            opts_extend = { "sources.default" },
         },
     },
     config = function()
-        local lspconfig = require("lspconfig")
-        local mason = require("mason")
-        local mason_lspconfig = require("mason-lspconfig")
-        local null_ls = require("null-ls")
-        local blink_cmp = require("blink.cmp")
+        require("mason").setup()
 
-        -- Extend capabilities for blink.cmp
-        local capabilities = blink_cmp.extend_capabilities(vim.lsp.protocol.make_client_capabilities())
+        local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-        -- Keymaps for LSP
-        local on_attach = function(client, bufnr)
-            local opts = { buffer = bufnr, remap = false }
+        local on_attach = function(_, bufnr)
+            local opts = { buffer = bufnr, noremap = true, silent = true }
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
             vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
             vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -45,60 +39,17 @@ return {
             vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
         end
 
-        -- Mason setup
-        mason.setup()
-        mason_lspconfig.setup({
-            ensure_installed = { "lua_ls", "pyright", "tsserver" },
-        })
+        require("mason-lspconfig").setup {
+            handlers = {
+                -- default handler for all servers
+                function(server_name)
+                    require("lspconfig")[server_name].setup {
+                        capabilities = capabilities,
+                        on_attach = on_attach,
+                    }
+                end,
 
-        -- Setup each installed LSP server
-        mason_lspconfig.setup_handlers({
-            function(server_name)
-                lspconfig[server_name].setup({
-                    capabilities = capabilities,
-                    on_attach = on_attach,
-                })
-            end,
-            ["lua_ls"] = function()
-                lspconfig.lua_ls.setup({
-                    capabilities = capabilities,
-                    on_attach = on_attach,
-                    settings = {
-                        Lua = {
-                            diagnostics = { globals = { "vim" } },
-                            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-                        },
-                    },
-                })
-            end,
-        })
-
-        -- Null-ls setup
-        null_ls.setup({
-            sources = {
-                null_ls.builtins.formatting.stylua,
-                null_ls.builtins.formatting.black,
-                null_ls.builtins.formatting.prettier,
-                null_ls.builtins.diagnostics.eslint,
-                null_ls.builtins.completion.spell,
             },
-            on_attach = on_attach,
-        })
-
-        -- Autoformat on save
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            pattern = "*",
-            callback = function()
-                vim.lsp.buf.format({ async = false })
-            end,
-        })
-
-        -- Diagnostic config
-        vim.diagnostic.config({
-            virtual_text = true,
-            signs = true,
-            underline = true,
-            severity_sort = true,
-        })
+        }
     end,
 }
