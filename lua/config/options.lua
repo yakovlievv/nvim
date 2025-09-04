@@ -18,7 +18,7 @@ opt.smarttab = true    -- makes tab use shiftwidth instead of tabstop in new lin
 
 -- whitespace
 opt.list = true
-opt.listchars = "eol:.,tab:>-,trail:~,extends:>,precedes:<"
+-- opt.listchars = "eol:.,tab:>-,trail:~,extends:>,precedes:<"
 
 -- Searching
 opt.ignorecase = true  -- case-insensitive search by default
@@ -42,7 +42,7 @@ opt.updatetime = 50     -- faster completion & diagnostic updates
 
 
 
-vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
+vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim-undodir"
 vim.opt.undofile = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
@@ -51,6 +51,12 @@ vim.opt.smartcase = true
 
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
+vim.diagnostic.config({
+  virtual_text = true,   -- show messages inline
+  signs = true,          -- keep gutter icons
+  underline = true,
+  update_in_insert = false,
+})
 
 
 

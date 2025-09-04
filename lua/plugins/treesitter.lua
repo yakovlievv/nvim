@@ -1,46 +1,14 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	branch = 'master',
-	lazy = false,
-	build = ":TSUpdate",
-	opts = {
-		ensure_installed = {
-			"bash",
-			"c",
-			"diff",
-			"html",
-			"htmldjango",
-			"javascript",
-			"jsdoc",
-			"json",
-			"jsonc",
-			"lua",
-			"luadoc",
-			"luap",
-			"markdown",
-			"markdown_inline",
-			"printf",
-			"python",
-			"query",
-			"regex",
-			"toml",
-			"tsx",
-			"typescript",
-			"vim",
-			"vimdoc",
-			"xml",
-			"yaml",
-		},
-	},
+    "nvim-treesitter/nvim-treesitter",
+    branch = 'master',
+    lazy = false,
+    build = ":TSUpdate",
+    config = function ()
+        require("nvim-treesitter.configs").setup {
+            ensure_installed = {},   -- empty or a small curated list
+            sync_install = false,
+            auto_install = true,    -- install missing parsers when entering buffer
+            highlight = { enable = true },
+        }
+    end
 }
-
-
-
-
-
-
-
-
-
-
-
