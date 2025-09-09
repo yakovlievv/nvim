@@ -15,7 +15,24 @@ return {
 			opts_extend = { "sources.default" },
 			config = function()
 				require("blink-cmp").setup({
-					keymap = { preset = "default" },
+					keymap = {
+						preset = "none",
+						["<C-d"] = { "show_documentation", "hide_documentation" },
+
+						["<C-e>"] = { "hide" },
+						["<C-y>"] = { "select_and_accept", "show" },
+
+						["<Up>"] = { "select_prev", "fallback" },
+						["<Down>"] = { "select_next", "fallback" },
+						["<C-k>"] = { "select_prev", "fallback_to_mappings" },
+						["<C-j>"] = { "select_next", "fallback_to_mappings" },
+
+						["<C-b>"] = { "scroll_documentation_up", "fallback" },
+						["<C-f>"] = { "scroll_documentation_down", "fallback" },
+
+						["<C-l>"] = { "snippet_forward", "fallback" },
+						["<C-h>"] = { "snippet_backward", "fallback" },
+					},
 					appearance = { nerd_font_variant = "mono" },
 					completion = {
 						ghost_text = { enabled = true },
