@@ -9,53 +9,6 @@ return {
 		},
 		{ "mason-org/mason-lspconfig.nvim" },
 		{
-			"saghen/blink.cmp",
-			dependencies = { "rafamadriz/friendly-snippets" },
-			version = "1.*",
-			opts_extend = { "sources.default" },
-			config = function()
-				require("blink-cmp").setup({
-					keymap = {
-						preset = "none",
-						["<C-d"] = { "show_documentation", "hide_documentation" },
-
-						["<C-e>"] = { "hide" },
-						["<C-y>"] = { "select_and_accept", "show" },
-
-						["<Up>"] = { "select_prev", "fallback" },
-						["<Down>"] = { "select_next", "fallback" },
-						["<C-k>"] = { "select_prev", "fallback_to_mappings" },
-						["<C-j>"] = { "select_next", "fallback_to_mappings" },
-
-						["<C-b>"] = { "scroll_documentation_up", "fallback" },
-						["<C-f>"] = { "scroll_documentation_down", "fallback" },
-
-						["<C-l>"] = { "snippet_forward", "fallback" },
-						["<C-h>"] = { "snippet_backward", "fallback" },
-					},
-					appearance = { nerd_font_variant = "mono" },
-					completion = {
-						ghost_text = { enabled = true },
-						documentation = { auto_show = true, auto_show_delay_ms = 0 },
-					},
-					sources = {
-						default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-						providers = {
-							lazydev = {
-								name = "LazyDev",
-								module = "lazydev.integrations.blink",
-								-- make lazydev completions top priority (see `:h blink.cmp`)
-								score_offset = 100,
-							},
-						},
-					},
-				})
-			end,
-		},
-		{
-			"nvimtools/none-ls.nvim",
-		},
-		{
 			"folke/lazydev.nvim",
 			ft = "lua", -- only load on lua files
 			opts = {
@@ -101,37 +54,6 @@ return {
 					})
 				end,
 			},
-		})
-
-		local null_ls = require("null-ls")
-
-		null_ls.setup({
-			sources = {
-				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.prettier,
-				null_ls.builtins.formatting.black,
-			},
-		})
-
-		-- In your lua config, e.g., `after/plugin/format.lua`
-		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = augroup,
-			pattern = "*", -- all filetypes, or you can restrict to e.g., "*.py"
-			callback = function()
-				local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
-				for _, client in ipairs(clients) do
-					if client.supports_method("textDocument/formatting") then
-						vim.lsp.buf.format({
-							bufnr = 0,
-							filter = function(c)
-								return c.name == "null-ls"
-							end, -- only use null-ls
-						})
-					end
-				end
-			end,
 		})
 	end,
 }
