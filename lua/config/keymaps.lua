@@ -1,7 +1,7 @@
 local keymap = vim.keymap
 local set = vim.keymap.set
 
--------- Visual mode stuff -------- 
+-------- Visual mode stuff --------
 
 -- Move selected lines
 set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
@@ -13,14 +13,13 @@ set("v", "<", "<gv")
 
 -- Reselect last pasted area
 keymap.set("n", "<leader>v", "printf('`[%s`]', getregtype()[0])", {
-    expr = true,
-    desc = "reselect last pasted area",
+	expr = true,
+	desc = "reselect last pasted area",
 })
 
 -------- Yanking Pasting --------
 -- Paste and not copy
 set("x", "<leader>p", [["_dP]])
-
 
 set("n", "J", "mzJ`z")
 
@@ -30,25 +29,24 @@ set("n", "J", "mzJ`z")
 set("n", "<leader>=", ":keepjumps normal! magg=G`azz<CR>")
 set("n", "<leader>l", ":Lazy<CR>")
 
-set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlights text when yanking",
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+	desc = "Highlights text when yanking",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
-
 
 set({ "n", "x" }, "H", "^")
 set({ "n", "x" }, "L", "g_")
 
 set("n", "<leader><leader>x", "<cmd>!chmod +x %<CR>", { silent = false })
 
-set("n", "<C-M-Up>",    ":resize -2<CR>", { silent = true, desc = "Decrease height" })
-set("n", "<C-M-Down>",  ":resize +2<CR>", { silent = true, desc = "Increase height" })
-set("n", "<C-M-Left>",  ":vertical resize -2<CR>", { silent = true, desc = "Decrease width" })
+set("n", "<C-M-Up>", ":resize -2<CR>", { silent = true, desc = "Decrease height" })
+set("n", "<C-M-Down>", ":resize +2<CR>", { silent = true, desc = "Increase height" })
+set("n", "<C-M-Left>", ":vertical resize -2<CR>", { silent = true, desc = "Decrease width" })
 set("n", "<C-M-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increase width" })
 
 -- Tmux sessionizer
