@@ -1,4 +1,3 @@
-local keymap = vim.keymap
 local set = vim.keymap.set
 
 -------- Visual mode stuff --------
@@ -12,7 +11,7 @@ set("v", ">", ">gv")
 set("v", "<", "<gv")
 
 -- Reselect last pasted area
-keymap.set("n", "<leader>v", "printf('`[%s`]', getregtype()[0])", {
+set("n", "<leader>v", "printf('`[%s`]', getregtype()[0])", {
 	expr = true,
 	desc = "reselect last pasted area",
 })
@@ -44,10 +43,10 @@ set({ "n", "x" }, "L", "g_")
 
 set("n", "<leader><leader>x", "<cmd>!chmod +x %<CR>", { silent = false })
 
-set("n", "<C-M-Up>", ":resize -2<CR>", { silent = true, desc = "Decrease height" })
-set("n", "<C-M-Down>", ":resize +2<CR>", { silent = true, desc = "Increase height" })
-set("n", "<C-M-Left>", ":vertical resize -2<CR>", { silent = true, desc = "Decrease width" })
-set("n", "<C-M-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increase width" })
+set("n", "<M-Up>", ":resize -2<CR>", { silent = true, desc = "Decrease height" })
+set("n", "<M-Down>", ":resize +2<CR>", { silent = true, desc = "Increase height" })
+set("n", "<M-Left>", ":vertical resize -2<CR>", { silent = true, desc = "Decrease width" })
+set("n", "<M-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increase width" })
 
 -- Tmux sessionizer
 -- set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")

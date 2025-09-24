@@ -18,7 +18,7 @@ return {
 			group = augroup,
 			pattern = "*", -- all filetypes, or you can restrict to e.g., "*.py"
 			callback = function()
-				local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
+				local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
 				for _, client in ipairs(clients) do
 					if client.supports_method("textDocument/formatting") then
 						vim.lsp.buf.format({

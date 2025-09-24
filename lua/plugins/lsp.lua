@@ -31,8 +31,9 @@ return {
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+			vim.keymap.set("n", "]d", vim.diagnostic.jump({ count = 1, float = true }))
+			vim.keymap.set("n", "[d", vim.diagnostic.jump({ count = -1, float = true }))
+			vim.keymap.set("n", "<leader>of", vim.diagnostic.open_float, { desc = "Show diagnostics in float" })
 		end
 
 		require("mason-lspconfig").setup({
