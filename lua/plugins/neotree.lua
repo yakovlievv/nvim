@@ -170,8 +170,8 @@ return {
 					["s"] = "open_vsplit",
 					["t"] = "open_tabnew",
 					["w"] = "open_with_window_picker",
-					["h"] = "close_node",
-					["H"] = "close_all_subnodes",
+					-- ["h"] = "close_node",
+					["h"] = "close_all_subnodes",
 					["z"] = "close_all_nodes",
 					["Z"] = "expand_all_nodes",
 					["a"] = {
