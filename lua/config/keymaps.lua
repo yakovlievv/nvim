@@ -5,7 +5,7 @@ local set = vim.keymap.set
 -----------------------------
 
 -- add stuff
--- set("x", "(", "<Esc>`<i(<Esc>`>la)<Esc>")
+set("x", "(", "<Esc>`<i(<Esc>`>la)<Esc>")
 -- set("x", "{", "<Esc>`<i{<Esc>`>la{<Esc>")
 -- set("x", "[", "<Esc>`<i[<Esc>`>la[<Esc>")
 -- set("x", "<", "<Esc>`<i<<Esc>`>la<<Esc>")
@@ -58,6 +58,10 @@ set({ "n", "x" }, "_", "L")
 ----------------------------
 -------- Utilities ---------
 ----------------------------
+
+-- Just makes sense
+set({ "n", "x" }, ";", ":")
+set({ "n", "x" }, ":", ";")
 
 -- Call lazy
 set("n", "<leader>l", ":Lazy<CR>")

@@ -10,39 +10,37 @@ opt.number = true
 opt.relativenumber = true
 
 -- Indentation
-opt.tabstop = 4        -- number of spaces a <Tab> counts for
-opt.shiftwidth = 4     -- number of spaces used for each step of (auto)indent
-opt.expandtab = true   -- convert tabs to spaces
+opt.tabstop = 4 -- number of spaces a <Tab> counts for
+opt.shiftwidth = 4 -- number of spaces used for each step of (auto)indent
+opt.expandtab = true -- convert tabs to spaces
 opt.smartindent = true -- smart autoindenting on new lines
-opt.smarttab = true    -- makes tab use shiftwidth instead of tabstop in new line 
+opt.smarttab = true -- makes tab use shiftwidth instead of tabstop in new line
 
 -- whitespace
 opt.list = true
 -- opt.listchars = "eol:.,tab:>-,trail:~,extends:>,precedes:<"
 
 -- Searching
-opt.ignorecase = true  -- case-insensitive search by default
-opt.smartcase = true   -- but case-sensitive if uppercase is used in search
+opt.ignorecase = true -- case-insensitive search by default
+opt.smartcase = true -- but case-sensitive if uppercase is used in search
 
 -- Clipboard
 opt.clipboard = "unnamedplus" -- sync with system clipboard
 
 -- Statusline & Display
-opt.laststatus = 3      -- global statusline
-opt.wrap = false        -- disable line wrapping
+opt.laststatus = 3 -- global statusline
+opt.wrap = false -- disable line wrapping
 opt.termguicolors = true -- enable 24-bit colors
 -- opt.fillchars:append({ eob = " " }) -- hide ~ on empty lines
 
 -- Scrolling & Signs
-opt.scrolloff = 5       -- keep 5 lines visible above/below cursor
-opt.signcolumn = "yes"  -- always show sign column (avoid text shift)
+opt.scrolloff = 5 -- keep 5 lines visible above/below cursor
+opt.signcolumn = "yes" -- always show sign column (avoid text shift)
 
 -- Performance
-opt.updatetime = 50     -- faster completion & diagnostic updates
+opt.updatetime = 50 -- faster completion & diagnostic updates
 
-
-
-vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim-undodir"
+vim.opt.undodir = os.getenv("XDG_STATE_HOME") .. "/nvim/undo"
 vim.opt.undofile = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
@@ -52,12 +50,8 @@ vim.opt.smartcase = true
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
 vim.diagnostic.config({
-  virtual_text = true,   -- show messages inline
-  signs = true,          -- keep gutter icons
-  underline = true,
-  update_in_insert = false,
+	virtual_text = true, -- show messages inline
+	signs = true, -- keep gutter icons
+	underline = true,
+	update_in_insert = false,
 })
-
-
-
-
