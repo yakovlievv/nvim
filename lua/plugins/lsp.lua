@@ -1,16 +1,22 @@
 return {
 	"neovim/nvim-lspconfig",
+	event = "BufReadPre",
 	dependencies = {
 		{
 			"mason-org/mason.nvim",
+			event = "BufReadPre",
 			opts = {
 				ui = { border = "rounded" },
 			},
 		},
-		{ "mason-org/mason-lspconfig.nvim" },
+		{
+			"mason-org/mason-lspconfig.nvim",
+			event = "BufReadPre",
+		},
 		{
 			"folke/lazydev.nvim",
 			ft = "lua", -- only load on lua files
+			event = "BufReadPre",
 			opts = {
 				library = {
 					-- See the configuration section for more details

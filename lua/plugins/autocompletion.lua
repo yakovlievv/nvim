@@ -1,13 +1,16 @@
 return {
 	"saghen/blink.cmp",
 	build = "cargo build --release",
+	event = "InsertEnter",
 	dependencies = {
 		{
 			"L3MON4D3/LuaSnip",
 			version = "v2.*",
+			event = "InsertEnter",
 			build = "make install_jsregexp",
 		},
 		{ "rafamadriz/friendly-snippets" },
+		event = "InsertEnter",
 		opts_extend = { "sources.default" },
 		version = "1.*",
 	},

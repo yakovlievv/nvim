@@ -1,4 +1,5 @@
 local set = vim.keymap.set
+local opts = { silent = true, noremap = true }
 
 -----------------------------
 -------- Visual mode --------
@@ -6,11 +7,6 @@ local set = vim.keymap.set
 
 -- add stuff
 set("x", "(", "<Esc>`<i(<Esc>`>la)<Esc>")
--- set("x", "{", "<Esc>`<i{<Esc>`>la{<Esc>")
--- set("x", "[", "<Esc>`<i[<Esc>`>la[<Esc>")
--- set("x", "<", "<Esc>`<i<<Esc>`>la<<Esc>")
--- set("x", '"', '<Esc>`<i"<Esc>`>la"<Esc>')
--- set("x", "'", "<Esc>`<i'<Esc>`>la'<Esc>")
 
 -- Move selected lines
 set("x", "K", ":m '<-2<CR>gv=gv", { silent = true })
@@ -32,15 +28,6 @@ set("x", "<leader>p", [["_dP]])
 
 -- Change the word under the cursor
 set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-
--- highlight yanking
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlights text when yanking",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
 
 --------------------------
 -------- Motions ---------
@@ -77,3 +64,32 @@ set("n", "<M-Up>", ":resize -2<CR>", { silent = true, desc = "Decrease height" }
 set("n", "<M-Down>", ":resize +2<CR>", { silent = true, desc = "Increase height" })
 set("n", "<M-Left>", ":vertical resize -2<CR>", { silent = true, desc = "Decrease width" })
 set("n", "<M-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increase width" })
+
+-- Toggle wrap
+set("n", "<leader>W", function()
+	vim.opt.wrap = not vim.opt.wrap:get()
+end, { desc = "Toggle wrap" })
+
+--------------------------
+-------- Buffers ---------
+--------------------------
+
+set("n", "<leader>bb", ":buffer #<CR>", opts)
+
+set("n", "<M-s-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+set("n", "<M-s-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+
+set({ "t", "n" }, "<C-t>", "<cmd>Floaterminal<cr>")
+
+-- Disable default tmux navigator mappings
+vim.g.tmux_navigator_no_mappings = 1
+
+-- Set custom mappings in normal mode
+set("n", "<m-h>", "<cmd>TmuxNavigateLeft<CR>", opts)
+set("n", "<m-j>", "<cmd>TmuxNavigateDown<CR>", opts)
+set("n", "<m-k>", "<cmd>TmuxNavigateUp<CR>", opts)
+set("n", "<m-l>", "<cmd>TmuxNavigateRight<CR>", opts)
+
+set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
+
+set({ "n", "v" }, "<leader>bd", "<cmd>bd<cr>")

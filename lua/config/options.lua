@@ -30,6 +30,7 @@ opt.clipboard = "unnamedplus" -- sync with system clipboard
 -- Statusline & Display
 opt.laststatus = 3 -- global statusline
 opt.wrap = false -- disable line wrapping
+opt.linebreak = true -- wrapping by word
 opt.termguicolors = true -- enable 24-bit colors
 -- opt.fillchars:append({ eob = " " }) -- hide ~ on empty lines
 
@@ -40,12 +41,12 @@ opt.signcolumn = "yes" -- always show sign column (avoid text shift)
 -- Performance
 opt.updatetime = 50 -- faster completion & diagnostic updates
 
-vim.opt.undodir = os.getenv("XDG_STATE_HOME") .. "/nvim/undo"
-vim.opt.undofile = true
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+opt.undodir = os.getenv("XDG_STATE_HOME") .. "/nvim/undo"
+opt.undofile = true
+opt.hlsearch = true
+opt.incsearch = true
+opt.ignorecase = true
+opt.smartcase = true
 
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 

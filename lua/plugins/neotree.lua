@@ -165,7 +165,7 @@ return {
 					["l"] = "open",
 					["<esc>"] = "cancel",
 					["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
-					["<M-l>"] = "focus_preview",
+					["<C-l>"] = "focus_preview",
 					["S"] = "open_split",
 					["s"] = "open_vsplit",
 					["t"] = "open_tabnew",
@@ -222,7 +222,7 @@ return {
 					mappings = {
 						["<bs>"] = "navigate_up",
 						["."] = "set_root",
-						["<M-h>"] = "toggle_hidden",
+						["<C-h>"] = "toggle_hidden",
 						["/"] = "fuzzy_finder",
 						["D"] = "fuzzy_finder_directory",
 						["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
