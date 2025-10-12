@@ -1,8 +1,10 @@
 return {
 	"saghen/blink.cmp",
-	build = "cargo build --release",
 	event = "InsertEnter",
+	opts_extend = { "sources.default" },
+	version = "1.*",
 	dependencies = {
+		{ "rafamadriz/friendly-snippets" },
 		{
 			"L3MON4D3/LuaSnip",
 			dependencies = { "rafamadriz/friendly-snippets" },
@@ -13,14 +15,12 @@ return {
 			end,
 		},
 	},
-	opts_extend = { "sources.default" },
-	version = "1.*",
 
 	config = function()
 		require("blink.cmp").setup({
 			keymap = {
 				preset = "none",
-				["<C-d"] = { "show_documentation", "hide_documentation" },
+				["<C-d>"] = { "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide" },
 				["<C-y>"] = { "select_and_accept", "show" },
 				["<Up>"] = { "select_prev", "fallback" },
@@ -38,7 +38,12 @@ return {
 			},
 
 			completion = {
-				ghost_text = { enabled = true },
+				ghost_text = {
+					enabled = function()
+						-- Only enable ghost text in insert mode, not cmdline
+						return vim.api.nvim_get_mode().mode == "i"
+					end,
+				},
 				documentation = { auto_show = true, auto_show_delay_ms = 10 },
 			},
 
