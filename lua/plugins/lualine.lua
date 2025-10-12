@@ -7,7 +7,7 @@ return {
 		local lazy_updates = {
 			function()
 				if lazy_status.has_updates() then
-					return "󰏗 " .. lazy_status.updates()
+					return lazy_status.updates()
 				end
 				return ""
 			end,
