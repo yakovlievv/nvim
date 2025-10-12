@@ -70,26 +70,26 @@ set("n", "<leader>W", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
 
+-- toggle floating terminal
+set({ "t", "n" }, "<C-t>", "<cmd>Floaterminal<cr>")
 --------------------------
 -------- Buffers ---------
 --------------------------
-
 set("n", "<leader>bb", ":buffer #<CR>", opts)
 
 set("n", "<M-s-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 set("n", "<M-s-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
-set({ "t", "n" }, "<C-t>", "<cmd>Floaterminal<cr>")
-
--- Disable default tmux navigator mappings
-vim.g.tmux_navigator_no_mappings = 1
-
--- Set custom mappings in normal mode
-set("n", "<m-h>", "<cmd>TmuxNavigateLeft<CR>", opts)
-set("n", "<m-j>", "<cmd>TmuxNavigateDown<CR>", opts)
-set("n", "<m-k>", "<cmd>TmuxNavigateUp<CR>", opts)
-set("n", "<m-l>", "<cmd>TmuxNavigateRight<CR>", opts)
-
 set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
 
-set({ "n", "v" }, "<leader>bd", "<cmd>bd<cr>")
+set("n", "<leader>bd", function()
+	require("snacks.bufdelete").delete()
+end)
+
+set("n", "<leader>ba", function()
+	require("snacks.bufdelete").all()
+end)
+
+set("n", "<leader>bo", function()
+	require("snacks.bufdelete").other()
+end)
