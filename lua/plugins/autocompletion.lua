@@ -18,6 +18,15 @@ return {
 
 	config = function()
 		require("blink.cmp").setup({
+			cmdline = {
+				enabled = true,
+				keymap = { preset = "inherit" },
+				completion = {
+					menu = { auto_show = true },
+					ghost_text = { enabled = false },
+				},
+			},
+
 			keymap = {
 				preset = "none",
 				["<C-d>"] = { "show_documentation", "hide_documentation" },
@@ -38,14 +47,17 @@ return {
 			},
 
 			completion = {
-				ghost_text = {
-					enabled = function()
-						-- Only enable ghost text in insert mode, not cmdline
-						return vim.api.nvim_get_mode().mode == "i"
-					end,
+				menu = {
+					border = "single",
+					scrollbar = false,
 				},
-				documentation = { auto_show = true, auto_show_delay_ms = 10 },
+				ghost_text = {
+					enabled = true,
+				},
+				documentation = { auto_show = true, auto_show_delay_ms = 10, window = { border = "single" } },
 			},
+
+			signature = { window = { border = "single" } },
 
 			snippets = {
 				preset = "luasnip",

@@ -56,3 +56,10 @@ vim.diagnostic.config({
 	underline = true,
 	update_in_insert = false,
 })
+
+vim.notify = function(msg, level, opts)
+	if msg:match('Error in decoration provider "line"') then
+		return
+	end
+	vim.api.nvim_echo({ { msg, "WarningMsg" } }, true, {})
+end
