@@ -31,7 +31,7 @@ require("lazy").setup({
 		border = "rounded",
 	},
 
-	install = { colorscheme = { "habamax" } },
+	install = { colorscheme = { "nighfly" } },
 	change_detection = { enabled = true, notify = false },
 	checker = { enabled = true, notify = false },
 })
