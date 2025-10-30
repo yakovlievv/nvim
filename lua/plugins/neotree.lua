@@ -1,14 +1,21 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
-
+	keys = {
+		{
+			"<leader>e",
+			function()
+				require("neo-tree.command").execute({ toggle = true })
+			end,
+			desc = "Toggle NeoTree",
+		},
+	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 	},
 
-	lazy = false,
 	opts = function(_, opts)
 		local function on_move(data)
 			Snacks.rename.on_rename_file(data.source, data.destination)
@@ -59,7 +66,7 @@ return {
 			end,
 		})
 		require("neo-tree").setup({
-			close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+			close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 			popup_border_style = "rounded",
 			enable_git_status = true,
 			enable_diagnostics = true,
@@ -83,26 +90,6 @@ return {
 					expander_collapsed = "",
 					expander_expanded = "",
 					expander_highlight = "NeoTreeExpander",
-				},
-				icon = {
-					folder_closed = "",
-					folder_open = "",
-					folder_empty = "󰜌",
-					provider = function(icon, node, state) -- default icon provider utilizes nvim-web-devicons if available
-						if node.type == "file" or node.type == "terminal" then
-							local success, web_devicons = pcall(require, "nvim-web-devicons")
-							local name = node.type == "terminal" and "terminal" or node.name
-							if success then
-								local devicon, hl = web_devicons.get_icon(name)
-								icon.text = devicon or icon.text
-								icon.highlight = hl or icon.highlight
-							end
-						end
-					end,
-					-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-					-- then these will never be used.
-					default = "*",
-					highlight = "NeoTreeFileIcon",
 				},
 				modified = {
 					symbol = "[+]",
@@ -211,7 +198,7 @@ return {
 					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 				},
 				group_empty_dirs = false, -- when true, empty folders will be grouped together
-				hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
+				hijack_netrw_behavior = "disabled",
 				-- in whatever position is specified in window.position
 				-- "open_current",  -- netrw disabled, opening a directory opens within the
 				-- window like netrw would, regardless of window.position
@@ -311,7 +298,5 @@ return {
 				},
 			},
 		})
-
-		vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>")
 	end,
 }

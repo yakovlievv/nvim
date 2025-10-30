@@ -1,6 +1,6 @@
 return {
 	"saghen/blink.cmp",
-	event = "InsertEnter",
+	event = { "InsertEnter", "CmdlineEnter" },
 	opts_extend = { "sources.default" },
 	version = "1.*",
 	dependencies = {
