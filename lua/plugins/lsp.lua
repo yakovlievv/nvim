@@ -1,80 +1,80 @@
 return {
-	"mason-org/mason-lspconfig.nvim",
-	event = "BufReadPre",
-	opts = {
-		ensure_installed = {
-			"lua_ls",
-			"ts_ls",
-			"emmet_ls",
-			"html",
-			"cssls",
-			"pyright",
-			"eslint",
+	{
+		"neovim/nvim-lspconfig",
+		config = function()
+			local capabilities = require("blink-cmp").get_lsp_capabilities()
+			vim.lsp.config("*", { capabilities = capabilities })
+			-- Show diagnostic for the current line in a floating window
+			vim.keymap.set("n", "<leader>d", function()
+				vim.diagnostic.open_float(nil, { focusable = false, border = "rounded" })
+			end, { desc = "Show line diagnostics" })
+		end,
+	},
+	{
+		"mason-org/mason.nvim",
+		cmd = "Mason",
+		opts = {
+			ensure_installed = {
+				-- Formatters
+				"prettierd", -- JS/TS/HTML/CSS/JSON/Markdown etc.
+				"stylua", -- Lua
+				"black", -- Python
+				"isort", -- Python import sorter
+				"clang-format", -- C/C++
+				"shfmt", -- Shell scripts
+				-- Linters
+				"ruff", -- Python linter
+				"shellcheck", -- Shell scripts
+			},
+			ui = { border = "rounded" },
 		},
 	},
-	dependencies = {
-		{
-			"mason-org/mason.nvim",
-			cmd = "Mason",
-			opts = {
-				ui = { border = "rounded" },
+	{
+		"mason-org/mason-lspconfig.nvim",
+		event = "BufReadPre",
+		opts = {
+			ensure_installed = {
+				-- webdev
+				"ts_ls",
+				"eslint",
+				"emmet_ls",
+				"html",
+				"cssls",
+				"jsonls",
+				--markdown
+				"marksman",
+				-- Python
+				"pyright",
+				-- Lua
+				"lua_ls",
+				-- C / C++
+				"clangd",
 			},
 		},
-		{
-			"neovim/nvim-lspconfig",
-			config = function()
-				local capabilities = require("blink-cmp").get_lsp_capabilities()
-				-- local signature = require("lsp_signature")
-
-				vim.lsp.config("*", { capabilities = capabilities })
-
-				-- attach signature only when LSP is active
-				-- vim.api.nvim_create_autocmd("LspAttach", {
-				-- 	callback = function(args)
-				-- 		local bufnr = args.buf
-				-- 		signature.on_attach(nil, bufnr)
-				-- 	end,
-				-- })
-			end,
+		dependencies = {
+			{ "neovim/nvim-lspconfig" },
+			{ "mason-org/mason.nvim" },
+			{ "folke/lazydev.nvim" },
+			{ "antosha417/nvim-lsp-file-operations" },
 		},
-		-- {
-		-- 	"ray-x/lsp_signature.nvim",
-		-- 	event = "VeryLazy",
-		-- 	opts = {
-		-- 		bind = true, -- Required
-		-- 		hint_enable = true, -- show inline hints (virtual text)
-		-- 		hint_prefix = "󰘧 ", -- symbol before hint
-		-- 		floating_window = true, -- show floating window with signature
-		-- 		handler_opts = {
-		-- 			border = "rounded",
-		-- 		},
-		-- 		transparency = 100, -- slightly transparent background
-		-- 		max_height = 12,
-		-- 		max_width = 80,
-		-- 		toggle_key = "<M-x>", -- press Alt+x to toggle signature window
-		-- 	},
-		-- 	config = function(_, opts)
-		-- 		require("lsp_signature").setup(opts)
-		-- 	end,
-		-- },
-		{
-			"folke/lazydev.nvim",
-			ft = "lua",
-			opts = {
-				library = {
-					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-				},
+	},
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			},
 		},
-		{
-			"antosha417/nvim-lsp-file-operations",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-				"nvim-neo-tree/neo-tree.nvim",
-			},
-			config = function()
-				require("lsp-file-operations").setup()
-			end,
+	},
+	{
+		"antosha417/nvim-lsp-file-operations",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-neo-tree/neo-tree.nvim",
 		},
+		config = function()
+			require("lsp-file-operations").setup()
+		end,
 	},
 }
