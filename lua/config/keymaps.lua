@@ -46,10 +46,6 @@ set({ "n", "x" }, "_", "L")
 -------- Utilities ---------
 ----------------------------
 
--- Just makes sense
-set({ "n", "x" }, ";", ":")
-set({ "n", "x" }, ":", ";")
-
 -- Call lazy
 set("n", "<leader>l", ":Lazy<CR>")
 
@@ -81,6 +77,8 @@ set("n", "<M-s-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 set("n", "<M-s-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
+set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
+set({ "n", "v" }, "<leader>Q", "<cmd>qa<Cr>")
 
 set("n", "<leader>bd", function()
 	require("snacks.bufdelete").delete()
