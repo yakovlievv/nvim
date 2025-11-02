@@ -9,7 +9,7 @@ return {
 			sync_install = false,
 			auto_install = true, -- install missing parsers when entering buffer
 			highlight = { enable = true },
-			autotag = { enable = true }, -- if you keep nvim-ts-autotag
+			autotag = { enable = false }, -- if you keep nvim-ts-autotag
 			indent = { enable = true },
 			incremental_selection = { enable = true },
 		})

@@ -1,8 +1,10 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
+		event = "BufReadPre",
 		config = function()
-			local capabilities = require("blink-cmp").get_lsp_capabilities()
+			local blink = require("blink-cmp")
+			local capabilities = blink.get_lsp_capabilities()
 			vim.lsp.config("*", { capabilities = capabilities })
 			-- Show diagnostic for the current line in a floating window
 			vim.keymap.set("n", "<leader>d", function()
@@ -14,18 +16,6 @@ return {
 		"mason-org/mason.nvim",
 		cmd = "Mason",
 		opts = {
-			ensure_installed = {
-				-- Formatters
-				"prettierd", -- JS/TS/HTML/CSS/JSON/Markdown etc.
-				"stylua", -- Lua
-				"black", -- Python
-				"isort", -- Python import sorter
-				"clang-format", -- C/C++
-				"shfmt", -- Shell scripts
-				-- Linters
-				"ruff", -- Python linter
-				"shellcheck", -- Shell scripts
-			},
 			ui = { border = "rounded" },
 		},
 	},
@@ -55,7 +45,7 @@ return {
 			{ "neovim/nvim-lspconfig" },
 			{ "mason-org/mason.nvim" },
 			{ "folke/lazydev.nvim" },
-			{ "antosha417/nvim-lsp-file-operations" },
+			-- { "antosha417/nvim-lsp-file-operations" },
 		},
 	},
 	{
@@ -67,14 +57,43 @@ return {
 			},
 		},
 	},
+	-- {
+	-- 	"antosha417/nvim-lsp-file-operations",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-neo-tree/neo-tree.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		require("lsp-file-operations").setup()
+	-- 	end,
+	-- },
 	{
-		"antosha417/nvim-lsp-file-operations",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-neo-tree/neo-tree.nvim",
-		},
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+
+		event = "BufReadPre",
 		config = function()
-			require("lsp-file-operations").setup()
+			require("mason-tool-installer").setup({
+				ensure_installed = {
+					-- Formatters
+					"prettierd", -- JS/TS/HTML/CSS/JSON/Markdown etc.
+					"stylua", -- Lua
+					"black", -- Python
+					"isort", -- Python import sorter
+					"clang-format", -- C/C++
+					"shfmt", -- Shell scripts
+					-- Linters
+					"ruff", -- Python linter
+					"shellcheck", -- Shell scripts
+				},
+
+				auto_update = true,
+
+				integrations = {
+					["mason-lspconfig"] = true,
+					["mason-null-ls"] = false,
+					["mason-nvim-dap"] = false,
+				},
+			})
 		end,
 	},
 }
