@@ -1,7 +1,8 @@
 return {
 	"nvim-telescope/telescope.nvim",
 	cmd = "Telescope",
-	lazy = false,
+	event = "VeryLazy",
+	-- lazy = false,
 	keys = {
 		{
 			"<C-f>",
