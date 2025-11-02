@@ -1,7 +1,7 @@
 return {
 	"catppuccin/nvim",
 	name = "catppuccin",
-	event = "VimEnter",
+	-- event = "VimEnter",
 	priority = 1000,
 	config = function()
 		require("catppuccin").setup({
