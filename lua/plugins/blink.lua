@@ -48,16 +48,16 @@ return {
 
 			completion = {
 				menu = {
-					border = "single",
+					border = "none",
 					scrollbar = false,
 				},
 				ghost_text = {
 					enabled = true,
 				},
-				documentation = { auto_show = true, auto_show_delay_ms = 10, window = { border = "single" } },
+				documentation = { auto_show = true, auto_show_delay_ms = 10, window = { border = "none" } },
 			},
 
-			signature = { window = { border = "single" } },
+			signature = { window = { border = "none" } },
 
 			snippets = {
 				preset = "luasnip",

@@ -5,6 +5,8 @@ local g = vim.g
 g.mapleader = " "
 g.maplocalleader = "//"
 
+-- Disable the bar in the bottom before noice loads
+vim.opt.cmdheight = 0
 -- UI: line numbers
 opt.number = true
 opt.relativenumber = true

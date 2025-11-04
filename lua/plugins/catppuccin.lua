@@ -1,7 +1,8 @@
 return {
 	"catppuccin/nvim",
 	name = "catppuccin",
-	-- event = "VimEnter",
+	lazy = true,
+	event = "VimEnter",
 	priority = 1000,
 	config = function()
 		require("catppuccin").setup({
@@ -47,7 +48,6 @@ return {
 				nvim_web_devicons = true,
 			},
 		})
-
 		vim.cmd.colorscheme("catppuccin")
 	end,
 }
