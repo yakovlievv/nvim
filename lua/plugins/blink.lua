@@ -14,6 +14,7 @@ return {
 				require("luasnip.loaders.from_vscode").lazy_load()
 			end,
 		},
+		"folke/lazydev.nvim",
 	},
 
 	config = function()
@@ -48,16 +49,16 @@ return {
 
 			completion = {
 				menu = {
-					border = "none",
+					border = "rounded",
 					scrollbar = false,
 				},
 				ghost_text = {
 					enabled = true,
 				},
-				documentation = { auto_show = true, auto_show_delay_ms = 10, window = { border = "none" } },
+				documentation = { auto_show = true, auto_show_delay_ms = 10, window = { border = "rounded" } },
 			},
 
-			signature = { window = { border = "none" } },
+			signature = { window = { border = "rounded" } },
 
 			snippets = {
 				preset = "luasnip",

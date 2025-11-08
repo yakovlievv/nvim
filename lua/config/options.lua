@@ -5,12 +5,12 @@ local g = vim.g
 g.mapleader = " "
 g.maplocalleader = "//"
 
--- Disable the bar in the bottom before noice loads
-vim.opt.cmdheight = 0
 -- UI: line numbers
 opt.number = true
 opt.relativenumber = true
 
+-- Disable the bar in the bottom before noice loads
+vim.opt.cmdheight = 0
 -- Indentation
 opt.tabstop = 4 -- number of spaces a <Tab> counts for
 opt.shiftwidth = 4 -- number of spaces used for each step of (auto)indent

@@ -14,6 +14,7 @@ return {
 	end,
 	config = function()
 		Snacks = require("snacks")
+		vim.opt.laststatus = 3 -- global statusline
 		require("lualine").setup({
 			options = {
 				theme = "auto",

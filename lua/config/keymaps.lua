@@ -33,6 +33,9 @@ set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -------- Motions ---------
 --------------------------
 
+set({ "n", "x", "o" }, ";", ":")
+set({ "n", "x", "o" }, ":", ";")
+
 -- Do J but keep the curson in place
 set("n", "J", "mzJ`z")
 
@@ -79,6 +82,9 @@ set("n", "<M-s-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
 set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
 set({ "n", "v" }, "<leader>Q", "<cmd>qa<Cr>")
+
+set({ "n", "v" }, "<C-s>", "<Cmd>w<Cr>")
+set({ "n", "v" }, "<C-q>", "<Cmd>qa<Cr>")
 
 set("n", "<leader>bd", function()
 	require("snacks.bufdelete").delete()

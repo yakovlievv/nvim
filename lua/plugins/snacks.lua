@@ -55,7 +55,8 @@ return {
 		image = { enabled = false },
 		indent = { enabled = true },
 		input = { enabled = true },
-		picker = { enabled = false },
+		picker = { enabled = true },
+
 		bufdelete = {
 			enabled = true,
 			config = function() end,
