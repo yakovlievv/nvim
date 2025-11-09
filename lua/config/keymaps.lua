@@ -39,10 +39,12 @@ set({ "n", "x", "o" }, ":", ";")
 set("n", "J", "mzJ`z")
 
 -- Swap H L and better versions of _ and $
-set({ "n", "x", "o" }, "H", "^")
-set({ "n", "x", "o" }, "L", "g_")
-set({ "n", "x" }, "$", "H")
-set({ "n", "x" }, "_", "L")
+-- set({ "n", "x", "o" }, "H", "^")
+-- set({ "n", "x", "o" }, "L", "g_")
+-- set({ "n", "x" }, "$", "H")
+-- set({ "n", "x" }, "_", "L")
+set({ "n", "x" }, "H", "[b")
+set({ "n", "x" }, "L", "]b")
 
 ----------------------------
 -------- Utilities ---------
@@ -65,7 +67,7 @@ set("n", "<M-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increa
 
 -- Toggle wrap
 set("n", "<leader>W", function()
-    vim.opt.wrap = not vim.opt.wrap:get()
+	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
 
 -- toggle floating terminal
@@ -86,13 +88,13 @@ set({ "n", "v" }, "<C-s>", "<Cmd>w<Cr>")
 set({ "n", "v" }, "<C-q>", "<Cmd>qa<Cr>")
 
 set("n", "<leader>bd", function()
-    require("snacks.bufdelete").delete()
+	require("snacks.bufdelete").delete()
 end)
 
 set("n", "<leader>ba", function()
-    require("snacks.bufdelete").all()
+	require("snacks.bufdelete").all()
 end)
 
 set("n", "<leader>bo", function()
-    require("snacks.bufdelete").other()
+	require("snacks.bufdelete").other()
 end)
