@@ -77,8 +77,8 @@ set({ "t", "n" }, "<C-t>", "<cmd>Floaterminal<cr>")
 --------------------------
 set("n", "<leader>bb", ":buffer #<CR>", opts)
 
-set("n", "<M-s-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-set("n", "<M-s-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+set("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+set("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
 set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
