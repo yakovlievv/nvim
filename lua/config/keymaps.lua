@@ -38,14 +38,6 @@ set({ "n", "x", "o" }, ":", ";")
 -- Do J but keep the curson in place
 set("n", "J", "mzJ`z")
 
--- Swap H L and better versions of _ and $
--- set({ "n", "x", "o" }, "H", "^")
--- set({ "n", "x", "o" }, "L", "g_")
--- set({ "n", "x" }, "$", "H")
--- set({ "n", "x" }, "_", "L")
-set({ "n", "x" }, "H", "[b")
-set({ "n", "x" }, "L", "]b")
-
 ----------------------------
 -------- Utilities ---------
 ----------------------------

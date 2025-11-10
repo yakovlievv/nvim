@@ -1,7 +1,7 @@
 return {
 
 	animate = {
-		duration = { step = 15, total = 150 },
+		duration = { step = 4, total = 150 },
 		easing = "linear",
 	},
 	-- filter = function(buf)
