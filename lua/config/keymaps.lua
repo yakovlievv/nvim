@@ -6,7 +6,7 @@ local opts = { silent = true, noremap = true }
 -----------------------------
 
 -- add stuff
-set("x", "(", "<Esc>`<i(<Esc>`>la)<Esc>")
+-- set("x", "(", "<Esc>`<i(<Esc>`>la)<Esc>")
 
 -- Move selected lines
 set("x", "K", ":m '<-2<CR>gv=gv", { silent = true })
@@ -16,15 +16,15 @@ set("x", "J", ":m '>+1<CR>gv=gv", { silent = true })
 set("x", ">", ">gv")
 set("x", "<", "<gv")
 
--- Reselect last pasted area
-set("n", "<leader>v", "`<v`>")
-
 ---------------------------------
 -------- Yanking Pasting --------
 ---------------------------------
 
 -- Paste and not copy
-set("x", "<leader>p", [["_dP]])
+set("x", "<leader>p", [["_dp]])
+set("x", "<leader>P", [["_dP]])
+set("x", "<leader>c", [["_dc]])
+set("x", "<leader>c", [["_dC]])
 
 -- Change the word under the cursor
 set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -32,8 +32,8 @@ set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 --------------------------
 -------- Motions ---------
 --------------------------
-set({ "n", "x", "o" }, ";", ":")
 set({ "n", "x", "o" }, ":", ";")
+set({ "n", "x", "o" }, ";", ":")
 
 -- Do J but keep the curson in place
 set("n", "J", "mzJ`z")
@@ -59,7 +59,7 @@ set("n", "<M-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increa
 
 -- Toggle wrap
 set("n", "<leader>W", function()
-	vim.opt.wrap = not vim.opt.wrap:get()
+    vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
 
 -- toggle floating terminal
@@ -80,13 +80,13 @@ set({ "n", "v" }, "<C-s>", "<Cmd>w<Cr>")
 set({ "n", "v" }, "<C-q>", "<Cmd>qa<Cr>")
 
 set("n", "<leader>bd", function()
-	require("snacks.bufdelete").delete()
+    require("snacks.bufdelete").delete()
 end)
 
 set("n", "<leader>ba", function()
-	require("snacks.bufdelete").all()
+    require("snacks.bufdelete").all()
 end)
 
 set("n", "<leader>bo", function()
-	require("snacks.bufdelete").other()
+    require("snacks.bufdelete").other()
 end)
