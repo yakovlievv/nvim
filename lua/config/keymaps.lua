@@ -76,8 +76,8 @@ set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
 set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
 set({ "n", "v" }, "<leader>Q", "<cmd>qa<Cr>")
 
-set({ "n", "v" }, "<C-s>", "<Cmd>w<Cr>")
-set({ "n", "v" }, "<C-q>", "<Cmd>qa<Cr>")
+set({ "n", "v", "i" }, "<C-s>", "<Cmd>w<Cr>")
+set({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>")
 
 set("n", "<leader>bd", function()
     require("snacks.bufdelete").delete()
