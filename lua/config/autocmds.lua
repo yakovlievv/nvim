@@ -16,3 +16,22 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Remove timeout inside yazi for instant <Esc> response
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "yazi",
+	callback = function()
+		vim.b.old_timeoutlen = vim.o.timeoutlen
+		vim.o.timeoutlen = 0
+	end,
+})
+
+-- Restore timeoutlen when leaving yazi buffer
+vim.api.nvim_create_autocmd("BufLeave", {
+	pattern = "yazi",
+	callback = function()
+		if vim.b.old_timeoutlen then
+			vim.o.timeoutlen = vim.b.old_timeoutlen
+		end
+	end,
+})
