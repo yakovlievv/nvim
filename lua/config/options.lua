@@ -22,6 +22,8 @@ opt.smarttab = true -- makes tab use shiftwidth instead of tabstop in new line
 opt.list = true
 -- opt.listchars = "eol:.,tab:>-,trail:~,extends:>,precedes:<"
 
+vim.o.swapfile = false
+
 -- Searching
 opt.ignorecase = true -- case-insensitive search by default
 opt.smartcase = true -- but case-sensitive if uppercase is used in search
