@@ -1,24 +1,24 @@
 return {
-    "folke/snacks.nvim",
-    lazy = false,
-    opts = {
-        dashboard = require("plugins.snacks.dashboard"),
-        bigfile = { enabled = true },
-        explorer = require("plugins.snacks.explorer"),
-        image = { enabled = false },
-        indent = { enabled = true },
-        input = { enabled = true },
-        picker = require("plugins.snacks.picker"),
-        bufdelete = { enabled = true },
-        notifier = require("plugins.snacks.notifier"),
-        quickfile = { enabled = true },
-        scope = { enabled = true },
-        scroll = require("plugins.snacks.scroll"),
-        statuscolumn = { enabled = true },
-        words = { enabled = true },
-    },
+	"folke/snacks.nvim",
+	lazy = false,
+	opts = {
+		dashboard = require("plugins.snacks.dashboard"),
+		bigfile = { enabled = true },
+		explorer = require("plugins.snacks.explorer"),
+		image = { enabled = false },
+		indent = { enabled = true },
+		input = { enabled = true },
+		picker = require("plugins.snacks.picker"),
+		bufdelete = { enabled = true },
+		notifier = require("plugins.snacks.notifier"),
+		quickfile = { enabled = true },
+		scope = { enabled = true },
+		scroll = require("plugins.snacks.scroll"),
+		statuscolumn = { enabled = true },
+		words = { enabled = true },
+	},
 
-    keys = {
+	keys = {
         --stylua: ignore start
         -- Top Pickers & Explorer
         { "<C-f>",      function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
@@ -95,6 +95,6 @@ return {
         { "<c-_>",      function() Snacks.terminal() end,                                       desc = "which_key_ignore" },
         { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",             mode = { "n", "t" } },
         { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",             mode = { "n", "t" } },
-        --stylua: ignore end
-    },
+		--stylua: ignore end
+	},
 }
