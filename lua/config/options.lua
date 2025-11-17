@@ -9,6 +9,14 @@ g.maplocalleader = "//"
 opt.number = true
 opt.relativenumber = true
 
+-- Enable cursor line
+opt.cursorline = true
+
+-- Highlight current line number
+-- vim.cmd([[
+--   hi CursorLineNr guifg=#f5c2e7 guibg=NONE gui=bold
+-- ]])
+
 -- Disable the bar in the bottom before noice loads
 vim.opt.cmdheight = 0
 -- Indentation

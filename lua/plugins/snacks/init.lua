@@ -5,7 +5,7 @@ return {
 		dashboard = require("plugins.snacks.dashboard"),
 		bigfile = { enabled = true },
 		explorer = require("plugins.snacks.explorer"),
-		image = { enabled = false },
+		image = { enabled = true },
 		indent = { enabled = true },
 		input = { enabled = true },
 		picker = require("plugins.snacks.picker"),
