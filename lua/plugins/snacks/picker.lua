@@ -1,9 +1,12 @@
 return {
 	enabled = true,
-	sources = {},
-	focus = "input",
 	ui_select = true, -- replace `vim.ui.select` with the snacks picker
 	formatters = {},
+	prompt = " ",
+	sources = {},
+	focus = "input",
+	show_delay = 5000,
+	limit_live = 10000,
 	layout = {
 		preset = "default",
 		layout = {
