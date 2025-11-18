@@ -12,6 +12,7 @@ return {
 		bufdelete = { enabled = true },
 		notifier = require("plugins.snacks.notifier"),
 		quickfile = { enabled = true },
+		terminal = require("plugins.snacks.terminal"),
 		scope = { enabled = true },
 		scroll = require("plugins.snacks.scroll"),
 		statuscolumn = { enabled = true },
@@ -96,5 +97,21 @@ return {
         { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",             mode = { "n", "t" } },
         { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",             mode = { "n", "t" } },
 		--stylua: ignore end
+
+		{
+			"<C-t>", -- ctrl + t
+			function()
+				Snacks.terminal.toggle(nil, {
+					cwd = vim.fn.getcwd(),
+					win = {
+						style = "float",
+						relative = "editor",
+						border = "rounded",
+					},
+				})
+			end,
+			mode = { "n", "t" },
+			desc = "Toggle floating Snacks terminal",
+		},
 	},
 }

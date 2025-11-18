@@ -63,14 +63,15 @@ set("n", "<leader>W", function()
 end, { desc = "Toggle wrap" })
 
 -- toggle floating terminal
-set({ "t", "n" }, "<C-t>", "<cmd>Floaterminal<cr>")
+-- set({ "t", "n" }, "<C-t>", "<cmd>Floaterminal<cr>")
 --------------------------
 -------- Buffers ---------
 --------------------------
 set("n", "<leader>bb", ":buffer #<CR>", opts)
+set("n", "<C-b><C-b>", ":buffer #<CR>", opts)
 
-set("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-set("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+-- set("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+-- set("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
 set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
