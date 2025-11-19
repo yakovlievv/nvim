@@ -9,6 +9,7 @@
 -- 	end,
 -- })
 
+-- yank highlighting
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlights text when yanking",
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
@@ -34,4 +35,25 @@ vim.api.nvim_create_autocmd("BufLeave", {
 			vim.o.timeoutlen = vim.b.old_timeoutlen
 		end
 	end,
+})
+
+-- Enable wrap for all Markdown files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.wo.wrap = true -- turn on line wrapping
+		vim.wo.linebreak = true -- break lines at word boundaries (optional, nicer look)
+	end,
+})
+
+-- Auto-save folds for each file
+vim.api.nvim_create_autocmd("BufWinLeave", {
+	pattern = "*",
+	command = "silent! mkview",
+})
+
+-- Auto-load folds when reopening
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	pattern = "*",
+	command = "silent! loadview",
 })

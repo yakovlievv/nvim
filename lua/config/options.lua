@@ -26,6 +26,10 @@ opt.expandtab = true -- convert tabs to spaces
 opt.smartindent = true -- smart autoindenting on new lines
 opt.smarttab = true -- makes tab use shiftwidth instead of tabstop in new line
 
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
 -- whitespace
 opt.list = true
 -- opt.listchars = "eol:.,tab:>-,trail:~,extends:>,precedes:<"
