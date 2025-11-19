@@ -1,35 +1,27 @@
--- vim.api.nvim_create_autocmd("VimEnter", {
--- 	-- For preloading telescope stuff
--- 	callback = function()
--- 		local telescope = require("telescope")
--- 		pcall(telescope.load_extension, "fzf") -- pre-load extensions
---
--- 		-- Preload builtin modules without opening a buffer
--- 		pcall(require("telescope.builtin"))
--- 	end,
--- })
-
--- yank highlighting
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlights text when yanking",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	group = vim.api.nvim_create_augroup("my.yank-highlight", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
 	end,
 })
 
--- Remove timeout inside yazi for instant <Esc> response
+local yazi_group = vim.api.nvim_create_augroup("my.yazi", { clear = true })
+
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "yazi",
+	pattern = "my.yazi",
+	group = yazi_group,
+	desc = "Remove timeout inside yazi for instant <Esc> response",
 	callback = function()
 		vim.b.old_timeoutlen = vim.o.timeoutlen
 		vim.o.timeoutlen = 0
 	end,
 })
 
--- Restore timeoutlen when leaving yazi buffer
 vim.api.nvim_create_autocmd("BufLeave", {
 	pattern = "yazi",
+	group = yazi_group,
+	desc = "Restore timeoutlen when leaving yazi buffer",
 	callback = function()
 		if vim.b.old_timeoutlen then
 			vim.o.timeoutlen = vim.b.old_timeoutlen
@@ -37,23 +29,28 @@ vim.api.nvim_create_autocmd("BufLeave", {
 	end,
 })
 
--- Enable wrap for all Markdown files
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
+	group = vim.api.nvim_create_augroup("my.markdown-wrap", { clear = true }),
+	desc = "Enable wrap for all Markdown files",
 	callback = function()
 		vim.wo.wrap = true -- turn on line wrapping
 		vim.wo.linebreak = true -- break lines at word boundaries (optional, nicer look)
 	end,
 })
 
--- Auto-save folds for each file
+local folds_group = vim.api.nvim_create_augroup("my.folds", { clear = true })
+
 vim.api.nvim_create_autocmd("BufWinLeave", {
+	group = folds_group,
+	desc = "Auto-save folds for each file",
 	pattern = "*",
 	command = "silent! mkview",
 })
 
--- Auto-load folds when reopening
 vim.api.nvim_create_autocmd("BufWinEnter", {
+	group = folds_group,
+	desc = "Auto-load folds when reopening",
 	pattern = "*",
 	command = "silent! loadview",
 })
