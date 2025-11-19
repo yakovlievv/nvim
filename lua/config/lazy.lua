@@ -17,7 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- sourcing options and keymaps
 require("config.options")
-require("config.toggle-term")
 require("config.keymaps")
 require("config.autocmds")
 
