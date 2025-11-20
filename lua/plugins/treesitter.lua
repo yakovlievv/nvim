@@ -7,6 +7,50 @@ return {
 	event = { "VeryLazy" },
 	config = function()
 		local ts = require("nvim-treesitter")
+
+		local function ensure_treesitter_cli(cb)
+			if vim.fn.executable("tree-sitter") == 1 then
+				return cb(true)
+			end
+
+			-- try installing with mason
+			if not pcall(require, "mason") then
+				return cb(false, "`mason.nvim` is disabled in your config, so we cannot install it automatically.")
+			end
+
+			-- check again since we might have installed it already
+			if vim.fn.executable("tree-sitter") == 1 then
+				return cb(true)
+			end
+
+			local mr = require("mason-registry")
+			mr.refresh(function()
+				local p = mr.get_package("tree-sitter-cli")
+				if not p:is_installed() then
+					vim.notify("Installing `tree-sitter-cli` with `mason.nvim`...")
+					p:install(
+						nil,
+						vim.schedule_wrap(function(success)
+							if success then
+								vim.notify("Installed `tree-sitter-cli` with `mason.nvim`.")
+								cb(true)
+							else
+								cb(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
+							end
+						end)
+					)
+				end
+			end)
+		end
+
+		ensure_treesitter_cli(function(success, err)
+			if success then
+				print("Tree-sitter CLI available!")
+			else
+				print("Tree-sitter CLI missing: " .. err)
+			end
+		end)
+
 		local ensure_installed = {
 			"bash",
 			"c",
@@ -25,44 +69,15 @@ return {
 			"gitcommit",
 			"vim",
 		}
-		local available_parsers = ts.get_available()
+
 		local installed = ts.get_installed()
-		local not_installed = {}
-
-		-- Get the list of not installed parsers
-		for _, parser in ipairs(ensure_installed) do
-			if not vim.tbl_contains(installed, parser) then
-				table.insert(not_installed, parser)
-			end
-		end
-
+		local not_installed = vim.tbl_filter(function(parser)
+			return not vim.tbl_contains(installed, parser)
+		end, ensure_installed)
 		if #not_installed > 0 then
-			vim.schedule(function()
-				ts.install(not_installed, { summary = true })
-			end)
+			ts.install(not_installed, { summary = true })
 		end
-
-		-- Installation proccess of a parser
-		local function parser_sync(parser)
-			local is_installed, _ = vim.treesitter.language.add(parser)
-			if not is_installed then
-				local is_available = vim.tbl_contains(available_parsers, parser)
-				if is_available then
-					-- vim.notify("TS installing: " .. parser, vim.log.levels.INFO)
-					ts.install({ parser }):wait(30 * 1000)
-					-- vim.notify("Installed " .. parser, vim.log.levels.INFO)
-					return true
-				end
-			end
-			return false
-		end
-
-		-- Sync ensure_installed
-		-- for _, parser in ipairs(ensure_installed) do
-		-- 	vim.schedule(function()
-		-- 		parser_sync(parser)
-		-- 	end)
-		-- end
+		ts.install({}, { force = false, summary = true, max_jobs = 3 })
 
 		local augroup = vim.api.nvim_create_augroup("my.treesitter", { clear = true })
 		vim.api.nvim_create_autocmd("FileType", {
