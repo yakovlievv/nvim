@@ -13,7 +13,8 @@ return {
 		end
 	end,
 	config = function()
-		Snacks = require("snacks")
+		local snacks = require("snacks")
+		local noice = require("noice")
 		vim.opt.laststatus = 3 -- global statusline
 		require("lualine").setup({
 			options = {
@@ -27,24 +28,24 @@ return {
 				lualine_c = { "filename" },
 				lualine_x = {
 					"searchcount",
-					Snacks.profiler.status(),
+					snacks.profiler.status(),
                     -- stylua: ignore
                     {
                         function() return require("noice").api.status.command.get() end,
                         cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-                        color = function() return { fg = Snacks.util.color("Statement") } end,
+                        color = function() return { fg = snacks.util.color("Statement") } end,
                     },
                     -- stylua: ignore
-                    {
-                        function() return require("noice").api.status.mode.get() end,
-                        cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-                        color = function() return { fg = "#94e2d5" } end,
-                    },
+                    -- {
+                    --     function() return require("noice").api.status.mode.get() end,
+                    --     cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+                    --     color = function() return { fg = "#94e2d5" } end,
+                    -- },
                     -- stylua: ignore
                     {
                         function() return "  " .. require("dap").status() end,
                         cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-                        color = function() return { fg = Snacks.util.color("Debug") } end,
+                        color = function() return { fg = snacks.util.color("Debug") } end,
                     },
 					{
 						require("lazy.status").updates,
