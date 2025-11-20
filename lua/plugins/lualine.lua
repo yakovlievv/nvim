@@ -20,6 +20,8 @@ return {
 			options = {
 				theme = "auto",
 				globalstatus = vim.o.laststatus == 3,
+				component_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
 				disabled_filetypes = { statusline = { "dashboard", "snacks_dashboard" } },
 			},
 			sections = {
@@ -34,6 +36,7 @@ return {
                         function() return require("noice").api.status.command.get() end,
                         cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
                         color = function() return { fg = snacks.util.color("Statement") } end,
+                        separator = "",
                     },
                     -- stylua: ignore
                     -- {
@@ -52,6 +55,24 @@ return {
 						cond = require("lazy.status").has_updates,
 						color = function()
 							return { fg = "#fab387" }
+						end,
+					},
+					{
+						"diff",
+						-- symbols = {
+						-- 	added = icons.git.added,
+						-- 	modified = icons.git.modified,
+						-- 	removed = icons.git.removed,
+						-- },
+						source = function()
+							local gitsigns = vim.b.gitsigns_status_dict
+							if gitsigns then
+								return {
+									added = gitsigns.added,
+									modified = gitsigns.changed,
+									removed = gitsigns.removed,
+								}
+							end
 						end,
 					},
 				},
