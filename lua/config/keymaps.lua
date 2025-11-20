@@ -20,6 +20,7 @@ set("x", "<", "<gv")
 -------- Yanking Pasting --------
 ---------------------------------
 
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Paste and not copy
 set("x", "<leader>p", [["_dp]])
 set("x", "<leader>P", [["_dP]])

@@ -77,7 +77,6 @@ return {
 		if #not_installed > 0 then
 			ts.install(not_installed, { summary = true })
 		end
-		ts.install({}, { force = false, summary = true, max_jobs = 3 })
 
 		local augroup = vim.api.nvim_create_augroup("my.treesitter", { clear = true })
 		vim.api.nvim_create_autocmd("FileType", {
