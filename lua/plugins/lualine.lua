@@ -14,7 +14,7 @@ return {
 	end,
 	config = function()
 		local snacks = require("snacks")
-		local noice = require("noice")
+		local icons = require("nvim-web-devicons")
 		vim.opt.laststatus = 3 -- global statusline
 		require("lualine").setup({
 			options = {
@@ -26,8 +26,8 @@ return {
 			},
 			sections = {
 				lualine_a = { "mode" },
-				lualine_b = { "branch", "diff", "diagnostics" },
-				lualine_c = { "filename" },
+				lualine_b = { "branch" },
+				lualine_c = { "diagnostics", "filename" },
 				lualine_x = {
 					"searchcount",
 					snacks.profiler.status(),
@@ -59,11 +59,11 @@ return {
 					},
 					{
 						"diff",
-						-- symbols = {
-						-- 	added = icons.git.added,
-						-- 	modified = icons.git.modified,
-						-- 	removed = icons.git.removed,
-						-- },
+						symbols = {
+							added = " ", -- nf-fa-plus-square
+							modified = " ", -- nf-oct-diff_modified
+							removed = " ", -- nf-fa-minus-square
+						},
 						source = function()
 							local gitsigns = vim.b.gitsigns_status_dict
 							if gitsigns then

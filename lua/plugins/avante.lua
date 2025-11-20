@@ -11,13 +11,9 @@ return {
 		providers = {
 			openai = {
 				endpoint = "https://api.openai.com/v1",
-				api_key = os.getenv("OPENAI_API_KEY"), -- you must export OPENAI_API_KEY
-				model = "gpt-4o-mini", -- pick your preferred default
+				api_key = os.getenv("OPENAI_API_KEY"),
+				model = "gpt-4o-mini",
 				chat_model = "gpt-4o-mini",
-				embedding_model = "text-embedding-3-large",
-				extra_request_body = {
-					temperature = 0,
-				},
 			},
 		},
 		input = {
