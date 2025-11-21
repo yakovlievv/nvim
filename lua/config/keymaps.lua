@@ -1,12 +1,8 @@
 local set = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
------------------------------
--------- Visual mode --------
------------------------------
-
--- add stuff
--- set("x", "(", "<Esc>`<i(<Esc>`>la)<Esc>")
+set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+set({ "n", "x" }, "k", "v:count == 1 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
 -- Move selected lines
 set("x", "K", ":m '<-2<CR>gv=gv", { silent = true })
@@ -16,11 +12,8 @@ set("x", "J", ":m '>+1<CR>gv=gv", { silent = true })
 set("x", ">", ">gv")
 set("x", "<", "<gv")
 
----------------------------------
--------- Yanking Pasting --------
----------------------------------
+set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Paste and not copy
 set("x", "<leader>p", [["_dp]])
 set("x", "<leader>P", [["_dP]])
@@ -30,18 +23,11 @@ set("x", "<leader>c", [["_dC]])
 -- Change the word under the cursor
 set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
---------------------------
--------- Motions ---------
---------------------------
 -- set({ "n", "x", "o" }, ":", ";")
 -- set({ "n", "x", "o" }, ";", ":")
 
 -- Do J but keep the curson in place
 set("n", "J", "mzJ`z")
-
-----------------------------
--------- Utilities ---------
-----------------------------
 
 -- Call lazy
 set("n", "<leader>l", ":Lazy<CR>")
@@ -53,26 +39,18 @@ set("n", "<leader>=", ":keepjumps normal! magg=G`azz<CR>")
 set("n", "<leader><leader>x", "<cmd>!chmod +x %<CR>", { silent = false })
 
 -- resize a window
-set("n", "<M-Up>", ":resize -2<CR>", { silent = true, desc = "Decrease height" })
+set("n", "<C-Up>", "<Cmd>resize -2<CR>", { silent = true, desc = "Decrease height" })
 set("n", "<M-Down>", ":resize +2<CR>", { silent = true, desc = "Increase height" })
-set("n", "<M-Left>", ":vertical resize -2<CR>", { silent = true, desc = "Decrease width" })
-set("n", "<M-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increase width" })
+set("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true, desc = "Decrease width" })
+set("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increase width" })
 
 -- Toggle wrap
 set("n", "<leader>W", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
 
--- toggle floating terminal
--- set({ "t", "n" }, "<C-t>", "<cmd>Floaterminal<cr>")
---------------------------
--------- Buffers ---------
---------------------------
 set("n", "<leader>bb", ":buffer #<CR>", opts)
 set("n", "<C-b><C-b>", ":buffer #<CR>", opts)
-
--- set("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
--- set("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
 set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
