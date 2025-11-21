@@ -79,17 +79,28 @@ return {
 		end
 
 		local augroup = vim.api.nvim_create_augroup("my.treesitter", { clear = true })
+		local available_parsers = ts.get_available()
+
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = "*",
 			group = augroup,
 			callback = function(event)
-				local lang = vim.treesitter.language.get_lang(event.match)
-				local is_installed, _ = vim.treesitter.language.add(lang)
+				local parser = vim.treesitter.language.get_lang(event.match)
+				local is_installed, _ = vim.treesitter.language.add(parser)
+				if not is_installed then
+					local is_available = vim.tbl_contains(available_parsers, parser)
+					if is_available then
+						ts.install(parser):wait(3000)
+					end
+				end
+
+				is_installed, _ = vim.treesitter.language.add(parser)
+
 				if is_installed then
-					local ok, _ = pcall(vim.treesitter.start, event.buf, lang)
+					local ok, _ = pcall(vim.treesitter.start, event.buf, parser)
 
 					if not ok then
-						vim.notify("Treesitter fucked up!" .. lang, vim.log.levels.INFO)
+						vim.notify("Treesitter fucked up!" .. parser, vim.log.levels.INFO)
 						return
 					end
 
