@@ -94,3 +94,7 @@ set("n", "<leader>bo", function()
 end)
 set({ "n", "x" }, "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 set("i", "<C-p>", "<Nop>", { noremap = true, silent = true })
+
+set("n", "K", function()
+	vim.lsp.buf.hover({ border = "rounded" })
+end)

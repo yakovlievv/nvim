@@ -12,6 +12,8 @@ opt.relativenumber = true
 -- Enable cursor line
 opt.cursorline = true
 
+vim.o.winborder = "rounded"
+
 -- Highlight current line number
 -- vim.cmd([[
 --   hi CursorLineNr guifg=#f5c2e7 guibg=NONE gui=bold
@@ -31,7 +33,7 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
 -- whitespace
-opt.list = true
+opt.list = false
 -- opt.listchars = "eol:.,tab:>-,trail:~,extends:>,precedes:<"
 
 vim.o.swapfile = false
@@ -48,7 +50,7 @@ opt.laststatus = 3 -- global statusline
 opt.wrap = false -- disable line wrapping
 opt.linebreak = true -- wrapping by word
 opt.termguicolors = true -- enable 24-bit colors
--- opt.fillchars:append({ eob = " " }) -- hide ~ on empty lines
+-- opt.fillchars:append() -- hide ~ on empty lines
 
 -- Scrolling & Signs
 opt.scrolloff = 5 -- keep 5 lines visible above/below cursor
@@ -65,17 +67,3 @@ opt.ignorecase = true
 opt.smartcase = true
 
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
-
-vim.diagnostic.config({
-	virtual_text = true, -- show messages inline
-	signs = true, -- keep gutter icons
-	underline = true,
-	update_in_insert = false,
-})
-
-vim.notify = function(msg, level, opts)
-	if msg:match('Error in decoration provider "line"') then
-		return
-	end
-	vim.api.nvim_echo({ { msg, "WarningMsg" } }, true, {})
-end
