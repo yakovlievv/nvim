@@ -82,7 +82,11 @@ set("n", "J", "mzJ`z")
 set("n", "<leader>l", "<cmd>Lazy<CR>")
 
 -- Reindent entire buffer while keeping cursor
-set("n", "<leader>=", "<cmd>keepjumps normal! magg=G`azz<CR>")
+vim.keymap.set("n", "<leader>=", function()
+	local view = vim.fn.winsaveview()
+	vim.cmd("normal! gg=G")
+	vim.fn.winrestview(view)
+end, { desc = "Reindent whole file and keep cursor" })
 
 -- chmod a file (make it executable)
 set("n", "<leader><leader>x", ":!chmod +x %<CR>", { silent = false })
@@ -114,3 +118,5 @@ set({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>")
 
 set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 set("i", "<C-p>", "<Nop>", { noremap = true, silent = true })
+
+set({ "n", "o", "x" }, "$", "g_")

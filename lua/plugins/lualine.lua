@@ -14,7 +14,6 @@ return {
 	end,
 	config = function()
 		local snacks = require("snacks")
-		local icons = require("nvim-web-devicons")
 		vim.opt.laststatus = 3 -- global statusline
 		require("lualine").setup({
 			options = {
@@ -33,30 +32,28 @@ return {
 				},
 				lualine_x = {
 					snacks.profiler.status(),
+
                     -- stylua: ignore
                     {
-                        function() return require("noice").api.status.command.get() end,
-                        cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-                        color = function() return { fg = snacks.util.color("Statement") } end,
-                        separator = "",
+                        function() return "  " .. require("dap").status() end,
+                        cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+                        color = function() return { fg = snacks.util.color("Debug") } end,
                     },
                     -- stylua: ignore
                     {
                         function() return require("noice").api.status.mode.get() end,
                         cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
                         color = function() return { fg = "#94e2d5" } end,
-                        separator = "",
                     },
                     -- stylua: ignore
                     {
-                        function() return "  " .. require("dap").status() end,
-                        cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-                        color = function() return { fg = snacks.util.color("Debug") } end,
-                        separator = "",
+                        function() return require("noice").api.status.command.get() end,
+                        cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+                        color = function() return { fg = snacks.util.color("Statement") } end,
+
                     },
 					{
 						require("lazy.status").updates,
-						separator = "",
 						cond = require("lazy.status").has_updates,
 						color = function()
 							return { fg = "#fab387" }
@@ -64,11 +61,10 @@ return {
 					},
 					{
 						"diff",
-						separator = "",
 						symbols = {
-							added = " ", -- nf-fa-plus-square
-							modified = " ", -- nf-oct-diff_modified
-							removed = " ", -- nf-fa-minus-square
+							added = ICONS.git_diff.added,
+							modified = ICONS.git_diff.modified,
+							removed = ICONS.git_diff.removed,
 						},
 						source = function()
 							local gitsigns = vim.b.gitsigns_status_dict

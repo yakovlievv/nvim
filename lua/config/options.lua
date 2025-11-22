@@ -66,22 +66,22 @@ vim.diagnostic.config({
 })
 
 -- Define your custom signs
-vim.fn.sign_define("DiagnosticSignError", { text = "✗", texthl = "DiagnosticError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = "⚠", texthl = "DiagnosticWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = "ℹ", texthl = "DiagnosticInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = "➤", texthl = "DiagnosticHint" })
 
--- diagnostics icons
-_G.DIAGNOSTIC_ICONS = {
-	error = "✗",
-	warn = "⚠",
-	info = "ℹ",
-	hint = "➤",
+_G.ICONS = {
+	diagnostics = {
+		error = "",
+		warn = "",
+		info = "ℹ",
+		hint = "",
+	},
+	git_diff = {
+		added = " ",
+		modified = " ",
+		removed = " ",
+	},
 }
 
--- git diff signs
-_G.GIT_DIFF_SIGNS = {
-	added = " ", -- nf-fa-plus-square
-	modified = " ", -- nf-oct-diff_modified
-	removed = " ", -- nf-fa-minus-square
-}
+vim.fn.sign_define("DiagnosticSignError", { text = ICONS.diagnostics.error, texthl = "DiagnosticError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = ICONS.diagnostics.warn, texthl = "DiagnosticWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = ICONS.diagnostics.info, texthl = "DiagnosticInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { text = ICONS.diagnostics.hint, texthl = "DiagnosticHint" })
