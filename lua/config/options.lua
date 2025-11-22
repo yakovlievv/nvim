@@ -3,7 +3,7 @@ local g = vim.g
 
 -- Leader keys
 g.mapleader = " "
-g.maplocalleader = "//"
+g.maplocalleader = "\\"
 
 -- UI: line numbers
 opt.number = true
@@ -14,13 +14,6 @@ opt.cursorline = true
 
 vim.o.winborder = "rounded"
 
--- Highlight current line number
--- vim.cmd([[
---   hi CursorLineNr guifg=#f5c2e7 guibg=NONE gui=bold
--- ]])
-
--- Disable the bar in the bottom before noice loads
-vim.opt.cmdheight = 0
 -- Indentation
 opt.tabstop = 4 -- number of spaces a <Tab> counts for
 opt.shiftwidth = 4 -- number of spaces used for each step of (auto)indent
@@ -50,7 +43,7 @@ opt.laststatus = 3 -- global statusline
 opt.wrap = false -- disable line wrapping
 opt.linebreak = true -- wrapping by word
 opt.termguicolors = true -- enable 24-bit colors
--- opt.fillchars:append() -- hide ~ on empty lines
+-- opt.fillchars:append({ eob = " " })
 
 -- Scrolling & Signs
 opt.scrolloff = 5 -- keep 5 lines visible above/below cursor
@@ -63,10 +56,6 @@ opt.undodir = os.getenv("XDG_STATE_HOME") .. "/nvim/undo"
 opt.undofile = true
 opt.hlsearch = true
 opt.incsearch = true
-opt.ignorecase = true
-opt.smartcase = true
-
-vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
 vim.diagnostic.config({
 	virtual_text = true, -- show messages inline

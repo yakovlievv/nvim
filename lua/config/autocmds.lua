@@ -54,3 +54,10 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	pattern = "*",
 	command = "silent! loadview",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("my.comments", { clear = true }),
+	callback = function()
+		vim.opt.formatoptions:remove({ "r", "o" })
+	end,
+})

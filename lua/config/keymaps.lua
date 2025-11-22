@@ -2,8 +2,8 @@ local set = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
 -- better up and down
-set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-set({ "n", "x" }, "k", "v:count == 1 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Down" })
+set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Up" })
 
 -- better n, N
 set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
@@ -53,10 +53,9 @@ set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 set("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 set("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
-
 -- Move selected lines
-set("x", "K", ":m '<-2<CR>gv=gv", { silent = true })
-set("x", "J", ":m '>+1<CR>gv=gv", { silent = true })
+set("x", "K", "<cmd>m '<-2<cr>gv=gv", { silent = true })
+set("x", "J", "<cmd>m '>+1<CR>gv=gv", { silent = true })
 
 -- Indent witout reselecting everytime
 set("x", ">", ">gv")
@@ -80,13 +79,13 @@ set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 set("n", "J", "mzJ`z")
 
 -- Call lazy
-set("n", "<leader>l", ":Lazy<CR>")
+set("n", "<leader>l", "<cmd>Lazy<CR>")
 
 -- Reindent entire buffer while keeping cursor
-set("n", "<leader>=", ":keepjumps normal! magg=G`azz<CR>")
+set("n", "<leader>=", "<cmd>keepjumps normal! magg=G`azz<CR>")
 
 -- chmod a file (make it executable)
-set("n", "<leader><leader>x", "<cmd>!chmod +x %<CR>", { silent = false })
+set("n", "<leader><leader>x", ":!chmod +x %<CR>", { silent = false })
 
 -- resize a window
 set("n", "<C-Up>", "<Cmd>resize -2<CR>", { silent = true, desc = "Decrease height" })

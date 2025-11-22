@@ -4,6 +4,9 @@ return {
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 	},
+	init = function()
+		vim.opt.cmdheight = 0
+	end,
 	config = function()
 		require("noice").setup({
 			lsp = {
