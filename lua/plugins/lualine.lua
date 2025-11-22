@@ -27,9 +27,11 @@ return {
 			sections = {
 				lualine_a = { "mode" },
 				lualine_b = { "branch" },
-				lualine_c = { "diagnostics", "filename" },
+				lualine_c = {
+					"diagnostics",
+					{ "filename" },
+				},
 				lualine_x = {
-					"searchcount",
 					snacks.profiler.status(),
                     -- stylua: ignore
                     {
@@ -39,19 +41,22 @@ return {
                         separator = "",
                     },
                     -- stylua: ignore
-                    -- {
-                    --     function() return require("noice").api.status.mode.get() end,
-                    --     cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-                    --     color = function() return { fg = "#94e2d5" } end,
-                    -- },
+                    {
+                        function() return require("noice").api.status.mode.get() end,
+                        cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+                        color = function() return { fg = "#94e2d5" } end,
+                        separator = "",
+                    },
                     -- stylua: ignore
                     {
                         function() return "  " .. require("dap").status() end,
                         cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
                         color = function() return { fg = snacks.util.color("Debug") } end,
+                        separator = "",
                     },
 					{
 						require("lazy.status").updates,
+						separator = "",
 						cond = require("lazy.status").has_updates,
 						color = function()
 							return { fg = "#fab387" }
@@ -59,6 +64,7 @@ return {
 					},
 					{
 						"diff",
+						separator = "",
 						symbols = {
 							added = " ", -- nf-fa-plus-square
 							modified = " ", -- nf-oct-diff_modified
@@ -77,7 +83,24 @@ return {
 					},
 				},
 				lualine_y = { "progress", "location" },
-				lualine_z = { "lsp_status" },
+				lualine_z = {
+					{
+						"lsp_status",
+						icon = "", -- f013
+						symbols = {
+							-- Standard unicode symbols to cycle through for LSP progress:
+							spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+							-- Standard unicode symbol for when LSP is done:
+							done = "✓",
+							-- Delimiter inserted between LSP names:
+							separator = "  ",
+						},
+						-- List of LSP names to ignore (e.g., `null-ls`):
+						ignore_lsp = {},
+						-- Display the LSP name
+						show_name = true,
+					},
+				},
 			},
 		})
 	end,
