@@ -5,6 +5,55 @@ local opts = { silent = true, noremap = true }
 set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 set({ "n", "x" }, "k", "v:count == 1 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
+-- better n, N
+set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
+set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
+set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+
+set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+
+-- location list
+set("n", "<leader>xl", function()
+	local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
+	if not success and err then
+		vim.notify(err, vim.log.levels.ERROR)
+	end
+end, { desc = "Location List" })
+
+-- quickfix list
+set("n", "<leader>xq", function()
+	local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
+	if not success and err then
+		vim.notify(err, vim.log.levels.ERROR)
+	end
+end, { desc = "Quickfix List" })
+
+local diagnostic_goto = function(next, severity)
+	return function()
+		vim.diagnostic.jump({
+			count = (next and 1 or -1) * vim.v.count1,
+			severity = severity and vim.diagnostic.severity[severity] or nil,
+			float = true,
+		})
+	end
+end
+
+set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+set("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+set("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+
+
 -- Move selected lines
 set("x", "K", ":m '<-2<CR>gv=gv", { silent = true })
 set("x", "J", ":m '>+1<CR>gv=gv", { silent = true })
@@ -59,7 +108,7 @@ set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
 set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
 set({ "n", "v" }, "<leader>Q", "<cmd>qa<Cr>")
 
-set({ "n", "v", "i" }, "<C-s>", "<Cmd>w<Cr>")
+set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 set({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>")
 
 -- Utilities
