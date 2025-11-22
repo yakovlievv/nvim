@@ -64,3 +64,24 @@ vim.diagnostic.config({
 	update_in_insert = false,
 	-- float = { border = "rounded" },
 })
+
+-- Define your custom signs
+vim.fn.sign_define("DiagnosticSignError", { text = "✗", texthl = "DiagnosticError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "⚠", texthl = "DiagnosticWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "ℹ", texthl = "DiagnosticInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "➤", texthl = "DiagnosticHint" })
+
+-- diagnostics icons
+_G.DIAGNOSTIC_ICONS = {
+	error = "✗",
+	warn = "⚠",
+	info = "ℹ",
+	hint = "➤",
+}
+
+-- git diff signs
+_G.GIT_DIFF_SIGNS = {
+	added = " ", -- nf-fa-plus-square
+	modified = " ", -- nf-oct-diff_modified
+	removed = " ", -- nf-fa-minus-square
+}

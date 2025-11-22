@@ -103,10 +103,10 @@ set("n", "<leader>bb", ":buffer #<CR>", opts)
 set("n", "<C-b><C-b>", ":buffer #<CR>", opts)
 
 -- saving and quiting
-set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
-set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
-set({ "n", "v" }, "<leader>Q", "<cmd>qa<Cr>")
-
+-- set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
+-- set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
+-- set({ "n", "v" }, "<leader>Q", "<cmd>qa<Cr>")
+--
 set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 set({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>")
 
