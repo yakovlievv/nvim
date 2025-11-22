@@ -24,6 +24,10 @@ return {
 				icon = " ",
 			},
 		},
+		selection = {
+			enabled = false,
+			-- hint_display = "delayed",
+		},
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
