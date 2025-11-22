@@ -1,3 +1,15 @@
+local function path_for_bufferline(bufnr)
+	local bufname = vim.api.nvim_buf_get_name(bufnr)
+	if bufname == "" then
+		return "Neo-tree"
+	end
+	local home = vim.env.HOME
+	if bufname:sub(1, #home) == home then
+		bufname = "~" .. bufname:sub(#home + 1)
+	end
+	return bufname
+end
+
 return {
 	"akinsho/bufferline.nvim",
 	event = "BufAdd",
@@ -17,17 +29,20 @@ return {
 	},
 	opts = {
 		options = {
-			close_command = function(n)
-				Snacks.bufdelete(n)
-			end,
-			right_mouse_command = function(n)
-				Snacks.bufdelete(n)
-			end,
+            -- stylua: ignore
+            close_command = function(n) Snacks.bufdelete(n) end,
+            -- stylua: ignore
+            right_mouse_command = function(n) Snacks.bufdelete(n) end,
+			always_show_bufferline = false,
 			diagnostics = "nvim_lsp",
 			offsets = {
 				{
 					filetype = "neo-tree",
-					text = "Neo-tree",
+                    -- stylua: ignore
+                    -- text = function() 
+                    --     return path_for_bufferline(vim.fn.bufnr()) 
+                    -- end,
+                    text = "Neotree",
 					highlight = "Directory",
 					text_align = "left",
 				},
@@ -37,17 +52,4 @@ return {
 			},
 		},
 	},
-	config = function()
-		require("bufferline").setup({
-			options = {
-				custom_filter = function(bufnr, _)
-					local ok, floating_term = pcall(vim.b[bufnr].floating_term)
-					if ok and floating_term then
-						return false -- hide this buffer
-					end
-					return true -- show all other buffers
-				end,
-			},
-		})
-	end,
 }
