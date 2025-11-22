@@ -12,6 +12,12 @@ return {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 				},
+				-- hover = {
+				-- 	opts = { border = "rounded", offset_y = 1 },
+				-- },
+				-- signature = {
+				-- 	opts = { border = "rounded", offset_y = 1 },
+				-- },
 			},
 			-- you can enable a preset for easier configuration
 			presets = {
