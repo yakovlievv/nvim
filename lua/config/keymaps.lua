@@ -1,6 +1,7 @@
 local set = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
+-- better up and down
 set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 set({ "n", "x" }, "k", "v:count == 1 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
@@ -12,15 +13,15 @@ set("x", "J", ":m '>+1<CR>gv=gv", { silent = true })
 set("x", ">", ">gv")
 set("x", "<", "<gv")
 
-set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+-- Not use system clipboard
+set({ "x", "n", "o" }, "<leader>p", [["_dp]])
+set({ "x", "n", "o" }, "<leader>P", [["_dP]])
+set({ "x", "n", "o" }, "<leader>c", [["_c]])
+set({ "x", "n", "o" }, "<leader>C", [["_C]])
+set({ "x", "n", "o" }, "<leader>d", [["_d]])
+set({ "x", "n", "o" }, "<leader>D", [["_D]])
 
--- Paste and not copy
-set("x", "<leader>p", [["_dp]])
-set("x", "<leader>P", [["_dP]])
-set("x", "<leader>c", [["_dc]])
-set("x", "<leader>c", [["_dC]])
-
--- Change the word under the cursor
+-- Change the word under the word
 set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- set({ "n", "x", "o" }, ":", ";")
@@ -49,9 +50,11 @@ set("n", "<leader>W", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
 
+-- switch to latest buffer
 set("n", "<leader>bb", ":buffer #<CR>", opts)
 set("n", "<C-b><C-b>", ":buffer #<CR>", opts)
 
+-- saving and quiting
 set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
 set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
 set({ "n", "v" }, "<leader>Q", "<cmd>qa<Cr>")
@@ -59,20 +62,7 @@ set({ "n", "v" }, "<leader>Q", "<cmd>qa<Cr>")
 set({ "n", "v", "i" }, "<C-s>", "<Cmd>w<Cr>")
 set({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>")
 
-set("n", "<leader>bd", function()
-	require("snacks.bufdelete").delete()
-end)
+-- Utilities
 
-set("n", "<leader>ba", function()
-	require("snacks.bufdelete").all()
-end)
-
-set("n", "<leader>bo", function()
-	require("snacks.bufdelete").other()
-end)
-set({ "n", "x" }, "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
+set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 set("i", "<C-p>", "<Nop>", { noremap = true, silent = true })
-
-set("n", "K", function()
-	vim.lsp.buf.hover({ border = "rounded" })
-end)
