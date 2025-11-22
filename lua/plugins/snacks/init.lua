@@ -21,12 +21,12 @@ return {
 
 	keys = {
         --stylua: ignore start
+
         -- Top Pickers & Explorer
         { "<C-f>",      function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
         { "<C-g>",      function() Snacks.picker.grep() end,                                    desc = "Grep" },
         { "<leader>:",  function() Snacks.picker.command_history() end,                         desc = "Command History" },
         { "<leader>n",  function() Snacks.picker.notifications() end,                           desc = "Notification History" },
-        { "<leader>e",  function() Snacks.explorer() end,                                       desc = "File Explorer" },
         -- find
         { "<leader>fb", function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
         { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
@@ -82,31 +82,17 @@ return {
         { "<leader>ss", function() Snacks.picker.lsp_symbols() end,                             desc = "LSP Symbols" },
         { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
         -- Other
-        { "<leader>cR", function() Snacks.rename.rename_file() end,                             desc = "Rename File" },
+        { "<leader>R", function() Snacks.rename.rename_file() end,                             desc = "Rename File" },
         { "<leader>gB", function() Snacks.gitbrowse() end,                                      desc = "Git Browse",                 mode = { "n", "v" } },
         { "<leader>gg", function() Snacks.lazygit() end,                                        desc = "Lazygit" },
-        { "<leader>gg", function() Snacks.lazygit() end, desc = "lazygit (cwd)" },
+        { "<leader>gG", function() Snacks.lazygit() end, desc = "lazygit (cwd)" },
         { "<leader>U",  function() Snacks.notifier.hide() end,                                  desc = "Dismiss All Notifications" },
-        { "<c-/>",      function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
-        { "<c-_>",      function() Snacks.terminal() end,                                       desc = "which_key_ignore" },
         { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",             mode = { "n", "t" } },
         { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",             mode = { "n", "t" } },
+        { "<leader>bd", function() Snacks.bufdelete.delete() end, desc = "Delete the buffer"},
+        { "<leader>ba", function() Snacks.bufdelete.all() end, desc = "Delete all buffers"},
+        { "<leader>bo", function() Snacks.bufdelete.other() end, desc = "Delete other buffers"},
+		{ "<C-t>", function() Snacks.terminal.toggle(nil, { cwd = vim.fn.getcwd(), win = { style = "float", relative = "editor", border = "rounded" } }) end, mode = { "n", "t" }, desc = "Toggle floating Snacks terminal", },
 		--stylua: ignore end
-
-		{
-			"<C-t>", -- ctrl + t
-			function()
-				Snacks.terminal.toggle(nil, {
-					cwd = vim.fn.getcwd(),
-					win = {
-						style = "float",
-						relative = "editor",
-						border = "rounded",
-					},
-				})
-			end,
-			mode = { "n", "t" },
-			desc = "Toggle floating Snacks terminal",
-		},
 	},
 }
