@@ -28,7 +28,28 @@ return {
 				lualine_b = { "branch" },
 				lualine_c = {
 					"diagnostics",
-					{ "filename" },
+					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+					{
+						"filename",
+						padding = { left = 0, right = 1 },
+						separator = "",
+						file_status = true, -- Displays file status (readonly status, modified status)
+						newfile_status = false, -- Display new file status (new file means no write after created)
+						path = 1, -- 0: Just the filename
+						-- 1: Relative path
+						-- 2: Absolute path
+						-- 3: Absolute path, with tilde as the home directory
+						-- 4: Filename and parent dir, with tilde as the home directory
+
+						shorting_target = 40, -- Shortens path to leave 40 spaces in the window
+						-- for other components. (terrible name, any suggestions?)
+						symbols = {
+							modified = "[+]", -- Text to show when the file is modified.
+							readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+							unnamed = "[No Name]", -- Text to show for unnamed buffers.
+							newfile = "[New]", -- Text to show for newly created file before first write
+						},
+					},
 				},
 				lualine_x = {
 					snacks.profiler.status(),
@@ -43,7 +64,7 @@ return {
                     {
                         function() return require("noice").api.status.mode.get() end,
                         cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-                        color = function() return { fg = "#94e2d5" } end,
+                        color = function() return { fg = Snacks.util.color("Constant") } end,
                     },
                     -- stylua: ignore
                     {
@@ -59,6 +80,7 @@ return {
 							return { fg = "#fab387" }
 						end,
 					},
+
 					{
 						"diff",
 						symbols = {
@@ -78,7 +100,10 @@ return {
 						end,
 					},
 				},
-				lualine_y = { "progress", "location" },
+				lualine_y = {
+					{ "progress", separator = " ", padding = { left = 1, right = 0 } },
+					{ "location", padding = { left = 0, right = 1 } },
+				},
 				lualine_z = {
 					{
 						"lsp_status",
@@ -91,9 +116,8 @@ return {
 							-- Delimiter inserted between LSP names:
 							separator = "  ",
 						},
-						-- List of LSP names to ignore (e.g., `null-ls`):
+						-- list of LSP names to ignore (e.g., `null-ls`):
 						ignore_lsp = {},
-						-- Display the LSP name
 						show_name = true,
 					},
 				},
