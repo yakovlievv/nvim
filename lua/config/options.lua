@@ -67,3 +67,11 @@ opt.ignorecase = true
 opt.smartcase = true
 
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
+
+vim.diagnostic.config({
+	virtual_text = true, -- show messages inline
+	signs = true, -- keep gutter icons
+	underline = true,
+	update_in_insert = false,
+	-- float = { border = "rounded" },
+})
