@@ -5,7 +5,6 @@ return {
 	version = "1.*",
 	dependencies = {
 		{ "rafamadriz/friendly-snippets" },
-		{ "Kaiser-Yang/blink-cmp-avante" },
 		{
 			"L3MON4D3/LuaSnip",
 			dependencies = { "rafamadriz/friendly-snippets" },
@@ -66,15 +65,8 @@ return {
 			},
 
 			sources = {
-				default = { "avante", "lazydev", "lsp", "path", "snippets", "buffer" },
+				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 				providers = {
-					avante = {
-						module = "blink-cmp-avante",
-						name = "Avante",
-						opts = {
-							-- options for blink-cmp-avante
-						},
-					},
 					lazydev = {
 						name = "LazyDev",
 						module = "lazydev.integrations.blink",

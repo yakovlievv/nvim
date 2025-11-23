@@ -90,7 +90,13 @@ return {
 				if not is_installed then
 					local is_available = vim.tbl_contains(available_parsers, parser)
 					if is_available then
-						ts.install(parser):wait(3000)
+						ts.install(parser)
+						vim.schedule(function()
+							local installed = vim.treesitter.language.add(parser)
+							if installed then
+								pcall(vim.treesitter.start, event.buf, parser)
+							end
+						end)
 					end
 				end
 
