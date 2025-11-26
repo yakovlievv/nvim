@@ -6,7 +6,7 @@ return {
                 { "<leader>q", function() require("quicker").toggle() end, { desc = "Toggle quickfix", }},
 
                 -- stylua: ignore
-                { "<leader>l", function() require("quicker").toggle({ loclist = true }) end, { desc = "Toggle loclist", }},
+                { "<leader>L", function() require("quicker").toggle({ loclist = true }) end, { desc = "Toggle loclist", }},
 	},
 	config = function()
 		require("quicker").setup({

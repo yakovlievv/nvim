@@ -114,9 +114,22 @@ set("n", "<C-b><C-b>", ":buffer #<CR>", opts)
 set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 set({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>")
 
+-- these just make sense don't they?
+set({ "n", "x", "o" }, "<S-l>", "g_")
+set({ "n", "x", "o" }, "<S-h>", "_")
+
+-- Close floating windows in insert mode with K
+set(
+	"i",
+	"<A-k>",
+	'<Cmd>lua for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do if vim.api.nvim_win_is_valid(win) then local cfg = vim.api.nvim_win_get_config(win) if cfg.relative ~= "" then vim.api.nvim_win_close(win, true) end end end <CR>',
+	{ noremap = true, silent = true }
+)
+
+-- Close only floating windows safely in insert mode
 -- Utilities
 
 set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 set("i", "<C-p>", "<Nop>", { noremap = true, silent = true })
 
-set({ "n", "o", "x" }, "$", "g_")
+set("t", "<leader>", "<space>", { noremap = true, silent = true })

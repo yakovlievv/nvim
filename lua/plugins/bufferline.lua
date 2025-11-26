@@ -12,7 +12,7 @@ end
 
 return {
 	"akinsho/bufferline.nvim",
-	event = "BufAdd",
+	event = "BufReadPost",
 	version = "*",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	keys = {
@@ -20,8 +20,10 @@ return {
 		{ "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
 		{ "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
 		{ "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
-		{ "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-		{ "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+
+		{ "<C-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+		{ "<C-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+
 		{ "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
 		{ "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
 		{ "<C-b>h", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
@@ -52,4 +54,16 @@ return {
 			},
 		},
 	},
+
+	config = function(_, opts)
+		for i = 1, 9 do
+			vim.api.nvim_set_keymap(
+				"n",
+				"<C-" .. i .. ">",
+				":BufferLineGoToBuffer " .. i .. "<CR>",
+				{ noremap = true, silent = true }
+			)
+		end
+		require("bufferline").setup(opts)
+	end,
 }
