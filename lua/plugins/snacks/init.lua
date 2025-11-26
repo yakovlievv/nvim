@@ -89,43 +89,70 @@ return {
         { "<leader>U",  function() Snacks.notifier.hide() end,                                  desc = "Dismiss All Notifications" },
         { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",             mode = { "n", "t" } },
         { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",             mode = { "n", "t" } },
+        -- bufdelete
         { "<leader>bd", function() Snacks.bufdelete.delete() end, desc = "Delete the buffer"},
         { "<leader>ba", function() Snacks.bufdelete.all() end, desc = "Delete all buffers"},
         { "<leader>bo", function() Snacks.bufdelete.other() end, desc = "Delete other buffers"},
+        -- Terminal
         { "<C-t>", function() Snacks.terminal.toggle(nil, { cwd = vim.fn.getcwd(), win = { style = "float", relative = "editor", border = "rounded" } }) end, mode = { "n", "t" }, desc = "Toggle floating Snacks terminal", },
-        { "<leader>us", function() Snacks.toggle.option("spell", { name = "Spelling" }) end , desc = "Toggle Spelling" },
-        { "<leader>uw", function() Snacks.toggle.option("wrap", { name = "Wrap" }) end , desc = "Toggle Wrap" },
-        { "<leader>ud", function() Snacks.toggle.diagnostics() end , desc = "Toggle Diagnostics" },
-        { "<leader>ul", function() Snacks.toggle.line_number() end , desc = "Toggle Line Number" },
-        {
-            "<leader>uc",
-            function ()
-                Snacks.toggle.option("conceallevel", {
-                    off = 0,
-                    on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2,
-                    name = "Conceal Level",
-                }, { desc = "Toggle Conceal Level" })
-            end
-        },
-        {
-            "<leader>uA",
-            function ()
-                Snacks.toggle.option("showtabline", {
-                    off = 0,
-                    on = vim.o.showtabline > 0 and vim.o.showtabline or 2,
-                    name = "Tabline",
-                }, {desc = "Toggle Tabline"} )
 
-            end
-        },
-        { "<leader>uT", function () Snacks.toggle.treesitter() end, {desc = "Toggle Treesitter"} },
-        { "<leader>ub", function () Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }) end, {desc = "Toggle Background"} },
-        { "<leader>uD", function() Snacks.toggle.dim() end , desc = "Toggle Dimming" },
-        { "<leader>ua", function() Snacks.toggle.animate() end , desc = "Toggle Animate" },
-        { "<leader>ug", function() Snacks.toggle.indent() end , desc = "Toggle Indent Guides" },
-        { "<leader>uS", function() Snacks.toggle.scroll() end , desc = "Toggle Scroll Animations" },
-        { "<leader>dpp", function() Snacks.toggle.profiler() end , desc = "Toggle Profiler" },
-        { "<leader>dph", function() Snacks.toggle.profiler_highlights() end , desc = "Toggle Profiler Highlights" },
+        {
+            "<leader>t",
+            function()
+                Snacks.terminal.toggle(nil, {
+                    cwd = vim.fn.getcwd(),
+                    win = {
+                        style = "minimal",
+                        relative = "editor",
+
+                        -- bottom panel layout
+                        width = vim.o.columns,
+                        height = math.floor(vim.o.lines * 0.25),
+                        row = vim.o.lines - math.floor(vim.o.lines * 0.25),
+                        col = 0,
+
+                        border = "rounded",
+                    },
+                })
+            end,
+            mode = { "n", "t" },
+            desc = "Toggle bottom panel Snacks terminal",
+        }
+,
+
+		-- { "<leader>us", function() Snacks.toggle.option("spell", { name = "Spelling" }) end , desc = "Toggle Spelling" },
+		-- { "<leader>uw", function() Snacks.toggle.option("wrap", { name = "Wrap" }) end , desc = "Toggle Wrap" },
+		-- { "<leader>ud", function() Snacks.toggle.diagnostics() end , desc = "Toggle Diagnostics" },
+		-- { "<leader>ul", function() Snacks.toggle.line_number() end , desc = "Toggle Line Number" },
+		-- {
+		--     "<leader>uc",
+		--     function ()
+		--         Snacks.toggle.option("conceallevel", {
+		--             off = 0,
+		--             on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2,
+		--             name = "Conceal Level",
+		--         }, { desc = "Toggle Conceal Level" })
+		--     end
+		-- },
+		-- {
+		--     "<leader>uA",
+		--     function ()
+		--         Snacks.toggle.option("showtabline", {
+		--             off = 0,
+		--             on = vim.o.showtabline > 0 and vim.o.showtabline or 2,
+		--             name = "Tabline",
+		--         }, {desc = "Toggle Tabline"} )
+		--
+		--     end
+		-- },
+		-- { "<leader>uT", function () Snacks.toggle.treesitter() end, {desc = "Toggle Treesitter"} },
+		-- { "<leader>ub", function () Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }) end, {desc = "Toggle Background"} },
+		-- { "<leader>uD", function() Snacks.toggle.dim() end , desc = "Toggle Dimming" },
+		-- { "<leader>ua", function() Snacks.toggle.animate() end , desc = "Toggle Animate" },
+		-- { "<leader>ug", function() Snacks.toggle.indent() end , desc = "Toggle Indent Guides" },
+		-- { "<leader>uS", function() Snacks.toggle.scroll() end , desc = "Toggle Scroll Animations" },
+		-- { "<leader>dpp", function() Snacks.toggle.profiler() end , desc = "Toggle Profiler" },
+		-- { "<leader>dph", function() Snacks.toggle.profiler_highlights() end , desc = "Toggle Profiler Highlights" },
 
 		--stylua: ignore end
 	},

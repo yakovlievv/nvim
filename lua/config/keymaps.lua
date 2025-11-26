@@ -54,8 +54,8 @@ set("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 set("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- Move selected lines
-set("x", "K", "<cmd>m '<-2<cr>gv=gv", { silent = true })
-set("x", "J", "<cmd>m '>+1<CR>gv=gv", { silent = true })
+set("x", "K", ":m '<-2<cr>gv=gv", { silent = true })
+set("x", "J", ":m '>+1<CR>gv=gv", { silent = true })
 
 -- Indent witout reselecting everytime
 set("x", ">", ">gv")

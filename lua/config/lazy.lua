@@ -30,7 +30,7 @@ require("lazy").setup({
 		border = "rounded",
 	},
 
-	install = { colorscheme = { "nighfly" } },
+	install = { colorscheme = { " nightfly " } },
 	change_detection = { enabled = true, notify = false },
 	checker = { enabled = true, notify = false },
 })
