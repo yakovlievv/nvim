@@ -96,29 +96,29 @@ return {
         -- Terminal
         { "<C-t>", function() Snacks.terminal.toggle(nil, { cwd = vim.fn.getcwd(), win = { style = "float", relative = "editor", border = "rounded" } }) end, mode = { "n", "t" }, desc = "Toggle floating Snacks terminal", },
 
-        {
-            "<leader>t",
-            function()
-                Snacks.terminal.toggle(nil, {
-                    cwd = vim.fn.getcwd(),
-                    win = {
-                        style = "minimal",
-                        relative = "editor",
-
-                        -- bottom panel layout
-                        width = vim.o.columns,
-                        height = math.floor(vim.o.lines * 0.25),
-                        row = vim.o.lines - math.floor(vim.o.lines * 0.25),
-                        col = 0,
-
-                        border = "rounded",
-                    },
-                })
-            end,
-            mode = { "n", "t" },
-            desc = "Toggle bottom panel Snacks terminal",
-        }
-,
+		-- {
+		--     "<leader>t",
+		--     function()
+		--         Snacks.terminal.toggle(nil, {
+		--             cwd = vim.fn.getcwd(),
+		--             win = {
+		--                 style = "minimal",
+		--                 relative = "editor",
+		--
+		--                 -- bottom panel layout
+		--                 width = vim.o.columns,
+		--                 height = math.floor(vim.o.lines * 0.25),
+		--                 row = vim.o.lines - math.floor(vim.o.lines * 0.25),
+		--                 col = 0,
+		--
+		--                 border = "rounded",
+		--             },
+		--         })
+		--     end,
+		--     mode = { "n", "t" },
+		--     desc = "Toggle bottom panel Snacks terminal",
+		--         -- }
+		-- ,
 
 		-- { "<leader>us", function() Snacks.toggle.option("spell", { name = "Spelling" }) end , desc = "Toggle Spelling" },
 		-- { "<leader>uw", function() Snacks.toggle.option("wrap", { name = "Wrap" }) end , desc = "Toggle Wrap" },
