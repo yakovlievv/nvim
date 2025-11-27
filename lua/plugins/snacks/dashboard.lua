@@ -24,6 +24,12 @@ return {
 				action = ":Yazi toggle",
 			},
 			{
+				icon = " ",
+				key = "g",
+				desc = "Lazygit",
+				action = ":lua Snacks.lazygit()",
+			},
+			{
 				icon = "󰒲 ",
 				key = "l",
 				desc = "Lazy",

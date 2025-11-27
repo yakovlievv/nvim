@@ -27,7 +27,7 @@ return {
         { "<C-g>",      function() Snacks.picker.grep() end,                                    desc = "Grep" },
         { "<leader>:",  function() Snacks.picker.command_history() end,                         desc = "Command History" },
         { "<leader>n",  function() Snacks.picker.notifications() end,                           desc = "Notification History" },
-        -- find
+        -- files
         { "<leader>fb", function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
         { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
         { "<leader>ff", function() Snacks.picker.files() end,                                   desc = "Find Files" },
@@ -52,7 +52,7 @@ return {
         { "<leader>sB", function() Snacks.picker.grep_buffers() end,                            desc = "Grep Open Buffers" },
         { "<leader>sw", function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word",   mode = { "n", "x" } },
         -- search
-        { "<leader>fr", function() Snacks.picker.registers() end,                               desc = "Registers" },
+        { "<leader>sr", function() Snacks.picker.registers() end,                               desc = "Registers" },
         { "<leader>s/", function() Snacks.picker.search_history() end,                          desc = "Search History" },
         { "<leader>fa", function() Snacks.picker.autocmds() end,                                desc = "Autocmds" },
         { "<leader>sc", function() Snacks.picker.commands() end,                                desc = "Commands" },

@@ -16,22 +16,7 @@ set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result
 set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
--- location list
-set("n", "<leader>xl", function()
-	local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
-	if not success and err then
-		vim.notify(err, vim.log.levels.ERROR)
-	end
-end, { desc = "Location List" })
-
--- quickfix list
-set("n", "<leader>xq", function()
-	local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
-	if not success and err then
-		vim.notify(err, vim.log.levels.ERROR)
-	end
-end, { desc = "Quickfix List" })
-
+-- Jump so specific diagnostic of certain severity
 local diagnostic_goto = function(next, severity)
 	return function()
 		vim.diagnostic.jump({
@@ -42,13 +27,14 @@ local diagnostic_goto = function(next, severity)
 	end
 end
 
-set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 
 set("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 set("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
@@ -71,6 +57,7 @@ set({ "x", "n", "o" }, "<leader>D", [["_D]])
 
 -- Change the word under the word
 set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+set("v", "<leader>S", [[y:%s/<C-r>"/<C-r>"/gI<Left><Left><Left>]])
 
 -- set({ "n", "x", "o" }, ":", ";")
 -- set({ "n", "x", "o" }, ";", ":")
@@ -132,4 +119,9 @@ set(
 set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 set("i", "<C-p>", "<Nop>", { noremap = true, silent = true })
 
-set("t", "<leader>", "<space>", { noremap = true, silent = true })
+-- uninstall treesitter parsers
+set(
+	"n",
+	"<leader>td",
+	[[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]]
+)
