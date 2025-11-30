@@ -4,30 +4,6 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			vim.lsp.config("*", { capabilities = require("blink-cmp").get_lsp_capabilities() })
-
-			-- attach keymaps on LspAttach
-			-- vim.api.nvim_create_autocmd("LspAttach", {
-			-- 	callback = function(args)
-			-- 		local buf = args.buf
-			-- 		local opts = { buffer = buf, noremap = true, silent = true }
-			--
-			-- 		-- Hover & Signature
-			-- 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-			--
-			-- 		-- Code actions & refactoring
-			-- 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-			-- 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-			--
-			-- 		-- Diagnostics
-			-- 		vim.keymap.set("n", "]d", function()
-			-- 			vim.diagnostic.jump({ count = 1, float = true })
-			-- 		end, opts)
-			-- 		vim.keymap.set("n", "[d", function()
-			-- 			vim.diagnostic.jump({ count = -1, float = true })
-			-- 		end, opts)
-			-- 		vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
-			-- 	end,
-			-- })
 		end,
 	},
 
@@ -45,7 +21,8 @@ return {
 		event = "BufReadPre",
 		opts = {
 			ensure_installed = {
-				"ts_ls", -- TypeScript/JavaScript
+				-- "ts_ls", -- TypeScript/JavaScript
+				"vtsls",
 				"eslint", -- ESLint
 				"emmet_ls", -- Emmet
 				"html", -- HTML

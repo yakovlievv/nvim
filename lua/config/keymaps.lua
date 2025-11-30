@@ -34,10 +34,20 @@ set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
+set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1, float = true })
+end, opts)
+set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1, float = true })
+end, opts)
+
 set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 
 set("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 set("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+
+set("n", "<C-k>", vim.cmd.cprev, { desc = "Previous Quickfix" })
+set("n", "<C-j>", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- Move selected lines
 set("x", "K", ":m '<-2<cr>gv=gv", { silent = true })
@@ -89,6 +99,9 @@ set("n", "<leader>W", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
 
+set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
 -- switch to latest buffer
 set("n", "<leader>bb", ":buffer #<CR>", opts)
 set("n", "<C-b><C-b>", ":buffer #<CR>", opts)
@@ -125,3 +138,4 @@ set(
 	"<leader>td",
 	[[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]]
 )
+set({ "n" }, "<leader>c", "1z=")
