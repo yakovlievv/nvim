@@ -59,10 +59,10 @@ opt.incsearch = true
 
 _G.ICONS = {
 	diagnostics = {
-		error = "",
-		warn = "",
-		info = "ℹ",
-		hint = "",
+		error = "", -- 
+		warn = "", -- 
+		info = "", -- 
+		hint = "", -- 󰌵
 	},
 	git_diff = {
 		added = " ",
@@ -74,10 +74,13 @@ _G.ICONS = {
 vim.diagnostic.config({
 	virtual_text = true, -- show messages inline
 	signs = {
-		[vim.diagnostic.severity.ERROR] = ICONS.diagnostics.error,
-		[vim.diagnostic.severity.WARN] = ICONS.diagnostics.warn,
-		[vim.diagnostic.severity.INFO] = ICONS.diagnostics.info,
-		[vim.diagnostic.severity.HINT] = ICONS.diagnostics.hint,
+		text = {
+
+			[vim.diagnostic.severity.ERROR] = ICONS.diagnostics.error,
+			[vim.diagnostic.severity.WARN] = ICONS.diagnostics.warn,
+			[vim.diagnostic.severity.INFO] = ICONS.diagnostics.info,
+			[vim.diagnostic.severity.HINT] = ICONS.diagnostics.hint,
+		},
 	},
 	underline = true,
 	update_in_insert = false,
