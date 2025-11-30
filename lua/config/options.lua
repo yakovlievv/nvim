@@ -57,22 +57,12 @@ opt.undofile = true
 opt.hlsearch = true
 opt.incsearch = true
 
-vim.diagnostic.config({
-	virtual_text = true, -- show messages inline
-	signs = true, -- keep gutter icons
-	underline = true,
-	update_in_insert = false,
-	-- float = { border = "rounded" },
-})
-
--- Define your custom signs
-
 _G.ICONS = {
 	diagnostics = {
-		error = "",
-		warn = "",
-		info = "ℹ",
-		hint = "",
+		error = "", -- 
+		warn = "", -- 
+		info = "", -- 
+		hint = "", -- 󰌵
 	},
 	git_diff = {
 		added = " ",
@@ -81,7 +71,18 @@ _G.ICONS = {
 	},
 }
 
-vim.fn.sign_define("DiagnosticSignError", { text = ICONS.diagnostics.error, texthl = "DiagnosticError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = ICONS.diagnostics.warn, texthl = "DiagnosticWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = ICONS.diagnostics.info, texthl = "DiagnosticInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = ICONS.diagnostics.hint, texthl = "DiagnosticHint" })
+vim.diagnostic.config({
+	virtual_text = true, -- show messages inline
+	underline = true,
+	update_in_insert = false,
+	-- float = { border = "rounded" },
+
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = ICONS.diagnostics.error,
+			[vim.diagnostic.severity.WARN] = ICONS.diagnostics.warn,
+			[vim.diagnostic.severity.INFO] = ICONS.diagnostics.info,
+			[vim.diagnostic.severity.HINT] = ICONS.diagnostics.hint,
+		},
+	},
+})
