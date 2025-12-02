@@ -21,8 +21,7 @@ return {
 		event = "BufReadPre",
 		opts = {
 			ensure_installed = {
-				-- "ts_ls", -- TypeScript/JavaScript
-				"vtsls",
+				"vtsls", -- TypeScript/JavaScript
 				"eslint", -- ESLint
 				"emmet_ls", -- Emmet
 				"html", -- HTML
