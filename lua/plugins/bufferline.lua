@@ -31,6 +31,7 @@ return {
 	},
 	opts = {
 		options = {
+			show_buffer_close_icons = false,
             -- stylua: ignore
             close_command = function(n) Snacks.bufdelete(n) end,
             -- stylua: ignore
