@@ -61,8 +61,8 @@ set("x", ">", ">gv")
 set("x", "<", "<gv")
 
 -- Not use system clipboard
-set({ "x", "n", "o" }, "<leader>p", [["_dp]])
-set({ "x", "n", "o" }, "<leader>P", [["_dP]])
+set({ "x", "n", "o" }, "<leader>p", [["_dhp]])
+set({ "x", "n", "o" }, "<leader>P", [["_dhP]])
 set({ "x", "n", "o" }, "<leader>c", [["_c]])
 set({ "x", "n", "o" }, "<leader>C", [["_C]])
 set({ "x", "n", "o" }, "<leader>d", [["_d]])

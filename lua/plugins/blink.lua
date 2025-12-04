@@ -49,16 +49,20 @@ return {
 
 			completion = {
 				menu = {
-					border = "rounded",
-					scrollbar = false,
+					-- border = "rounded",
+					-- scrollbar = false,
 				},
 				ghost_text = {
 					enabled = true,
 				},
-				documentation = { auto_show = true, auto_show_delay_ms = 10, window = { border = "rounded" } },
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 10,
+					-- window = { border = "rounded" },
+				},
 			},
 
-			signature = { window = { border = "rounded" } },
+			-- signature = { window = { border = "rounded" } },
 
 			snippets = {
 				preset = "luasnip",
@@ -75,5 +79,15 @@ return {
 				},
 			},
 		})
+
+		-- BlinkCmp highlights for solid background
+		vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#181825", fg = "#cdd6f4" })
+		vim.api.nvim_set_hl(0, "BlinkCmpDocumentation", { bg = "#181825", fg = "#cdd6f4" })
+		vim.api.nvim_set_hl(0, "BlinkCmpSignature", { bg = "#181825", fg = "#cdd6f4" })
+		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#181825" }) -- pick your color
+		vim.api.nvim_set_hl(0, "NoiceHover", { bg = "#181825", fg = "#cdd6f4" })
+		vim.api.nvim_set_hl(0, "NoicePopup", { bg = "#181825", fg = "#cdd6f4" })
+		-- vim.api.nvim_set_hl(0, "MyDoc", { bg = "#181825", fg = "#cdd6f4" })
+		-- vim.api.nvim_set_hl(0, "MyDocBorder", { bg = "#181825", fg = "#cdd6f4" })
 	end,
 }

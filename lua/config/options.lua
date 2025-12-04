@@ -25,7 +25,7 @@ opt.relativenumber = true
 opt.cursorline = true
 opt.backspace = { "start", "eol", "indent" }
 
-o.winborder = "rounded"
+-- o.winborder = "rounded"
 
 -- Indentation
 opt.tabstop = 4 -- number of spaces a <Tab> counts for
