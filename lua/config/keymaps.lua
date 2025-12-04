@@ -21,13 +21,13 @@ set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 -- Jump so specific diagnostic of certain severity
 local diagnostic_goto = function(next, severity)
-    return function()
-        vim.diagnostic.jump({
-            count = (next and 1 or -1) * vim.v.count1,
-            severity = severity and vim.diagnostic.severity[severity] or nil,
-            float = true,
-        })
-    end
+	return function()
+		vim.diagnostic.jump({
+			count = (next and 1 or -1) * vim.v.count1,
+			severity = severity and vim.diagnostic.severity[severity] or nil,
+			float = true,
+		})
+	end
 end
 
 set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -38,10 +38,10 @@ set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 set("n", "]d", function()
-    vim.diagnostic.jump({ count = 1, float = true })
+	vim.diagnostic.jump({ count = 1, float = true })
 end, opts)
 set("n", "[d", function()
-    vim.diagnostic.jump({ count = -1, float = true })
+	vim.diagnostic.jump({ count = -1, float = true })
 end, opts)
 
 set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
@@ -83,9 +83,9 @@ set("n", "<leader>l", "<cmd>Lazy<CR>")
 
 -- Reindent entire buffer while keeping cursor
 vim.keymap.set("n", "<leader>=", function()
-    local view = vim.fn.winsaveview()
-    vim.cmd("normal! gg=G")
-    vim.fn.winrestview(view)
+	local view = vim.fn.winsaveview()
+	vim.cmd("normal! gg=G")
+	vim.fn.winrestview(view)
 end, { desc = "Reindent whole file and keep cursor" })
 
 -- chmod a file (make it executable)
@@ -99,7 +99,7 @@ set("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increa
 
 -- Toggle wrap
 set("n", "<leader>W", function()
-    vim.opt.wrap = not vim.opt.wrap:get()
+	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
 
 set("n", "<leader>rn", vim.lsp.buf.rename, opts)
@@ -123,10 +123,10 @@ set({ "n", "x", "o" }, "<S-h>", "_")
 
 -- Close floating windows in insert mode with K
 set(
-    "i",
-    "<A-k>",
-    '<Cmd>lua for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do if vim.api.nvim_win_is_valid(win) then local cfg = vim.api.nvim_win_get_config(win) if cfg.relative ~= "" then vim.api.nvim_win_close(win, true) end end end <CR>',
-    { noremap = true, silent = true }
+	"i",
+	"<A-k>",
+	'<Cmd>lua for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do if vim.api.nvim_win_is_valid(win) then local cfg = vim.api.nvim_win_get_config(win) if cfg.relative ~= "" then vim.api.nvim_win_close(win, true) end end end <CR>',
+	{ noremap = true, silent = true }
 )
 
 -- Close only floating windows safely in insert mode
@@ -137,8 +137,8 @@ set("i", "<C-p>", "<Nop>", { noremap = true, silent = true })
 
 -- uninstall treesitter parsers
 set(
-    "n",
-    "<leader>td",
-    [[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]]
+	"n",
+	"<leader>tu",
+	[[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]]
 )
 set({ "n" }, "<leader>c", "1z=")
