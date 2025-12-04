@@ -12,7 +12,7 @@ opt.relativenumber = true
 -- Enable cursor line
 opt.cursorline = true
 
-vim.o.winborder = "rounded"
+-- vim.o.winborder = "rounded"
 
 -- Highlight current line number
 -- vim.cmd([[

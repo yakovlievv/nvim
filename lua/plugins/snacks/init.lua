@@ -1,25 +1,27 @@
 return {
-	"folke/snacks.nvim",
-	lazy = false,
-	opts = {
-		dashboard = require("plugins.snacks.dashboard"),
-		bigfile = { enabled = true },
-		explorer = require("plugins.snacks.explorer"),
-		image = { enabled = true },
-		indent = { enabled = true },
-		input = { enabled = true },
-		picker = require("plugins.snacks.picker"),
-		bufdelete = { enabled = true },
-		notifier = require("plugins.snacks.notifier"),
-		quickfile = { enabled = true },
-		terminal = require("plugins.snacks.terminal"),
-		scope = { enabled = true },
-		scroll = require("plugins.snacks.scroll"),
-		statuscolumn = { enabled = true },
-		words = { enabled = true },
-	},
+  "folke/snacks.nvim",
+  lazy = false,
+  opts = {
+    -- dashboard = require("plugins.snacks.dashboard"),
+    dashboard = { enabled = true },
+    bigfile = { enabled = true },
+    -- explorer = require("plugins.snacks.explorer"),
+    explorer = { enabled = true },
+    image = { enabled = true },
+    indent = { enabled = true },
+    input = { enabled = true },
+    picker = require("plugins.snacks.picker"),
+    bufdelete = { enabled = true },
+    notifier = require("plugins.snacks.notifier"),
+    quickfile = { enabled = true },
+    terminal = require("plugins.snacks.terminal"),
+    scope = { enabled = true },
+    scroll = require("plugins.snacks.scroll"),
+    statuscolumn = { enabled = true },
+    words = { enabled = true },
+  },
 
-	keys = {
+  keys = {
         --stylua: ignore start
         -- Top Pickers & Explorer
         { "<C-f>",      function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
@@ -91,22 +93,22 @@ return {
         { "<c-_>",      function() Snacks.terminal() end,                                       desc = "which_key_ignore" },
         { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",             mode = { "n", "t" } },
         { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",             mode = { "n", "t" } },
-		--stylua: ignore end
+    --stylua: ignore end
 
-		{
-			"<C-t>", -- ctrl + t
-			function()
-				Snacks.terminal.toggle(nil, {
-					cwd = vim.fn.getcwd(),
-					win = {
-						style = "float",
-						relative = "editor",
-						border = "rounded",
-					},
-				})
-			end,
-			mode = { "n", "t" },
-			desc = "Toggle floating Snacks terminal",
-		},
-	},
+    {
+      "<C-t>", -- ctrl + t
+      function()
+        Snacks.terminal.toggle(nil, {
+          cwd = vim.fn.getcwd(),
+          win = {
+            style = "float",
+            relative = "editor",
+            border = "rounded",
+          },
+        })
+      end,
+      mode = { "n", "t" },
+      desc = "Toggle floating Snacks terminal",
+    },
+  },
 }
