@@ -21,17 +21,17 @@ return {
         event = "BufReadPre",
         opts = {
             ensure_installed = {
-                "vtsls",  -- TypeScript/JavaScript
+                "vtsls", -- TypeScript/JavaScript
                 "tailwindcss",
                 "eslint", -- ESLint
-                -- "emmet_ls", -- Emmet
-                -- "html",     -- HTML
-                -- "cssls",    -- CSS
-                "jsonls",   -- JSON
+                "emmet_ls", -- Emmet
+                "html", -- HTML
+                "cssls", -- CSS
+                "jsonls", -- JSON
                 "marksman", -- Markdown
-                "pyright",  -- Python
-                "lua_ls",   -- Lua
-                "clangd",   -- C/C++
+                "pyright", -- Python
+                "lua_ls", -- Lua
+                "clangd", -- C/C++
             },
         },
     },
@@ -43,15 +43,15 @@ return {
             require("mason-tool-installer").setup({
                 ensure_installed = {
                     -- Formatters
-                    "prettierd",    -- JS/TS/HTML/CSS/JSON/Markdown etc.
-                    "stylua",       -- Lua
-                    "black",        -- Python
-                    "isort",        -- Python import sorter
+                    "prettierd", -- JS/TS/HTML/CSS/JSON/Markdown etc.
+                    "stylua", -- Lua
+                    "black", -- Python
+                    "isort", -- Python import sorter
                     "clang-format", -- C/C++
-                    "shfmt",        -- Shell scripts
+                    "shfmt", -- Shell scripts
                     -- Linters
-                    "ruff",         -- Python linter
-                    "shellcheck",   -- Shell scripts
+                    "ruff", -- Python linter
+                    "shellcheck", -- Shell scripts
                 },
                 auto_update = true,
                 integrations = {

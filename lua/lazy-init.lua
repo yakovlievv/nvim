@@ -15,21 +15,18 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- sourcing options and keymaps
-require("config.options")
-require("config.keymaps")
-require("config.autocmds")
+local function is_minimal()
+	return vim.env.NVIM_REMOTE == "1" or vim.fn.filereadable(vim.fn.expand("~/.remote_nvim")) == 1
+end
 
--- Setup lazy.nvim
+local import_dir = is_minimal() and "plugins-minimal" or "plugins-full"
+
 require("lazy").setup({
 	spec = {
-		{ import = "plugins" },
+		{ import = "plugins-core" },
+		{ import = import_dir },
 	},
-
-	ui = {
-		border = "rounded",
-	},
-
+	ui = { border = "rounded" },
 	install = { colorscheme = { " nightfly " } },
 	change_detection = { enabled = true, notify = false },
 	checker = { enabled = true, notify = false },
