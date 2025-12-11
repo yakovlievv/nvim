@@ -33,7 +33,7 @@ return {
 				icon = "󰆍 ",
 				key = "t",
 				desc = "Terminal",
-				action = ":lua Snacks.terminal.toggle(nil)",
+				action = ":lua Snacks.terminal.toggle(nil, {win={border='rounded'}})",
 			},
 			{
 				icon = "󰒲 ",

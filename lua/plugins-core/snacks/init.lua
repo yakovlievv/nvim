@@ -94,7 +94,7 @@ return {
         { "<leader>ba", function() Snacks.bufdelete.all() end, desc = "Delete all buffers"},
         { "<leader>bo", function() Snacks.bufdelete.other() end, desc = "Delete other buffers"},
         -- Terminal
-        { "<C-t>", function () Snacks.terminal.toggle(nil) end, mode = { "n", "t" }, desc = "Toggle floating Snacks terminal", },
+        { "<C-t>", function () Snacks.terminal.toggle(nil, {win = { border = "rounded" }}) end, mode = { "n", "t" }, desc = "Toggle floating Snacks terminal", },
 
 		-- { "<leader>us", function() Snacks.toggle.option("spell", { name = "Spelling" }) end , desc = "Toggle Spelling" },
 		-- { "<leader>uw", function() Snacks.toggle.option("wrap", { name = "Wrap" }) end , desc = "Toggle Wrap" },
