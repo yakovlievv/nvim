@@ -92,10 +92,10 @@ end, { desc = "Reindent whole file and keep cursor" })
 set("n", "<leader><leader>x", ":!chmod +x %<CR>", { silent = false })
 
 -- resize a window
-set("n", "<C-Up>", "<Cmd>resize -2<CR>", { silent = true, desc = "Decrease height" })
+set("n", "<M-Up>", ":resize -2<CR>", { silent = true, desc = "Decrease height" })
 set("n", "<M-Down>", ":resize +2<CR>", { silent = true, desc = "Increase height" })
-set("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true, desc = "Decrease width" })
-set("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increase width" })
+set("n", "<M-Left>", ":vertical resize -2<CR>", { silent = true, desc = "Decrease width" })
+set("n", "<M-Right>", ":vertical resize +2<CR>", { silent = true, desc = "Increase width" })
 
 -- Toggle wrap
 set("n", "<leader>W", function()
