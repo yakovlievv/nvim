@@ -15,13 +15,22 @@ return {
 	config = function()
 		local Snacks = require("snacks")
 
-		local function get_relative_path()
+		-- Helper function to format with highlights
+		local function format_hl(text, hl_group)
+			if not hl_group or hl_group == "" then
+				return text
+			end
+			return "%#" .. hl_group .. "#" .. text .. "%*"
+		end
+
+		-- Pretty path component
+		local function pretty_path()
 			local path = vim.fn.expand("%:p")
 			if path == "" then
 				return ""
 			end
 
-			-- Try to get relative to cwd
+			-- Get relative path from cwd
 			local cwd = vim.fn.getcwd()
 			if path:find(cwd, 1, true) == 1 then
 				path = path:sub(#cwd + 2)
@@ -36,7 +45,22 @@ return {
 				parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
 			end
 
-			return table.concat(parts, sep)
+			-- Build the path with separate highlights
+			if #parts == 1 then
+				-- Only filename, no directory
+				local hl = vim.bo.modified and "Constant" or "Bold"
+				return format_hl(parts[1], hl)
+			else
+				-- Separate directory and filename
+				local filename = table.remove(parts)
+				local dirpath = table.concat(parts, sep) .. sep
+
+				-- Apply different highlights
+				local dir_hl = "Comment" -- Dimmed for directory
+				local file_hl = vim.bo.modified and "Constant" or "Bold"
+
+				return format_hl(dirpath, dir_hl) .. format_hl(filename, file_hl)
+			end
 		end
 		vim.opt.laststatus = 3
 
@@ -56,16 +80,7 @@ return {
 				lualine_c = {
 					"diagnostics",
 					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-					{
-						get_relative_path,
-						-- Highlight filename in bold when modified
-						color = function()
-							if vim.bo.modified then
-								return { fg = vim.fn.synIDattr(vim.fn.hlID("Constant"), "fg"), gui = "bold" }
-							end
-							return { gui = "bold" }
-						end,
-					},
+					{ pretty_path },
 				},
 
 				lualine_x = {
