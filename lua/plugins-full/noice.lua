@@ -12,7 +12,7 @@ return {
 			lsp = {
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
-                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 				},
 				hover = {
@@ -32,6 +32,18 @@ return {
 			},
 
 			routes = {
+				{
+					filter = {
+						event = "msg_show",
+						kind = "",
+						any = {
+							{ find = "%d+ lines? indented" },
+							{ find = "%d+ lines? [<>]ed %d+ times?" },
+							{ find = "%d+ lines? changed" },
+						},
+					},
+					view = "mini",
+				},
 				{
 					filter = {
 						event = "msg_show",
