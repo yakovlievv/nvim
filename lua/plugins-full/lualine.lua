@@ -22,7 +22,7 @@ return {
 			end
 			return "%#" .. hl_group .. "#" .. text .. "%*"
 		end
-
+		vim.opt.showmode = false
 		-- Pretty path component
 		local function pretty_path()
 			local path = vim.fn.expand("%:p")
