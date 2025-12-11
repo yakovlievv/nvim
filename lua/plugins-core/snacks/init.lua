@@ -96,30 +96,6 @@ return {
         -- Terminal
         { "<C-t>", function () Snacks.terminal.toggle(nil) end, mode = { "n", "t" }, desc = "Toggle floating Snacks terminal", },
 
-		-- {
-		--     "<leader>t",
-		--     function()
-		--         Snacks.terminal.toggle(nil, {
-		--             cwd = vim.fn.getcwd(),
-		--             win = {
-		--                 style = "minimal",
-		--                 relative = "editor",
-		--
-		--                 -- bottom panel layout
-		--                 width = vim.o.columns,
-		--                 height = math.floor(vim.o.lines * 0.25),
-		--                 row = vim.o.lines - math.floor(vim.o.lines * 0.25),
-		--                 col = 0,
-		--
-		--                 border = "rounded",
-		--             },
-		--         })
-		--     end,
-		--     mode = { "n", "t" },
-		--     desc = "Toggle bottom panel Snacks terminal",
-		--         -- }
-		-- ,
-
 		-- { "<leader>us", function() Snacks.toggle.option("spell", { name = "Spelling" }) end , desc = "Toggle Spelling" },
 		-- { "<leader>uw", function() Snacks.toggle.option("wrap", { name = "Wrap" }) end , desc = "Toggle Wrap" },
 		-- { "<leader>ud", function() Snacks.toggle.diagnostics() end , desc = "Toggle Diagnostics" },
@@ -153,7 +129,6 @@ return {
 		-- { "<leader>uS", function() Snacks.toggle.scroll() end , desc = "Toggle Scroll Animations" },
 		-- { "<leader>dpp", function() Snacks.toggle.profiler() end , desc = "Toggle Profiler" },
 		-- { "<leader>dph", function() Snacks.toggle.profiler_highlights() end , desc = "Toggle Profiler Highlights" },
-
 		--stylua: ignore end
 	},
 }
