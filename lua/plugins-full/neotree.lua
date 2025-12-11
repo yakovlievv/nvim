@@ -181,7 +181,7 @@ return {
 					hide_hidden = true, -- only works on Windows for hidden files/directories
 				},
 				follow_current_file = {
-					enabled = false, -- This will find and focus the file in the active buffer every time
+					enabled = true, -- This will find and focus the file in the active buffer every time
 					--               -- the current file is changed while the tree is open.
 					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 				},
@@ -191,11 +191,29 @@ return {
 				-- "open_current",  -- netrw disabled, opening a directory opens within the
 				-- window like netrw would, regardless of window.position
 				-- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-				use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+				use_libuv_file_watcher = true, -- was false
 				-- instead of relying on nvim autocmd events.
 				window = {
 					mappings = {
 						["<bs>"] = "navigate_up",
+						["Y"] = {
+							function(state)
+								local node = state.tree:get_node()
+								local path = node:get_id()
+								vim.fn.setreg("+", path, "c")
+							end,
+							desc = "Copy Path to Clipboard",
+						},
+						["gy"] = {
+							function(state)
+								local node = state.tree:get_node()
+								local path = node:get_id()
+								local cwd = vim.fn.getcwd()
+								local relative_path = vim.fn.fnamemodify(path, ":~:.")
+								vim.fn.setreg("+", relative_path, "c")
+							end,
+							desc = "Copy Relative Path",
+						},
 						["."] = "set_root",
 						["<C-h>"] = "toggle_hidden",
 						["/"] = "fuzzy_finder",
