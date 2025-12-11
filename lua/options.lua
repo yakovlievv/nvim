@@ -72,10 +72,10 @@ opt.incsearch = true
 
 _G.ICONS = {
 	diagnostics = {
-		error = "", -- 
-		warn = "", -- 
-		info = "", -- 
-		hint = "", -- 󰌵
+		error = " ", -- 
+		warn = " ", -- 
+		info = " ", -- 
+		hint = " ", -- 󰌵
 	},
 	git_diff = {
 		added = " ",
