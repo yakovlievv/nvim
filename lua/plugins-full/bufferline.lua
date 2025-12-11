@@ -31,21 +31,28 @@ return {
 	},
 	opts = {
 		options = {
-			show_buffer_close_icons = false,
-            -- stylua: ignore
-            close_command = function(n) Snacks.bufdelete(n) end,
-            -- stylua: ignore
-            right_mouse_command = function(n) Snacks.bufdelete(n) end,
+			-- show_buffer_close_icons = false,
+			close_command = function(n)
+				Snacks.bufdelete(n)
+			end,
+			right_mouse_command = function(n)
+				Snacks.bufdelete(n)
+			end,
 			always_show_bufferline = false,
 			diagnostics = "nvim_lsp",
+			-- persistent, colored diagnostics like LazyVim
+			diagnostics_indicator = function(_, _, diag)
+				local icons = _G.ICONS.diagnostics
+				local ret = (diag.error and icons.error .. diag.error .. " " or "")
+					.. (diag.warning and icons.warn .. diag.warning .. " " or "")
+					.. (diag.info and icons.info .. diag.info .. " " or "")
+					.. (diag.hint and icons.hint .. diag.hint or "")
+				return vim.trim(ret)
+			end,
 			offsets = {
 				{
 					filetype = "neo-tree",
-                    -- stylua: ignore
-                    -- text = function() 
-                    --     return path_for_bufferline(vim.fn.bufnr()) 
-                    -- end,
-                    text = "Neotree",
+					text = "Neotree",
 					highlight = "Directory",
 					text_align = "left",
 				},
@@ -55,16 +62,4 @@ return {
 			},
 		},
 	},
-
-	config = function(_, opts)
-		for i = 1, 9 do
-			vim.api.nvim_set_keymap(
-				"n",
-				"<C-" .. i .. ">",
-				":BufferLineGoToBuffer " .. i .. "<CR>",
-				{ noremap = true, silent = true }
-			)
-		end
-		require("bufferline").setup(opts)
-	end,
 }
