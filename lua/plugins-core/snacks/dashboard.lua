@@ -30,6 +30,12 @@ return {
 				action = ":lua Snacks.lazygit()",
 			},
 			{
+				icon = "󰆍 ",
+				key = "t",
+				desc = "Terminal",
+				action = ":lua Snacks.terminal.toggle(nil)",
+			},
+			{
 				icon = "󰒲 ",
 				key = "l",
 				desc = "Lazy",
