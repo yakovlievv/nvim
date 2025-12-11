@@ -76,7 +76,11 @@ set("v", "<leader>S", [[y:%s/<C-r>"/<C-r>"/gI<Left><Left><Left>]])
 -- set({ "n", "x", "o" }, ";", ":")
 
 -- Do J but keep the curson in place
-set("n", "J", "mzJ`z")
+set("n", "J", function()
+	local pos = vim.api.nvim_win_get_cursor(0)
+	vim.cmd("normal! J")
+	vim.api.nvim_win_set_cursor(0, pos)
+end, { desc = "Join lines and stay in place" })
 
 -- Call lazy
 set("n", "<leader>l", "<cmd>Lazy<CR>")
