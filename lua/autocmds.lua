@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 local yazi_group = vim.api.nvim_create_augroup("my.yazi", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "my.yazi",
+	pattern = "yazi",
 	group = yazi_group,
 	desc = "Remove timeout inside yazi for instant <Esc> response",
 	callback = function()

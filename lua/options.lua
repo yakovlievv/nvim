@@ -1,6 +1,5 @@
 local opt = vim.opt
 local g = vim.g
-local o = vim.o
 
 -- Leader keys
 g.mapleader = " "
@@ -34,15 +33,15 @@ opt.expandtab = true -- convert tabs to spaces
 opt.smartindent = true -- smart autoindenting on new lines
 opt.smarttab = true -- makes tab use shiftwidth instead of tabstop in new line
 
-o.foldlevel = 99
-o.foldlevelstart = 99
-o.foldenable = true
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldenable = true
 
 -- whitespace
 opt.list = false
 -- opt.listchars = "eol:.,tab:>-,trail:~,extends:>,precedes:<"
 
-o.swapfile = false
+opt.swapfile = false
 
 -- Searching
 opt.ignorecase = true -- case-insensitive search by default
@@ -65,7 +64,7 @@ opt.signcolumn = "yes" -- always show sign column (avoid text shift)
 -- Performance
 opt.updatetime = 50 -- faster completion & diagnostic updates
 
-opt.undodir = os.getenv("XDG_STATE_HOME") .. "/nvim/undo"
+opt.undodir = vim.fn.stdpath("state") .. "/nvim/undo"
 opt.undofile = true
 opt.hlsearch = true
 opt.incsearch = true

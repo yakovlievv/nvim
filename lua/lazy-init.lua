@@ -27,7 +27,7 @@ require("lazy").setup({
 		{ import = import_dir },
 	},
 	ui = { border = "rounded" },
-	install = { colorscheme = { " nightfly " } },
+	install = { colorscheme = { "nightfly" } },
 	change_detection = { enabled = true, notify = false },
 	checker = { enabled = true, notify = false },
 })

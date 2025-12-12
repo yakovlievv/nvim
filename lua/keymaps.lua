@@ -37,13 +37,6 @@ set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
-set("n", "]d", function()
-	vim.diagnostic.jump({ count = 1, float = true })
-end, opts)
-set("n", "[d", function()
-	vim.diagnostic.jump({ count = -1, float = true })
-end, opts)
-
 set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 
 set("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
@@ -145,4 +138,5 @@ set(
 	"<leader>tu",
 	[[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]]
 )
-set({ "n" }, "<leader>c", "1z=")
+
+-- Set({ "n" }, "<leader>c", "1z=")
