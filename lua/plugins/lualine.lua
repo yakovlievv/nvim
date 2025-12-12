@@ -13,8 +13,9 @@ return {
 	end,
 
 	config = function()
-		local Snacks = require("snacks")
+		local snacks = require("snacks")
 		local utils = require("utils.lualine")
+		local icons = require("utils.icons")
 
 		vim.opt.laststatus = 3
 
@@ -38,7 +39,7 @@ return {
 				},
 
 				lualine_x = {
-					Snacks.profiler.status(),
+					snacks.profiler.status(),
 
 					-- DAP status
 					{
@@ -49,7 +50,7 @@ return {
 							return package.loaded["dap"] and require("dap").status() ~= ""
 						end,
 						color = function()
-							return { fg = Snacks.util.color("Debug") }
+							return { fg = snacks.util.color("Debug") }
 						end,
 					},
 
@@ -62,7 +63,7 @@ return {
 							return package.loaded["noice"] and require("noice").api.status.command.has()
 						end,
 						color = function()
-							return { fg = Snacks.util.color("Statement") }
+							return { fg = snacks.util.color("Statement") }
 						end,
 					},
 
@@ -75,7 +76,7 @@ return {
 							return package.loaded["noice"] and require("noice").api.status.mode.has()
 						end,
 						color = function()
-							return { fg = Snacks.util.color("Constant") }
+							return { fg = snacks.util.color("Constant") }
 						end,
 					},
 
@@ -92,9 +93,9 @@ return {
 					{
 						"diff",
 						symbols = {
-							added = ICONS.git_diff.added,
-							modified = ICONS.git_diff.modified,
-							removed = ICONS.git_diff.removed,
+							added = icons.git_diff.added,
+							modified = icons.git_diff.modified,
+							removed = icons.git_diff.removed,
 						},
 						source = function()
 							local gitsigns = vim.b.gitsigns_status_dict

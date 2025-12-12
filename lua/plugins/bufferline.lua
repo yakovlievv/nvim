@@ -27,7 +27,7 @@ return {
 			always_show_bufferline = false,
 			diagnostics = "nvim_lsp",
 			diagnostics_indicator = function(_, _, diag)
-				local icons = _G.ICONS.diagnostics
+				local icons = require("utils.icons").diagnostics
 				local ret = (diag.error and icons.error .. diag.error .. " " or "")
 					.. (diag.warning and not diag.error and icons.warn .. diag.warning .. " " or "")
 					.. (diag.info and not diag.error and not diag.warning and icons.info .. diag.info .. " " or "")

@@ -64,34 +64,24 @@ opt.signcolumn = "yes" -- always show sign column (avoid text shift)
 -- Performance
 opt.updatetime = 50 -- faster completion & diagnostic updates
 
-opt.undodir = vim.fn.stdpath("state") .. "/nvim/undo"
+local undodir = vim.fn.stdpath("state") .. "/nvim/undo"
+vim.fn.mkdir(undodir, "p") -- make sure it exists
+opt.undodir = undodir
+opt.undofile = true -- enable persistent undo
 opt.undofile = true
 opt.hlsearch = true
 opt.incsearch = true
 
-_G.ICONS = {
-	diagnostics = {
-		error = " ", -- 
-		warn = " ", -- 
-		info = " ", -- 
-		hint = " ", -- 󰌵
-	},
-	git_diff = {
-		added = " ",
-		modified = " ",
-		removed = " ",
-	},
-}
-
+local icons = require("utils.icons")
 vim.diagnostic.config({
 	virtual_text = true, -- show messages inline
 	signs = {
 		text = {
 
-			[vim.diagnostic.severity.ERROR] = ICONS.diagnostics.error,
-			[vim.diagnostic.severity.WARN] = ICONS.diagnostics.warn,
-			[vim.diagnostic.severity.INFO] = ICONS.diagnostics.info,
-			[vim.diagnostic.severity.HINT] = ICONS.diagnostics.hint,
+			[vim.diagnostic.severity.ERROR] = icons.diagnostics.error,
+			[vim.diagnostic.severity.WARN] = icons.diagnostics.warn,
+			[vim.diagnostic.severity.INFO] = icons.diagnostics.info,
+			[vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
 		},
 	},
 	underline = true,
