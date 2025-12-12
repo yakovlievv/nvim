@@ -4,9 +4,8 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			vim.lsp.config("*", { capabilities = require("blink-cmp").get_lsp_capabilities() })
-			-- local augroup = vim.api.nvim_create_augroup("MyLspAttach", {})
 			-- vim.api.nvim_create_autocmd("LspAttach", {
-			-- 	group = augroup,
+			-- 	group = vim.api.nvim_create_augroup("MyLspAttach", {})
 			-- 	callback = function(ev)
 			-- 		-- Get the LSP client
 			-- 		local client = vim.lsp.get_client_by_id(ev.data.client_id)

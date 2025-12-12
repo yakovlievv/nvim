@@ -1,120 +1,77 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	branch = "main",
-	build = ":TSUpdate",
-	version = false,
-	cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
-	event = { "VeryLazy" },
-	config = function()
-		local ts = require("nvim-treesitter")
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    build = ":TSUpdate",
+    version = false,
+    cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
+    event = { "VeryLazy" },
+    config = function()
+        local ts = require("nvim-treesitter")
+        local utils = require("utils.treesitter")
+        local installed = ts.get_installed()
+        local available_parsers = ts.get_available()
+        local ensure_installed = {
+            "bash",
+            "c",
+            "cpp",
+            "lua",
+            "python",
+            "javascript",
+            "typescript",
+            "jsx",
+            "tsx",
+            "html",
+            "css",
+            "json",
+            "markdown",
+            "yaml",
+            "gitcommit",
+            "vim",
+        }
 
-		local function ensure_treesitter_cli(cb)
-			if vim.fn.executable("tree-sitter") == 1 then
-				return cb(true)
-			end
+        -- Check treesitter cli
+        utils.ensure_treesitter_cli()
 
-			-- try installing with mason
-			if not pcall(require, "mason") then
-				return cb(false, "`mason.nvim` is disabled in your config, so we cannot install it automatically.")
-			end
+        -- Install missing parsers from ensure installed
+        local not_installed = vim.tbl_filter(function(parser)
+            return not vim.tbl_contains(installed, parser)
+        end, ensure_installed)
+        if #not_installed > 0 then
+            ts.install(not_installed, { summary = true })
+        end
 
-			-- check again since we might have installed it already
-			if vim.fn.executable("tree-sitter") == 1 then
-				return cb(true)
-			end
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "*",
+            group = vim.api.nvim_create_augroup("my.treesitter", { clear = true }),
 
-			local mr = require("mason-registry")
-			mr.refresh(function()
-				local p = mr.get_package("tree-sitter-cli")
-				if not p:is_installed() then
-					vim.notify("Installing `tree-sitter-cli` with `mason.nvim`...")
-					p:install(
-						nil,
-						vim.schedule_wrap(function(success)
-							if success then
-								vim.notify("Installed `tree-sitter-cli` with `mason.nvim`.")
-								cb(true)
-							else
-								cb(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
-							end
-						end)
-					)
-				end
-			end)
-		end
+            callback = function(event)
+                local lang = vim.treesitter.language.get_lang(event.match)
+                if not lang then
+                    return
+                end
 
-		ensure_treesitter_cli(function(success, err)
-			if success then
-				print("Tree-sitter CLI available!")
-			else
-				print("Tree-sitter CLI missing: " .. err)
-			end
-		end)
+                -- Try installing parser for current buffer if missing
+                if not vim.treesitter.language.add(lang) then
+                    local is_available = vim.tbl_contains(available_parsers, lang)
+                    if is_available then
+                        ts.install(lang)
+                        vim.notify("Installing parser. Wait, then restart Neovim.")
+                    end
 
-		local ensure_installed = {
-			"bash",
-			"c",
-			"cpp",
-			"lua",
-			"python",
-			"javascript",
-			"typescript",
-			"jsx",
-			"tsx",
-			"html",
-			"css",
-			"json",
-			"markdown",
-			"yaml",
-			"gitcommit",
-			"vim",
-		}
-
-		local installed = ts.get_installed()
-		local not_installed = vim.tbl_filter(function(parser)
-			return not vim.tbl_contains(installed, parser)
-		end, ensure_installed)
-		if #not_installed > 0 then
-			ts.install(not_installed, { summary = true })
-		end
-
-		local augroup = vim.api.nvim_create_augroup("my.treesitter", { clear = true })
-		local available_parsers = ts.get_available()
-
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "*",
-			group = augroup,
-			callback = function(event)
-				local parser = vim.treesitter.language.get_lang(event.match)
-				local is_installed, _ = vim.treesitter.language.add(parser)
-				if not is_installed then
-					local is_available = vim.tbl_contains(available_parsers, parser)
-					if is_available then
-						ts.install(parser)
-						vim.schedule(function()
-							local installed = vim.treesitter.language.add(parser)
-							if installed then
-								pcall(vim.treesitter.start, event.buf, parser)
-							end
-						end)
-					end
-				end
-
-				is_installed, _ = vim.treesitter.language.add(parser)
-
-				if is_installed then
-					local ok, _ = pcall(vim.treesitter.start, event.buf, parser)
-
-					if not ok then
-						vim.notify("Treesitter fucked up!" .. parser, vim.log.levels.INFO)
-						return
-					end
-
-					vim.wo.foldmethod = "expr"
-					vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-					vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-				end
-			end,
-		})
-	end,
+                    -- Try enabling capabilities
+                else
+                    if not pcall(vim.treesitter.start, event.buf, lang) then
+                        vim.notify("Treesitter fucked up!" .. lang, vim.log.levels.INFO)
+                        return
+                    end
+                    vim.defer_fn(function()
+                        vim.wo.foldmethod = "expr"
+                        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+                        vim.wo.foldtext = "v:lua.require'utils.fold'.fold_text()"
+                        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    end, 50) -- 50ms delay
+                end
+            end,
+        })
+    end,
 }
