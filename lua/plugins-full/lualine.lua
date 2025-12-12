@@ -174,6 +174,30 @@ return {
 					},
 				},
 			},
+			extensions = {
+				-- NeoTree extension
+				-- { "terminal" },
+				{
+					sections = {
+						lualine_a = {
+							function()
+								local cwd = vim.fn.getcwd()
+								return vim.fn.fnamemodify(cwd, ":~")
+							end,
+						},
+						lualine_b = {},
+						lualine_c = {},
+						lualine_x = {},
+						lualine_y = {},
+						lualine_z = {
+							function()
+								return os.date("%R")
+							end,
+						},
+					},
+					filetypes = { "neo-tree" },
+				},
+			},
 		})
 	end,
 
