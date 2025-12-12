@@ -1,15 +1,3 @@
-local function path_for_bufferline(bufnr)
-	local bufname = vim.api.nvim_buf_get_name(bufnr)
-	if bufname == "" then
-		return "Neo-tree"
-	end
-	local home = vim.env.HOME
-	if bufname:sub(1, #home) == home then
-		bufname = "~" .. bufname:sub(#home + 1)
-	end
-	return bufname
-end
-
 return {
 	"akinsho/bufferline.nvim",
 	event = "BufReadPost",
@@ -38,7 +26,6 @@ return {
 			end,
 			always_show_bufferline = false,
 			diagnostics = "nvim_lsp",
-			-- Show only highest priority diagnostic like LazyVim
 			diagnostics_indicator = function(_, _, diag)
 				local icons = _G.ICONS.diagnostics
 				local ret = (diag.error and icons.error .. diag.error .. " " or "")
