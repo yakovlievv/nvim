@@ -1,6 +1,6 @@
 return {
 	"stevearc/quicker.nvim",
-	event = "VeryLazy",
+	event = "BufReadPost",
 	keys = {
                 -- stylua: ignore
                 { "<leader>q", function() require("quicker").toggle() end, { desc = "Toggle quickfix", }},

@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-mini/mini.surround",
 		version = "*",
-		event = "VeryLazy",
+		event = "InsertEnter",
 		config = function()
 			local surround = require("mini.surround")
 			surround.setup({
@@ -24,7 +24,7 @@ return {
 	{
 		"nvim-mini/mini.ai",
 		version = "*",
-		event = "VeryLazy",
+		event = "BufReadPost",
 		config = function()
 			require("mini.ai").setup()
 		end,
@@ -32,6 +32,7 @@ return {
 	{
 		"nvim-mini/mini.icons",
 		version = false,
+		event = "VeryLazy",
 		config = function()
 			require("mini.icons").setup({})
 			require("mini.icons").mock_nvim_web_devicons()
