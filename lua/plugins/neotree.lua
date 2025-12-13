@@ -13,6 +13,7 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
+		"nvim-mini/mini.icons",
 	},
 
 	opts = function(_, opts)

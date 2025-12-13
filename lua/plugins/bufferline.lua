@@ -2,7 +2,7 @@ return {
 	"akinsho/bufferline.nvim",
 	event = "BufReadPost",
 	version = "*",
-	dependencies = "nvim-tree/nvim-web-devicons",
+	dependencies = "nvim-mini/mini.icons",
 	keys = {
 		{ "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
 		{ "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },

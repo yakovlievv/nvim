@@ -1,7 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
-	dependencies = { "nvim-tree/nvim-web-devicons", "catppuccin" },
+	dependencies = { "nvim-mini/mini.icons", "catppuccin" },
 
 	init = function()
 		vim.g.lualine_laststatus = vim.o.laststatus
