@@ -12,6 +12,7 @@ return {
         local available_parsers = ts.get_available()
         local ensure_installed = {
             "bash",
+            "zsh",
             "c",
             "cpp",
             "lua",
