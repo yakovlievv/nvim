@@ -11,9 +11,9 @@ return {
 		preset = "default",
 		layout = {
 			box = "horizontal",
-			width = 0.9,
+			width = 0.93,
 			min_width = 120,
-			height = 0.95,
+			height = 0.97,
 			{
 				box = "vertical",
 				border = true,
