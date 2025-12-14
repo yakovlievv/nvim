@@ -15,12 +15,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local is_minimal = vim.env.NVIM_REMOTE == "1" or vim.fn.filereadable(vim.fn.expand("~/.remote_nvim")) == 1
+local is_minimal = vim.env.NVIM_REMOTE == "1" or vim.fn.filereadable(vim.fn.expand("~/.remote")) == 1
 
 local spec = {
 	{ import = "core-plugins" },
-	is_minimal and nil or { import = "plugins" },
 }
+
+if not is_minimal then
+	table.insert(spec, { import = "plugins" })
+end
 
 require("lazy").setup({
 	spec = spec,
