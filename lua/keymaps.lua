@@ -5,8 +5,8 @@ local opts = { silent = true, noremap = true }
 set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Down" })
 set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Up" })
 
-set("n", "+", "<C-a>")
-set("n", "-", "<C-x>")
+-- set("n", "+", "<C-a>")
+-- set("n", "-", "<C-x>")
 
 -- better n, N
 set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
@@ -29,6 +29,14 @@ local diagnostic_goto = function(next, severity)
 		})
 	end
 end
+
+set("i", "<C-h>", "<Left>", { desc = "move left" })
+set("i", "<C-l>", "<Right>", { desc = "move right" })
+set("i", "<C-j>", "<Down>", { desc = "move down" })
+set("i", "<C-k>", "<Up>", { desc = "move up" })
+set("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
+set("i", "<C-e>", "<ESC>$a", { desc = "move end of line" })
+set("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
 
 set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
