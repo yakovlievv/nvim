@@ -86,7 +86,7 @@ vim.keymap.set("n", "<leader>=", function()
 end, { desc = "Reindent whole file and keep cursor" })
 
 -- chmod a file (make it executable)
-set("n", "<leader><leader>x", ":!chmod +x %<CR>", { silent = false })
+set("n", "<leader>x", ":!chmod +x %<CR>", { silent = false })
 
 -- resize a window
 set("n", "<M-Up>", ":resize -2<CR>", { silent = true, desc = "Decrease height" })

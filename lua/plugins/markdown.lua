@@ -6,6 +6,10 @@ return {
 	config = function()
 		require("render-markdown").setup({
 			completions = { lsp = { enabled = true } },
+			-- heading = {
+			-- 	-- border = true,
+			-- 	-- border_virtual = true,
+			-- },
 		})
 	end,
 }
