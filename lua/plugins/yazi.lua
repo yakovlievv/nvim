@@ -1,6 +1,7 @@
 return {
 	"mikavilpas/yazi.nvim",
 	version = "*",
+	event = "BufEnter",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim", lazy = true },
 	},
