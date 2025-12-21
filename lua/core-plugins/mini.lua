@@ -18,7 +18,7 @@ return {
 					suffix_next = "l", -- Suffix to search with "next" method
 				},
 			})
-			vim.keymap.del("n", "sn")
+			-- vim.keymap.del("n", "sn")
 		end,
 	},
 	{
