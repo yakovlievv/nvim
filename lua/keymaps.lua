@@ -118,7 +118,6 @@ map("n", "<leader>ca", vim.lsp.buf.code_action)
 
 -- switch to latest buffer
 map("n", "<leader>bb", ":buffer #<CR>")
-map("n", "<C-b><C-b>", ":buffer #<CR>", opts)
 
 -- saving and quiting
 -- set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
