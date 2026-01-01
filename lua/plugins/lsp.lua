@@ -4,6 +4,39 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			vim.lsp.config("*", { capabilities = require("blink-cmp").get_lsp_capabilities() })
+			vim.lsp.config("tailwindcss", {
+				cmd = { "tailwindcss-language-server", "--stdio" },
+				filetypes = {
+					"html",
+					"css",
+					"scss",
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact",
+					"vue",
+					"svelte",
+				},
+				root_markers = {
+					"postcss.config.js",
+					"postcss.config.mjs",
+					"postcss.config.cjs",
+					"postcss.config.ts",
+					"package.json",
+					".git",
+				},
+				settings = {
+					tailwindCSS = {
+						experimental = {
+							classRegex = {
+								{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+								{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+							},
+						},
+					},
+				},
+			})
+
 			-- vim.api.nvim_create_autocmd("LspAttach", {
 			-- 	group = vim.api.nvim_create_augroup("MyLspAttach", {})
 			-- 	callback = function(ev)
