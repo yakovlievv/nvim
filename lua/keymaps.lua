@@ -21,8 +21,8 @@ map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search R
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
-map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
-map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+-- map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+-- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 -- Jump so specific diagnostic of certain severity
 local diagnostic_goto = function(next, severity)
@@ -35,14 +35,14 @@ local diagnostic_goto = function(next, severity)
 	end
 end
 
-map("i", "<C-h>", "<Left>", { desc = "move left" })
-map("i", "<C-l>", "<Right>", { desc = "move right" })
-map("i", "<C-j>", "<Down>", { desc = "move down" })
-map("i", "<C-k>", "<Up>", { desc = "move up" })
-map("i", "<C-b>", "<cmd>norm b<Cr>", { desc = "move beginning of line" })
-map("i", "<C-w>", "<cmd>norm w<Cr>", { desc = "w in inser mode" })
-map("i", "<C-e>", "<cmd>norm e<Cr>", { desc = "e in inser mode" })
-map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
+-- map("i", "<C-h>", "<Left>", { desc = "move left" })
+-- map("i", "<C-l>", "<Right>", { desc = "move right" })
+-- map("i", "<C-j>", "<Down>", { desc = "move down" })
+-- map("i", "<C-k>", "<Up>", { desc = "move up" })
+-- map("i", "<C-b>", "<cmd>norm b<Cr>", { desc = "move beginning of line" })
+-- map("i", "<C-w>", "<cmd>norm w<Cr>", { desc = "w in inser mode" })
+-- map("i", "<C-e>", "<cmd>norm e<Cr>", { desc = "e in inser mode" })
+-- map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "general copy whole file" })
 
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
@@ -50,11 +50,10 @@ map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
-
-map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 
 map("n", "<C-k>", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "<C-j>", vim.cmd.cnext, { desc = "Next Quickfix" })
@@ -117,7 +116,7 @@ map("n", "<leader>rn", vim.lsp.buf.rename)
 map("n", "<leader>ca", vim.lsp.buf.code_action)
 
 -- switch to latest buffer
-map("n", "<leader>bb", ":buffer #<CR>")
+-- map("n", "<leader>bb", ":buffer #<CR>")
 
 -- saving and quiting
 -- set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
@@ -128,8 +127,8 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 map({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>")
 
 -- these just make sense don't they?
-map({ "n", "x", "o" }, "<S-l>", "g_")
-map({ "n", "x", "o" }, "<S-h>", "_")
+-- map({ "n", "x", "o" }, "<S-h>", "_")
+-- map({ "n", "x", "o" }, "<S-l>", "g_")
 
 -- Close floating windows in insert mode with K
 map(
