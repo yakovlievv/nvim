@@ -42,17 +42,21 @@ vim.api.nvim_create_autocmd("FileType", {
 local folds_group = vim.api.nvim_create_augroup("my.folds", { clear = true })
 
 vim.api.nvim_create_autocmd("BufWinLeave", {
-	group = folds_group,
-	desc = "Auto-save folds for each file",
-	pattern = "*",
-	command = "silent! mkview",
+  group = folds_group,
+  callback = function()
+    if vim.bo.buftype == "" and vim.api.nvim_buf_get_name(0) ~= "" then
+      vim.cmd("silent! mkview")
+    end
+  end,
 })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
-	group = folds_group,
-	desc = "Auto-load folds when reopening",
-	pattern = "*",
-	command = "silent! loadview",
+  group = folds_group,
+  callback = function()
+    if vim.bo.buftype == "" and vim.api.nvim_buf_get_name(0) ~= "" then
+      vim.cmd("silent! loadview")
+    end
+  end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
