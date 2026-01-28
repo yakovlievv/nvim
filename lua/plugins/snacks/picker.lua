@@ -29,9 +29,8 @@ return {
 			-- fancy: Snacks fancy diff (borders, multi-column line numbers, syntax highlighting)
 			-- syntax: Neovim's built-in diff syntax highlighting
 			-- terminal: external command (git's pager for git commands, `cmd` for other diffs)
-			style = "fancy",
+			style = "terminal",
 			cmd = { "delta" }, -- example for using `delta` as the external diff command
-			---@type vim.wo?|{} window options for the fancy diff preview window
 			wo = {
 				breakindent = true,
 				wrap = true,
