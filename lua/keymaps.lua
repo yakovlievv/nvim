@@ -100,20 +100,8 @@ end, { desc = "Toggle wrap" })
 map("n", "<leader>rn", vim.lsp.buf.rename)
 map("n", "<leader>ca", vim.lsp.buf.code_action)
 
--- switch to latest buffer
--- map("n", "<leader>bb", ":buffer #<CR>")
-
--- saving and quiting
--- set({ "n", "v" }, "<leader>w", "<cmd>w<Cr>")
--- set({ "n", "v" }, "<leader>q", "<cmd>q<Cr>")
--- set({ "n", "v" }, "<leader>Q", "<cmd>qa<Cr>")
---
--- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
--- map({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>")
-
--- these just make sense don't they?
--- map({ "n", "x", "o" }, "<S-h>", "_")
--- map({ "n", "x", "o" }, "<S-l>", "g_")
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>")
 
 -- Close floating windows in insert mode with K
 map(
