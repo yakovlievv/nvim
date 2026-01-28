@@ -4,6 +4,21 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			vim.lsp.config("*", { capabilities = require("blink-cmp").get_lsp_capabilities() })
+			vim.lsp.config("cssls", {
+				settings = {
+					css = {
+						lint = {
+							unknownAtRules = "ignore",
+						},
+					},
+					scss = {
+						lint = {
+							unknownAtRules = "ignore",
+						},
+					},
+				},
+			})
+
 			vim.lsp.config("tailwindcss", {
 				cmd = { "tailwindcss-language-server", "--stdio" },
 				filetypes = {
