@@ -14,12 +14,12 @@ return {
 		},
 		{
 			-- Open in the current working directory
-			"<leader>y",
+			"<leader>yc",
 			"<cmd>Yazi cwd<cr>",
 			desc = "Open the file manager in nvim's working directory",
 		},
 		{
-			"<leader>Y",
+			"<leader>-",
 			"<cmd>Yazi toggle<cr>",
 			desc = "Resume the last yazi session",
 		},
