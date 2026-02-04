@@ -80,7 +80,7 @@ return {
 				"vtsls", -- TypeScript/JavaScript
 				"tailwindcss",
 				"eslint", -- ESLint
-				"emmet_ls", -- Emmet
+				-- "emmet_ls", -- Emmet
 				"html", -- HTML
 				"cssls", -- CSS
 				"jsonls", -- JSON

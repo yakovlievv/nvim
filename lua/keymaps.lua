@@ -52,8 +52,8 @@ map("x", ">", ">gv")
 map("x", "<", "<gv")
 
 -- Not use system clipboard
-map({ "x", "n", "o" }, "<leader>p", [["_dhp]])
-map({ "x", "n", "o" }, "<leader>P", [["_dhP]])
+map({ "x", "n", "o" }, "<leader>p", [["_dp]])
+map({ "x", "n", "o" }, "<leader>P", [["_dP]])
 map({ "x", "n", "o" }, "<leader>c", [["_c]])
 map({ "x", "n", "o" }, "<leader>C", [["_C]])
 map({ "x", "n", "o" }, "<leader>d", [["_d]])
@@ -65,6 +65,13 @@ map("v", "<leader>S", [[y:%s/<C-r>"/<C-r>"/gI<Left><Left><Left>]])
 
 -- set({ "n", "x", "o" }, ":", ";")
 -- set({ "n", "x", "o" }, ";", ":")
+
+-- EXPERIMENTAL SECTION
+
+map({ "n", "x", "o" }, "H", "_")
+map({ "n", "x", "o" }, "L", "g_")
+
+-- END
 
 -- Do J but keep the curson in place
 map("n", "J", function()
@@ -97,7 +104,7 @@ map("n", "<leader>W", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
 
-map("n", "<leader>rn", vim.lsp.buf.rename)
+map("n", "<leader>cr", vim.lsp.buf.rename)
 map("n", "<leader>ca", vim.lsp.buf.code_action)
 
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
