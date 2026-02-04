@@ -22,12 +22,48 @@ return {
 
 	keys = {
         --stylua: ignore start
-
         -- Top Pickers & Explorer
         { "<C-f>",      function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
         { "<C-g>",      function() Snacks.picker.grep() end,                                    desc = "Grep" },
         { "<leader>:",  function() Snacks.picker.command_history() end,                         desc = "Command History" },
-        { "<leader>n",  function() Snacks.picker.notifications() end,                           desc = "Notification History" },
+        { "<leader>n", function()
+            Snacks.picker.notifications({
+                layout = {
+                    preset = "vertical",
+                    layout = {
+                        backdrop = false,
+                        width = 0.9,
+                        min_width = 80,
+                        height = 0.9,
+                        min_height = 30,
+                        box = "vertical",
+                        border = true,
+                        title = "{title} {live} {flags}",
+                        title_pos = "center",
+                        { win = "input", height = 1, border = "bottom" },
+                        { win = "list", border = "none" },
+                        { win = "preview", title = "{preview}", height = 0.7, border = "top" },
+                    },
+                },
+                confirm = function(picker, item)
+                    if item and item.item then
+                        local notif = item.item
+                        local msg = notif.msg
+                        if type(msg) == "table" then
+                            msg = table.concat(msg, "\n")
+                        end
+                        -- Optionally include title
+                        if notif.title and notif.title ~= "" then
+                            msg = notif.title .. ": " .. msg
+                        end
+                        vim.fn.setreg("+", msg)
+                        vim.fn.setreg("*", msg)
+                        Snacks.notify.info("Copied to clipboard")
+                    end
+                    picker:close()
+                end,
+            })
+        end, desc = "Notification History" },
         -- files
         { "<leader>fb", function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
         { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },

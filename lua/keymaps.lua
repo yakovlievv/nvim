@@ -130,5 +130,8 @@ map(
 	[[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]]
 )
 
+map({ "n", "x", "o" }, "<C-d>", "<C-d>zz")
+map({ "n", "x", "o" }, "<C-u>", "<C-u>zz")
+
 map("n", "<leader>E", ":Ex<Cr>")
 -- Set({ "n" }, "<leader>c", "1z=")

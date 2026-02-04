@@ -101,8 +101,8 @@ return {
 					-- Formatters
 					"prettierd", -- JS/TS/HTML/CSS/JSON/Markdown etc.
 					"stylua", -- Lua
-					"black", -- Python
-					"isort", -- Python import sorter
+					-- "black", -- Python
+					-- "isort", -- Python import sorter
 					"clang-format", -- C/C++
 					"shfmt", -- Shell scripts
 					-- Linters
