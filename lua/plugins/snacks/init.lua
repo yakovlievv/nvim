@@ -83,7 +83,7 @@ return {
         { "<leader>ss", function() Snacks.picker.lsp_symbols() end,                             desc = "LSP Symbols" },
         { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
         -- Other
-        { "<leader>R", function() Snacks.rename.rename_file() end,                             desc = "Rename File" },
+        { "<leader>fR", function() Snacks.rename.rename_file() end,                             desc = "Rename File" },
         { "<leader>gB", function() Snacks.gitbrowse() end,                                      desc = "Git Browse",                 mode = { "n", "v" } },
         { "<leader>gg", function() Snacks.lazygit() end,                                        desc = "Lazygit" },
         { "<leader>gG", function() Snacks.lazygit() end, desc = "lazygit (cwd)" },
