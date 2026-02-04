@@ -7,7 +7,6 @@ return {
 		notifier = require("plugins.snacks.notifier"),
 		terminal = require("plugins.snacks.terminal"),
 		bigfile = { enabled = true },
-		image = { enabled = true },
 		indent = { enabled = true },
 		input = { enabled = true },
 		bufdelete = { enabled = true },
@@ -16,6 +15,7 @@ return {
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
 
+		image = { enabled = false },
 		explorer = { enabled = false },
 		scroll = { enabled = false },
 	},
