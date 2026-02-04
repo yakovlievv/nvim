@@ -3,20 +3,21 @@ return {
 	lazy = false,
 	opts = {
 		dashboard = require("plugins.snacks.dashboard"),
+		picker = require("plugins.snacks.picker"),
+		notifier = require("plugins.snacks.notifier"),
+		terminal = require("plugins.snacks.terminal"),
 		bigfile = { enabled = true },
-		explorer = require("plugins.snacks.explorer"),
 		image = { enabled = true },
 		indent = { enabled = true },
 		input = { enabled = true },
-		picker = require("plugins.snacks.picker"),
 		bufdelete = { enabled = true },
-		notifier = require("plugins.snacks.notifier"),
 		quickfile = { enabled = true },
-		terminal = require("plugins.snacks.terminal"),
 		scope = { enabled = true },
-		scroll = require("plugins.snacks.scroll"),
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
+
+		explorer = { enabled = false },
+		scroll = { enabled = false },
 	},
 
 	keys = {

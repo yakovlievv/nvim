@@ -1,5 +1,4 @@
 return {
-
 	animate = {
 		duration = { step = 4, total = 150 },
 		easing = "linear",
