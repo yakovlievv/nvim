@@ -8,9 +8,11 @@ return {
 	config = function()
 		local ts = require("nvim-treesitter")
 		local utils = require("utils.treesitter")
-		local installed = ts.get_installed()
 		local available_parsers = ts.get_available()
-		local ensure_installed = {
+
+		-- Check treesitter cli
+		utils.ensure_treesitter_cli()
+		ts.install({
 			"bash",
 			"zsh",
 			"c",
@@ -28,23 +30,11 @@ return {
 			"yaml",
 			"gitcommit",
 			"vim",
-		}
-
-		-- Check treesitter cli
-		utils.ensure_treesitter_cli()
-
-		-- Install missing parsers from ensure installed
-		local not_installed = vim.tbl_filter(function(parser)
-			return not vim.tbl_contains(installed, parser)
-		end, ensure_installed)
-		if #not_installed > 0 then
-			ts.install(not_installed, { summary = true })
-		end
+		}, { summary = false })
 
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = "*",
 			group = vim.api.nvim_create_augroup("my.treesitter", { clear = true }),
-
 			callback = function(event)
 				local lang = vim.treesitter.language.get_lang(event.match)
 				if not lang then
@@ -68,7 +58,7 @@ return {
 					vim.defer_fn(function()
 						vim.wo.foldmethod = "expr"
 						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-						vim.wo.foldtext = "v:lua.require'utils.fold'.fold_text()"
+						-- vim.wo.foldtext = "v:lua.require'utils.fold'.fold_text()"
 						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 					end, 50) -- 50ms delay
 				end
