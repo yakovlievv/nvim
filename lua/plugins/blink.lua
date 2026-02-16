@@ -19,14 +19,14 @@ return {
 
 	config = function()
 		require("blink.cmp").setup({
-			cmdline = {
-				enabled = true,
-				keymap = { preset = "inherit" },
-				completion = {
-					menu = { auto_show = true },
-					ghost_text = { enabled = false },
-				},
-			},
+			-- cmdline = {
+			-- 	enabled = true,
+			-- 	keymap = { preset = "inherit" },
+			-- 	completion = {
+			-- 		menu = { auto_show = true },
+			-- 		ghost_text = { enabled = false },
+			-- 	},
+			-- },
 
 			keymap = {
 				preset = "none",
