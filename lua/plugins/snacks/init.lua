@@ -7,7 +7,7 @@ return {
 		notifier = require("plugins.snacks.notifier"),
 		terminal = require("plugins.snacks.terminal"),
 		bigfile = { enabled = true },
-		indent = { enabled = true },
+		indent = { enabled = false },
 		input = { enabled = true },
 		bufdelete = { enabled = true },
 		quickfile = { enabled = true },
