@@ -54,6 +54,10 @@ opt.wrap = false -- disable line wrapping
 opt.termguicolors = true -- enable 24-bit colors
 -- opt.fillchars:append({ eob = " " })
 
+vim.api.nvim_create_user_command("TSUninstallAll", function()
+	require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })
+end, { desc = "Uninstall all installed parsers" })
+
 -- Scrolling & Signs
 opt.scrolloff = 5 -- keep 5 lines visible above/below cursor
 opt.signcolumn = "yes" -- always show sign column (avoid text shift)

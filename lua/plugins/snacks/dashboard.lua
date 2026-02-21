@@ -3,14 +3,18 @@ return {
 	pane_gap = 4, -- empty columns between vertical panes
 	preset = {
 		keys = {
-			{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
 			{
-				icon = " ",
-				key = "g",
-				desc = "Find Text",
-				action = ":lua Snacks.dashboard.pick('live_grep')",
+				icon = " ",
+				key = "f",
+				desc = "Find File",
+				action = ":lua Snacks.dashboard.pick('files')",
 			},
-			{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+			{
+				icon = " ",
+				key = "n",
+				desc = "New File",
+				action = ":ene | startinsert",
+			},
 			{
 				icon = " ",
 				key = "r",
@@ -42,7 +46,12 @@ return {
 				action = ":Lazy",
 				enabled = package.loaded.lazy ~= nil,
 			},
-			{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+			{
+				icon = " ",
+				key = "q",
+				desc = "Quit",
+				action = ":qa",
+			},
 		},
 		header = [[
 ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗

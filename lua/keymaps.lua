@@ -6,10 +6,6 @@ local function map(modes, key, action, opts)
 	vim.keymap.set(modes, key, action, final_opts)
 end
 
--- experimental shit
-map({ "n", "x", "o" }, "H", "_")
-map({ "n", "x", "o" }, "L", "g_")
-
 -- quickfix movements
 map("n", "<C-k>", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "<C-j>", vim.cmd.cnext, { desc = "Next Quickfix" })
@@ -91,14 +87,6 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- this pisses me off
 map("i", "<C-p>", "<Nop>")
-
--- uninstall treesitter parsers
-map(
-	"n",
-	"<leader>tu",
-	[[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]],
-	{ desc = "Uninstall all parsers" }
-)
 
 -- recentering viewport after actions
 map({ "n", "x", "o" }, "<C-d>", "<C-d>zz")
