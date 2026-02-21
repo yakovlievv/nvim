@@ -51,7 +51,6 @@ opt.clipboard = "unnamedplus" -- sync with system clipboard
 -- Statusline & Display
 opt.laststatus = 3 -- global statusline
 opt.wrap = false -- disable line wrapping
-opt.linebreak = true -- wrapping by word
 opt.termguicolors = true -- enable 24-bit colors
 -- opt.fillchars:append({ eob = " " })
 
@@ -66,7 +65,6 @@ local undodir = vim.fn.stdpath("state") .. "/nvim/undo"
 vim.fn.mkdir(undodir, "p") -- make sure it exists
 opt.undodir = undodir
 opt.undofile = true -- enable persistent undo
-opt.undofile = true
 opt.hlsearch = true
 opt.incsearch = true
 

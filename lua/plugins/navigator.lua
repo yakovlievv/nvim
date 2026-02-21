@@ -17,12 +17,4 @@ return {
 		{ "<m-l>", "<cmd>TmuxNavigateRight<cr>" },
 		{ "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
 	},
-	config = function()
-		local opts = { silent = true, noremap = true }
-
-		vim.keymap.set("n", "<m-h>", "<cmd>TmuxNavigateLeft<CR>", opts)
-		vim.keymap.set("n", "<m-j>", "<cmd>TmuxNavigateDown<CR>", opts)
-		vim.keymap.set("n", "<m-k>", "<cmd>TmuxNavigateUp<CR>", opts)
-		vim.keymap.set("n", "<m-l>", "<cmd>TmuxNavigateRight<CR>", opts)
-	end,
 }

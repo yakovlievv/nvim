@@ -94,22 +94,22 @@ return {
 
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		event = "BufReadPre", -- Load before reading buffers
+		event = "VeryLazy",
 		config = function()
 			require("mason-tool-installer").setup({
 				ensure_installed = {
 					-- Formatters
 					"prettierd", -- JS/TS/HTML/CSS/JSON/Markdown etc.
 					"stylua", -- Lua
-					-- "black", -- Python
-					-- "isort", -- Python import sorter
+					"black", -- Python
+					"isort", -- Python import sorter
 					"clang-format", -- C/C++
 					"shfmt", -- Shell scripts
 					-- Linters
 					"ruff", -- Python linter
 					"shellcheck", -- Shell scripts
 				},
-				auto_update = true,
+				auto_update = false,
 				integrations = {
 					["mason-lspconfig"] = true,
 					["mason-null-ls"] = false,

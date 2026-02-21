@@ -11,13 +11,13 @@ return {
 		input = { enabled = true },
 		bufdelete = { enabled = true },
 		quickfile = { enabled = true },
-		scope = { enabled = true },
+		scope = { enabled = false },
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
 
-		image = { enabled = false },
+		image = require("plugins.snacks.image"),
 		explorer = { enabled = false },
-		scroll = { enabled = false },
+		scroll = require("plugins.snacks.scroll"),
 	},
 
 	keys = {

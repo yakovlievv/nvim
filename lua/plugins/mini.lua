@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-mini/mini.surround",
 		version = "*",
-		event = "InsertEnter",
+		event = "VeryLazy",
 		config = function()
 			local surround = require("mini.surround")
 			surround.setup({

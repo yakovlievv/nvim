@@ -133,9 +133,4 @@ return {
 		})
 	end,
 
-	opts = function(_, opts)
-		-- Add to lualine config
-		opts.sections = opts.sections or {}
-		opts.sections.lualine_c = {}
-	end,
 }
