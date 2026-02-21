@@ -122,7 +122,7 @@ return {
         { "<leader>fR", function() Snacks.rename.rename_file() end,                             desc = "Rename File" },
         { "<leader>gB", function() Snacks.gitbrowse() end,                                      desc = "Git Browse",                 mode = { "n", "v" } },
         { "<leader>gg", function() Snacks.lazygit() end,                                        desc = "Lazygit" },
-        { "<leader>gG", function() Snacks.lazygit() end, desc = "lazygit (cwd)" },
+        { "<leader>gG", function() Snacks.lazygit({ cwd = vim.fn.expand("%:h") }) end, desc = "Lazygit (cwd)" },
         { "<leader>U",  function() Snacks.notifier.hide() end,                                  desc = "Dismiss All Notifications" },
         { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",             mode = { "n", "t" } },
         { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",             mode = { "n", "t" } },

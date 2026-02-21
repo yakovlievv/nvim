@@ -74,7 +74,7 @@ return {
 				["<M-t>"] = { "actions.select", opts = { tab = true } },
 				["<C-p>"] = "actions.preview",
 				["<C-e>"] = { "actions.close", mode = { "n", "i", "x" } },
-				["<M-l>"] = "actions.refresh",
+				["<M-r>"] = "actions.refresh",
 				["<C-h>"] = { "actions.parent", mode = "n" },
 				["_"] = { "actions.open_cwd", mode = "n" },
 				["`"] = { "actions.cd", mode = "n" },

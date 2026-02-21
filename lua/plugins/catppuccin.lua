@@ -41,7 +41,25 @@ return {
 				operators = {},
 			},
 			color_overrides = {},
-			custom_highlights = {},
+			custom_highlights = function(colors)
+				return {
+					-- Mason
+					MasonNormal = { bg = colors.mantle },
+					MasonBorder = { bg = colors.mantle, fg = colors.mantle },
+					-- Blink (completion menu, docs, signature)
+					BlinkCmpMenu                = { bg = colors.mantle },
+					BlinkCmpMenuBorder          = { bg = colors.mantle, fg = colors.mantle },
+					BlinkCmpDoc                 = { bg = colors.mantle },
+					BlinkCmpDocBorder           = { bg = colors.mantle, fg = colors.mantle },
+					BlinkCmpSignatureHelp       = { bg = colors.mantle },
+					BlinkCmpSignatureHelpBorder = { bg = colors.mantle, fg = colors.mantle },
+					-- Noice (LSP hover, command popup)
+					NoiceHover = { bg = colors.mantle, fg = colors.text },
+					NoicePopup = { bg = colors.mantle, fg = colors.text },
+					-- CursorLine
+					CursorLine = { bg = colors.mantle },
+				}
+			end,
 			default_integrations = true,
 			auto_integrations = true,
 			integrations = {

@@ -6,7 +6,7 @@ return {
 	prompt = " ",
 	sources = {},
 	focus = "input",
-	show_delay = 5000,
+	show_delay = 0,
 	limit_live = 10000,
 	layout = {
 		preset = "default",

@@ -12,8 +12,8 @@ return {
 		},
 	},
 	keys = {
-		{ "]h", function() require("gitsigns").nav_hunk("next") end, desc = "Next Hunk" },
-		{ "[h", function() require("gitsigns").nav_hunk("prev") end, desc = "Prev Hunk" },
+		{ "]h", function() require("gitsigns").nav_hunk("next", { count = vim.v.count1 }) end, desc = "Next Hunk" },
+		{ "[h", function() require("gitsigns").nav_hunk("prev", { count = vim.v.count1 }) end, desc = "Prev Hunk" },
 		{ "<leader>hs", function() require("gitsigns").stage_hunk() end,                                              desc = "Stage Hunk" },
 		{ "<leader>hs", function() require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, mode = "v", desc = "Stage Hunk" },
 		{ "<leader>hr", function() require("gitsigns").reset_hunk() end,                                              desc = "Reset Hunk" },

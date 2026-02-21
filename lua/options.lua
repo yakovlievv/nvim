@@ -59,7 +59,8 @@ opt.scrolloff = 5 -- keep 5 lines visible above/below cursor
 opt.signcolumn = "yes" -- always show sign column (avoid text shift)
 
 -- Performance
-opt.updatetime = 50 -- faster completion & diagnostic updates
+opt.updatetime = 150 -- faster completion & diagnostic updates
+opt.timeoutlen = 400
 
 local undodir = vim.fn.stdpath("state") .. "/nvim/undo"
 vim.fn.mkdir(undodir, "p") -- make sure it exists
@@ -82,5 +83,6 @@ vim.diagnostic.config({
 	},
 	underline = true,
 	update_in_insert = false,
-	-- float = { border = "rounded" },
+	severity_sort = true,
+	float = { border = "none" },
 })

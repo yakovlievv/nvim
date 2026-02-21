@@ -129,8 +129,7 @@ return {
 					},
 				},
 			},
-			extensions = { "neo-tree", "lazy", "fzf", "mason", "quickfix" },
+			extensions = { "lazy", "fzf", "mason", "quickfix" },
 		})
 	end,
-
 }
