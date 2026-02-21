@@ -26,15 +26,15 @@ map("x", "<", "<gv")
 
 -- not use system clipboard
 map({ "x", "n", "o" }, "<leader>p", [["_dp]], { desc = "Paste without yanking" })
-map({ "x", "n", "o" }, "<leader>P", [["_dP]])
-map({ "x", "n", "o" }, "<leader>c", [["_c]])
-map({ "x", "n", "o" }, "<leader>C", [["_C]])
-map({ "x", "n", "o" }, "<leader>d", [["_d]])
-map({ "x", "n", "o" }, "<leader>D", [["_D]])
+map({ "x", "n", "o" }, "<leader>P", [["_dP]], { desc = "Paste before (no yank)" })
+map({ "x", "n", "o" }, "<leader>c", [["_c]], { desc = "Change (no yank)" })
+map({ "x", "n", "o" }, "<leader>C", [["_C]], { desc = "Change to EOL (no yank)" })
+map({ "x", "n", "o" }, "<leader>d", [["_d]], { desc = "Delete (no yank)" })
+map({ "x", "n", "o" }, "<leader>D", [["_D]], { desc = "Delete to EOL (no yank)" })
 
 -- change the word under the word or the highlight
-map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-map("v", "<leader>S", [[y:%s/<C-r>"/<C-r>"/gI<Left><Left><Left>]])
+map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute word" })
+map("v", "<leader>S", [[y:%s/<C-r>"/<C-r>"/gI<Left><Left><Left>]], { desc = "Substitute selection" })
 
 -- join lines without moving the cursor
 map("n", "J", function()
@@ -44,7 +44,7 @@ map("n", "J", function()
 end, { desc = "Join lines and stay in place" })
 
 -- call lazy
-map("n", "<leader>l", "<cmd>Lazy<CR>")
+map("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
 
 -- indent whole buffer
 map("n", "<leader>=", function()
@@ -54,7 +54,7 @@ map("n", "<leader>=", function()
 end, { desc = "Reindent whole file and keep cursor" })
 
 -- execute stuff
-map("n", "<leader>x", ":!chmod +x %<CR>", { silent = false })
+map("n", "<leader>x", ":!chmod +x %<CR>", { silent = false, desc = "Make executable" })
 
 -- resizin
 map("n", "<M-Up>", ":resize -2<CR>", { desc = "Decrease height" })
@@ -72,8 +72,8 @@ map("n", "<leader>W", function()
 end, { desc = "Toggle wrap" })
 
 -- code group
-map("n", "<leader>cr", vim.lsp.buf.rename)
-map("n", "<leader>ca", vim.lsp.buf.code_action)
+map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
+map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "<leader>ch", function()
 	Snacks.toggle.inlay_hints():toggle()
@@ -81,7 +81,7 @@ end, { desc = "Toggle Inlay Hints" })
 
 -- simple write and quit
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
-map({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>")
+map({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>", { desc = "Quit all" })
 
 -- escape disable search-highlight
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -93,7 +93,7 @@ map("i", "<C-p>", "<Nop>")
 map(
 	"n",
 	"<leader>tu",
-	[[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]]
+	[[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]], { desc = "Uninstall all parsers" }
 )
 
 -- recentering viewport after actions
