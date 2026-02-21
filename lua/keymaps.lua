@@ -53,6 +53,9 @@ map("n", "<leader>=", function()
 	vim.fn.winrestview(view)
 end, { desc = "Reindent whole file and keep cursor" })
 
+-- macro replay
+map("n", "Q", "@q", { desc = "Replay macro q" })
+
 -- execute stuff
 map("n", "<leader>x", ":!chmod +x %<CR>", { silent = false, desc = "Make executable" })
 
@@ -93,7 +96,8 @@ map("i", "<C-p>", "<Nop>")
 map(
 	"n",
 	"<leader>tu",
-	[[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]], { desc = "Uninstall all parsers" }
+	[[:lua require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })]],
+	{ desc = "Uninstall all parsers" }
 )
 
 -- recentering viewport after actions
