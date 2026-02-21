@@ -59,6 +59,36 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   end,
 })
 
+-- macOS: re-sign native .so/.dylib files after lazy installs/updates to prevent
+-- code signature crashes (EXC_BAD_ACCESS / SIGKILL Code Signature Invalid)
+if vim.fn.has("mac") == 1 then
+	vim.api.nvim_create_autocmd("User", {
+		pattern = { "LazyInstall", "LazyUpdate", "LazySync", "LazyRestore" },
+		group = vim.api.nvim_create_augroup("my.codesign", { clear = true }),
+		desc = "Re-sign native libs after lazy operations",
+		callback = function()
+			local data_dir = vim.fn.stdpath("data")
+			vim.system(
+				{ "sh", "-c",
+				'find '
+				.. data_dir .. '/site/parser '
+				.. data_dir .. '/lazy/LuaSnip '
+				.. data_dir .. '/lazy/blink.cmp/target/release '
+				.. '-name "*.so" -o -name "*.dylib" 2>/dev/null | xargs -I{} codesign --force --sign - {}'
+			},
+				{ text = true },
+				function(result)
+					if result.code == 0 then
+						vim.schedule(function()
+							vim.notify("Native libs re-signed (macOS)", vim.log.levels.DEBUG)
+						end)
+					end
+				end
+			)
+		end,
+	})
+end
+
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("my.comments", { clear = true }),
 	callback = function()

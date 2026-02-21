@@ -3,6 +3,7 @@ return {
 	event = { "InsertEnter", "CmdlineEnter" },
 	opts_extend = { "sources.default" },
 	version = "1.*",
+	build = "source ~/.local/share/cargo/env && cargo build --release",
 	dependencies = {
 		{ "rafamadriz/friendly-snippets" },
 		{
