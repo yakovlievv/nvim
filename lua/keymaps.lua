@@ -25,12 +25,12 @@ map("x", ">", ">gv")
 map("x", "<", "<gv")
 
 -- not use system clipboard
-map({ "x", "n", "o" }, "<leader>p", [["_dp]], { desc = "Paste without yanking" })
-map({ "x", "n", "o" }, "<leader>P", [["_dP]], { desc = "Paste before (no yank)" })
-map({ "x", "n", "o" }, "<leader>c", [["_c]], { desc = "Change (no yank)" })
-map({ "x", "n", "o" }, "<leader>C", [["_C]], { desc = "Change to EOL (no yank)" })
-map({ "x", "n", "o" }, "<leader>d", [["_d]], { desc = "Delete (no yank)" })
-map({ "x", "n", "o" }, "<leader>D", [["_D]], { desc = "Delete to EOL (no yank)" })
+map({ "x", "n", "o" }, "<leader>vp", [["_dp]], { desc = "Paste without yanking" })
+map({ "x", "n", "o" }, "<leader>vP", [["_dP]], { desc = "Paste before (no yank)" })
+map({ "x", "n", "o" }, "<leader>vc", [["_c]], { desc = "Change (no yank)" })
+map({ "x", "n", "o" }, "<leader>vC", [["_C]], { desc = "Change to EOL (no yank)" })
+map({ "x", "n", "o" }, "<leader>vd", [["_d]], { desc = "Delete (no yank)" })
+map({ "x", "n", "o" }, "<leader>vD", [["_D]], { desc = "Delete to EOL (no yank)" })
 
 -- change the word under the word or the highlight
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute word" })

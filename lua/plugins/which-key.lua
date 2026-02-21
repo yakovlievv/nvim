@@ -22,6 +22,8 @@ return {
 			{ "<leader>s", group = "search" },
 			{ "<leader>y", group = "yazi" },
 			{ "<leader>t", group = "treesitter" },
+			{ "<leader>v", group = "void (no yank)" },
+			{ "<leader>j", group = "split/join" },
 			{ "<leader>u", group = "ui toggles" },
 			{ "<leader>d", group = "debug" },
 			{ "]", group = "next" },
