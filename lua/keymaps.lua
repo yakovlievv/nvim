@@ -25,7 +25,7 @@ map("x", ">", ">gv")
 map("x", "<", "<gv")
 
 -- not use system clipboard
-map({ "x", "n", "o" }, "<leader>p", [["_dp]])
+map({ "x", "n", "o" }, "<leader>p", [["_dp]], { desc = "Paste without yanking" })
 map({ "x", "n", "o" }, "<leader>P", [["_dP]])
 map({ "x", "n", "o" }, "<leader>c", [["_c]])
 map({ "x", "n", "o" }, "<leader>C", [["_C]])
@@ -75,6 +75,9 @@ end, { desc = "Toggle wrap" })
 map("n", "<leader>cr", vim.lsp.buf.rename)
 map("n", "<leader>ca", vim.lsp.buf.code_action)
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "<leader>ch", function()
+	Snacks.toggle.inlay_hints():toggle()
+end, { desc = "Toggle Inlay Hints" })
 
 -- simple write and quit
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })

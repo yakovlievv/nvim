@@ -52,14 +52,6 @@ return {
 				},
 			})
 
-			-- vim.api.nvim_create_autocmd("LspAttach", {
-			-- 	group = vim.api.nvim_create_augroup("MyLspAttach", {})
-			-- 	callback = function(ev)
-			-- 		-- Get the LSP client
-			-- 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-			-- 		local bufnr = ev.buf
-			-- 	end,
-			-- })
 		end,
 	},
 
