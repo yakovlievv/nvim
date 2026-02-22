@@ -2,7 +2,7 @@ return {
 	"gbprod/yanky.nvim",
 	event = "VeryLazy",
 	opts = {
-		ring = { storage = "shada" },
+		ring = { storage = "memory" },
 		system_clipboard = {
 			sync_with_ring = true,
 			clipboard_register = nil,

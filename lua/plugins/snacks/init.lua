@@ -25,7 +25,7 @@ return {
         -- Top Pickers & Explorer
         { "<C-f>",      function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
         { "<C-g>",      function() Snacks.picker.grep() end,                                    desc = "Grep" },
-        { "<leader>:",  function() Snacks.picker.command_history() end,                         desc = "Command History" },
+        { "<leader>:",  function() Snacks.picker.command_history({ preview = false }) end,      desc = "Command History" },
         { "<leader>n", function()
             Snacks.picker.notifications({
                 layout = {
@@ -70,7 +70,7 @@ return {
         { "<leader>ff", function() Snacks.picker.files() end,                                   desc = "Find Files" },
         { "<leader>fg", function() Snacks.picker.git_files() end,                               desc = "Find Git Files" },
         { "<leader>fp", function() Snacks.picker.projects() end,                                desc = "Projects" },
-        { "<leader>fr", function() Snacks.picker.recent() end,                                  desc = "Recent" },
+        { "<leader>fr", function() Snacks.picker.recent({ preview = false }) end,               desc = "Recent" },
         -- git
         { "<leader>gb", function() Snacks.picker.git_branches() end,                            desc = "Git Branches" },
         { "<leader>gl", function() Snacks.picker.git_log() end,                                 desc = "Git Log" },
@@ -89,17 +89,17 @@ return {
         { "<leader>sB", function() Snacks.picker.grep_buffers() end,                            desc = "Grep Open Buffers" },
         { "<leader>sw", function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word",   mode = { "n", "x" } },
         -- search
-        { "<leader>sr", function() Snacks.picker.registers() end,                               desc = "Registers" },
-        { "<leader>s/", function() Snacks.picker.search_history() end,                          desc = "Search History" },
-        { "<leader>fa", function() Snacks.picker.autocmds() end,                                desc = "Autocmds" },
-        { "<leader>sc", function() Snacks.picker.commands() end,                                desc = "Commands" },
+        { "<leader>sr", function() Snacks.picker.registers({ preview = false }) end,            desc = "Registers" },
+        { "<leader>s/", function() Snacks.picker.search_history({ preview = false }) end,       desc = "Search History" },
+        { "<leader>fa", function() Snacks.picker.autocmds({ preview = false }) end,             desc = "Autocmds" },
+        { "<leader>sc", function() Snacks.picker.commands({ preview = false }) end,             desc = "Commands" },
         { "<leader>sd", function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
         { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end,                      desc = "Buffer Diagnostics" },
         { "<leader>sh", function() Snacks.picker.help() end,                                    desc = "Help Pages" },
         { "<leader>sH", function() Snacks.picker.highlights() end,                              desc = "Highlights" },
-        { "<leader>si", function() Snacks.picker.icons() end,                                   desc = "Icons" },
+        { "<leader>si", function() Snacks.picker.icons({ preview = false }) end,                desc = "Icons" },
         { "<leader>sj", function() Snacks.picker.jumps() end,                                   desc = "Jumps" },
-        { "<leader>sk", function() Snacks.picker.keymaps() end,                                 desc = "Keymaps" },
+        { "<leader>sk", function() Snacks.picker.keymaps({ preview = false }) end,              desc = "Keymaps" },
         { "<leader>sl", function() Snacks.picker.loclist() end,                                 desc = "Location List" },
         { "<leader>sm", function() Snacks.picker.marks() end,                                   desc = "Marks" },
         { "<leader>sM", function() Snacks.picker.man() end,                                     desc = "Man Pages" },

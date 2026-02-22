@@ -1,3 +1,10 @@
+-- Disable unused built-in plugins
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_matchit = 1
+vim.g.loaded_tohtml = 1
+vim.g.loaded_tutor = 1
+
 local opt = vim.opt
 local g = vim.g
 

@@ -1,51 +1,21 @@
 return {
 	"ThePrimeagen/harpoon",
 	branch = "harpoon2",
-	opts = {
-		menu = {
-			width = vim.api.nvim_win_get_width(0) - 4,
-		},
-		-- settings = {
-		-- 	save_on_toggle = true,
-		-- },
+	keys = {
+		{ "<leader>a", function() require("harpoon"):list():add() end, desc = "Harpoon add" },
+		{ "<leader>H", function() local h = require("harpoon"); h.ui:toggle_quick_menu(h:list()) end, desc = "Harpoon menu" },
+		{ "<leader>1", function() require("harpoon"):list():select(1) end },
+		{ "<leader>2", function() require("harpoon"):list():select(2) end },
+		{ "<leader>3", function() require("harpoon"):list():select(3) end },
+		{ "<leader>4", function() require("harpoon"):list():select(4) end },
+		{ "<leader>5", function() require("harpoon"):list():select(5) end },
+		{ "<leader>6", function() require("harpoon"):list():select(6) end },
+		{ "<leader>7", function() require("harpoon"):list():select(7) end },
+		{ "<leader>8", function() require("harpoon"):list():select(8) end },
 	},
 	config = function()
-		local harpoon = require("harpoon")
-
-		-- REQUIRED
-		harpoon:setup()
-		-- REQUIRED
-
-		vim.keymap.set("n", "<leader>a", function()
-			harpoon:list():add()
-		end, { desc = "Harpoon add" })
-		vim.keymap.set("n", "<leader>H", function()
-			harpoon.ui:toggle_quick_menu(harpoon:list())
-		end, { desc = "Harpoon menu" })
-
-		vim.keymap.set("n", "<leader>1", function()
-			harpoon:list():select(1)
-		end)
-		vim.keymap.set("n", "<leader>2", function()
-			harpoon:list():select(2)
-		end)
-		vim.keymap.set("n", "<leader>3", function()
-			harpoon:list():select(3)
-		end)
-		vim.keymap.set("n", "<leader>4", function()
-			harpoon:list():select(4)
-		end)
-		vim.keymap.set("n", "<leader>5", function()
-			harpoon:list():select(5)
-		end)
-		vim.keymap.set("n", "<leader>6", function()
-			harpoon:list():select(6)
-		end)
-		vim.keymap.set("n", "<leader>7", function()
-			harpoon:list():select(7)
-		end)
-		vim.keymap.set("n", "<leader>8", function()
-			harpoon:list():select(8)
-		end)
+		require("harpoon"):setup({
+			menu = { width = vim.api.nvim_win_get_width(0) - 4 },
+		})
 	end,
 }
