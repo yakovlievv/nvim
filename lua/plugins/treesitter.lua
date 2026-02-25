@@ -15,6 +15,7 @@ return {
 		ts.install({
 			"bash",
 			"zsh",
+			"regex",
 			"c",
 			"cpp",
 			"lua",

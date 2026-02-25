@@ -4,6 +4,9 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_matchit = 1
 vim.g.loaded_tohtml = 1
 vim.g.loaded_tutor = 1
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
 
 local opt = vim.opt
 local g = vim.g
@@ -96,4 +99,16 @@ vim.diagnostic.config({
 	update_in_insert = false,
 	severity_sort = true,
 	float = { border = "none" },
+})
+
+vim.filetype.add({
+	extension = { mdx = "markdown.mdx" },
+	filename = {
+		["docker-compose.yml"]  = "yaml.docker-compose",
+		["docker-compose.yaml"] = "yaml.docker-compose",
+		[".gitlab-ci.yml"]      = "yaml.gitlab",
+	},
+	pattern = {
+		[".*helm.*values.*%.ya?ml"] = "yaml.helm-values",
+	},
 })

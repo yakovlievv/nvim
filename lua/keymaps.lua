@@ -105,7 +105,7 @@ map({ "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Sear
 -- Jump so specific diagnostic of certain severity
 local diagnostic_goto = function(next, severity)
 	return function()
-		vim.diagnostic.jump({
+		pcall(vim.diagnostic.jump, {
 			count = (next and 1 or -1) * vim.v.count1,
 			severity = severity and vim.diagnostic.severity[severity] or nil,
 			float = true,

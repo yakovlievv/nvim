@@ -14,6 +14,14 @@ return {
 		local wk = require("which-key")
 		wk.setup(opts)
 		wk.add({
+			{ "<leader>1", hidden = true },
+			{ "<leader>2", hidden = true },
+			{ "<leader>3", hidden = true },
+			{ "<leader>4", hidden = true },
+			{ "<leader>5", hidden = true },
+			{ "<leader>6", hidden = true },
+			{ "<leader>7", hidden = true },
+			{ "<leader>8", hidden = true },
 			{ "<leader>b", group = "buffers" },
 			{ "<leader>c", group = "code" },
 			{ "<leader>f", group = "find" },

@@ -14,8 +14,6 @@ return {
 		{ "<leader>8", function() require("harpoon"):list():select(8) end },
 	},
 	config = function()
-		require("harpoon"):setup({
-			menu = { width = vim.api.nvim_win_get_width(0) - 4 },
-		})
+		require("harpoon"):setup()
 	end,
 }

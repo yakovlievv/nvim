@@ -21,4 +21,5 @@ require("lazy").setup({
 	install = { colorscheme = { "catppuccin", "default" } },
 	change_detection = { enabled = true, notify = false },
 	checker = { enabled = true, notify = false },
+	rocks = { enabled = false },
 })

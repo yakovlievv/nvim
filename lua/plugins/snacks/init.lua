@@ -1,6 +1,7 @@
 return {
 	"folke/snacks.nvim",
 	lazy = false,
+	priority = 1000,
 	opts = {
 		dashboard = require("plugins.snacks.dashboard"),
 		picker = require("plugins.snacks.picker"),
@@ -34,7 +35,7 @@ return {
                         backdrop = false,
                         width = 0.9,
                         min_width = 80,
-                        height = 0.9,
+                        height = 0.7,
                         min_height = 30,
                         box = "vertical",
                         border = true,
@@ -42,7 +43,7 @@ return {
                         title_pos = "center",
                         { win = "input", height = 1, border = "bottom" },
                         { win = "list", border = "none" },
-                        { win = "preview", title = "{preview}", height = 0.7, border = "top" },
+                        { win = "preview", title = "{preview}", height = 0.5, border = "top" },
                     },
                 },
                 confirm = function(picker, item)
@@ -123,7 +124,7 @@ return {
         { "<leader>gB", function() Snacks.gitbrowse() end,                                      desc = "Git Browse",                 mode = { "n", "v" } },
         { "<leader>gg", function() Snacks.lazygit() end,                                        desc = "Lazygit" },
         { "<leader>gG", function() Snacks.lazygit({ cwd = vim.fn.expand("%:h") }) end, desc = "Lazygit (cwd)" },
-        { "<leader>U",  function() Snacks.notifier.hide() end,                                  desc = "Dismiss All Notifications" },
+        { "<leader>un",  function() Snacks.notifier.hide() end,                                  desc = "Dismiss All Notifications" },
         { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",             mode = { "n", "t" } },
         { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",             mode = { "n", "t" } },
         -- bufdelete
@@ -161,7 +162,14 @@ return {
 			end,
 			desc = "Toggle Tabline",
 		},
-		{ "<leader>dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
+		{ "<leader>ui", function()
+		Snacks.toggle({
+			name = "Image",
+			get = function() return Snacks.config.image.enabled end,
+			set = function(v) Snacks.config.image.enabled = v end,
+		}):toggle()
+	end, desc = "Toggle Image" },
+	{ "<leader>dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
 		{ "<leader>dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
 		--stylua: ignore end
 	},
