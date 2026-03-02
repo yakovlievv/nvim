@@ -5,7 +5,6 @@ return {
 	version = "1.*",
 	build = "source ~/.local/share/cargo/env && cargo build --release",
 	dependencies = {
-		{ "rafamadriz/friendly-snippets" },
 		{
 			"L3MON4D3/LuaSnip",
 			dependencies = { "rafamadriz/friendly-snippets" },
@@ -13,9 +12,23 @@ return {
 			build = "make install_jsregexp",
 			config = function()
 				require("luasnip.loaders.from_vscode").lazy_load()
+				require("luasnip.loaders.from_lua").lazy_load({
+					paths = { vim.fn.stdpath("config") .. "/luasnippets" },
+				})
 			end,
 		},
 		"folke/lazydev.nvim",
+		{
+			"supermaven-inc/supermaven-nvim",
+			config = function()
+				require("supermaven-nvim").setup({
+					disable_keymaps = true,
+				})
+				-- Disable inline ghost text; blink-cmp-supermaven handles completions
+				require("supermaven-nvim.completion_preview").disable_inline_completion = true
+			end,
+		},
+		"huijiro/blink-cmp-supermaven",
 	},
 
 	config = function()
@@ -52,6 +65,13 @@ return {
 				menu = {
 					-- border = "rounded",
 					-- scrollbar = false,
+					draw = {
+						columns = {
+							{ "kind_icon" },
+							{ "label", "label_description", gap = 1 },
+							{ "source_name" },
+						},
+					},
 				},
 				ghost_text = {
 					enabled = true,
@@ -63,20 +83,30 @@ return {
 				},
 			},
 
-			signature = { window = { border = "none" } },
+			signature = { enabled = true, window = { border = "none" } },
 
 			snippets = {
 				preset = "luasnip",
 			},
 
 			sources = {
-				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+				default = { "lazydev", "lsp", "supermaven", "path", "snippets", "buffer" },
 				providers = {
 					lazydev = {
-						name = "LazyDev",
+						name = "[Dev]",
 						module = "lazydev.integrations.blink",
 						score_offset = 100,
 					},
+					supermaven = {
+						name = "[AI]",
+						module = "blink-cmp-supermaven",
+						async = true,
+						score_offset = 90,
+					},
+					lsp = { name = "[LSP]" },
+					path = { name = "[Path]" },
+					snippets = { name = "[Snip]" },
+					buffer = { name = "[Buf]" },
 				},
 			},
 		})
