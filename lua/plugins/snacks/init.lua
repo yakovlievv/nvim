@@ -15,7 +15,6 @@ return {
 		scope = { enabled = false },
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
-
 		image = require("plugins.snacks.image"),
 		explorer = { enabled = false },
 		scroll = require("plugins.snacks.scroll"),
@@ -33,8 +32,8 @@ return {
                     preset = "vertical",
                     layout = {
                         backdrop = false,
-                        width = 0.9,
-                        min_width = 80,
+                        width = 0.7,
+                        min_width = 30,
                         height = 0.7,
                         min_height = 30,
                         box = "vertical",

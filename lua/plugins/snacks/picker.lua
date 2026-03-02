@@ -4,12 +4,15 @@ return {
 	ui_select = true, -- replace `vim.ui.select` with the snacks picker
 	formatters = {},
 	prompt = " ",
-	sources = {},
+	sources = {
+		notifications = { layout = { fullscreen = false } },
+	},
 	focus = "input",
 	show_delay = 0,
 	limit_live = 10000,
 	layout = {
 		preset = "default",
+		fullscreen = true,
 		layout = {
 			box = "horizontal",
 			width = 0.93,
@@ -82,10 +85,10 @@ return {
 				-- WINDOWS
 				["<a-l>"] = { "cycle_win", mode = { "i", "n" } },
 				-- PREVIEW
-				["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-				["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-				-- ["<c-d>"] = { "list_scroll_down", mode = { "i", "n" } },
-				-- ["<c-u>"] = { "list_scroll_up", mode = { "i", "n" } },
+				-- ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+				-- ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+				["<c-d>"] = { "list_scroll_down", mode = { "i", "n" } },
+				["<c-u>"] = { "list_scroll_up", mode = { "i", "n" } },
 				["<c-g>"] = { "toggle_live", mode = { "i", "n" } },
 				["<c-j>"] = { "list_down", mode = { "i", "n" } },
 				["<c-k>"] = { "list_up", mode = { "i", "n" } },
@@ -173,6 +176,10 @@ return {
 		},
 		-- preview window
 		preview = {
+			wo = {
+				wrap = true,
+				linebreak = true,
+			},
 			keys = {
 				["<Esc>"] = "cancel",
 				["q"] = "cancel",
