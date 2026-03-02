@@ -57,15 +57,14 @@ return {
 					-- Try enabling capabilities
 				else
 					if not pcall(vim.treesitter.start, event.buf, lang) then
-						vim.notify("Treesitter fucked up!" .. lang, vim.log.levels.INFO)
+						vim.notify("Treesitter failed for " .. lang, vim.log.levels.WARN)
 						return
 					end
-					vim.defer_fn(function()
+					vim.schedule(function()
 						vim.wo.foldmethod = "expr"
 						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-						-- vim.wo.foldtext = "v:lua.require'utils.fold'.fold_text()"
 						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-					end, 50) -- 50ms delay
+					end)
 				end
 			end,
 		})

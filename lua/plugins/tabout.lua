@@ -28,7 +28,6 @@ return {
 		-- 	"L3MON4D3/LuaSnip",
 		-- },
 		event = "InsertEnter",
-		priority = 1000,
 	},
 	-- {
 	-- 	"L3MON4D3/LuaSnip",

@@ -22,11 +22,16 @@ return {
 					liquid = { "prettierd" },
 					lua = { "stylua" },
 					python = { "isort", "black" },
+					c = { "clang-format" },
+					cpp = { "clang-format" },
+					sh = { "shfmt" },
+					bash = { "shfmt" },
+					zsh = { "shfmt" },
 				},
 				format_on_save = {
 					lsp_format = "fallback",
 					async = false,
-					timeout_ms = 3000,
+					timeout_ms = 1500,
 				},
 			})
 		end,
