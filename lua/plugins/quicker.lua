@@ -9,8 +9,6 @@ return {
         { "<leader>L", function() require("quicker").toggle({ loclist = true }) end, desc = "Toggle loclist" },
 	},
 	config = function()
-		require("quicker").setup({
-			opts = {},
-		})
+		require("quicker").setup({})
 	end,
 }

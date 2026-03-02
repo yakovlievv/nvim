@@ -28,7 +28,7 @@ return {
 			{ "<leader>g", group = "git" },
 			{ "<leader>h", group = "hunks" },
 			{ "<leader>s", group = "search" },
-			{ "<leader>y", group = "yazi" },
+			{ "<leader>y", group = "yanky" },
 			{ "<leader>t", group = "treesitter" },
 			{ "<leader>v", group = "void (no yank)" },
 			{ "<leader>j", group = "split/join" },

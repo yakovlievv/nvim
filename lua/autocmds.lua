@@ -1,3 +1,5 @@
+-- Inlay hints available but disabled by default; toggle with <leader>ch
+
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlights text when yanking",
 	group = vim.api.nvim_create_augroup("my.yank-highlight", { clear = true }),
@@ -6,28 +8,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-local yazi_group = vim.api.nvim_create_augroup("my.yazi", { clear = true })
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "yazi",
-	group = yazi_group,
-	desc = "Remove timeout inside yazi for instant <Esc> response",
-	callback = function()
-		vim.b.old_timeoutlen = vim.o.timeoutlen
-		vim.o.timeoutlen = 0
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufLeave", {
-	pattern = "yazi",
-	group = yazi_group,
-	desc = "Restore timeoutlen when leaving yazi buffer",
-	callback = function()
-		if vim.b.old_timeoutlen then
-			vim.o.timeoutlen = vim.b.old_timeoutlen
-		end
-	end,
-})
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",

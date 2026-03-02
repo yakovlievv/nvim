@@ -129,7 +129,7 @@ return {
 					},
 				},
 			},
-			extensions = { "lazy", "fzf", "mason", "quickfix" },
+			extensions = { "lazy", "mason", "quickfix" },
 		})
 	end,
 }

@@ -1,3 +1,25 @@
+-- Yazi autocmds (move to autocmds.lua if re-enabled):
+-- Note: BufLeave pattern should match on filetype, not buffer name.
+-- Use a FileType autocmd to register a buffer-local BufLeave instead.
+--
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "yazi",
+-- 	group = vim.api.nvim_create_augroup("my.yazi", { clear = true }),
+-- 	desc = "Remove timeout inside yazi for instant <Esc> response",
+-- 	callback = function()
+-- 		vim.b.old_timeoutlen = vim.o.timeoutlen
+-- 		vim.o.timeoutlen = 0
+-- 		vim.api.nvim_create_autocmd("BufLeave", {
+-- 			buffer = 0,
+-- 			callback = function()
+-- 				if vim.b.old_timeoutlen then
+-- 					vim.o.timeoutlen = vim.b.old_timeoutlen
+-- 				end
+-- 			end,
+-- 		})
+-- 	end,
+-- })
+
 return {
 	"mikavilpas/yazi.nvim",
 	version = "*",
