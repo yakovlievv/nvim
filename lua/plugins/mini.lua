@@ -7,12 +7,12 @@ return {
 			local surround = require("mini.surround")
 			surround.setup({
 				mappings = {
-					add = "ysa",      -- ysa{motion}{char}  e.g. ysaW"
-					delete = "ysd",   -- ysd{char}
-					find = "ysf",
-					find_left = "ysF",
-					highlight = "ysh",
-					replace = "ysr",  -- ysr{old}{new}
+					add = "gsa", -- ysa{motion}{char}  e.g. ysaW"
+					delete = "gsd", -- ysd{char}
+					find = "gsf",
+					find_left = "gsF",
+					highlight = "gsh",
+					replace = "gsr", -- ysr{old}{new}
 					suffix_last = "h",
 					suffix_next = "l",
 				},
@@ -31,7 +31,7 @@ return {
 				n_lines = 500,
 				custom_textobjects = {
 					f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
-					c = ai.gen_spec.treesitter({ a = "@class.outer",    i = "@class.inner" }),
+					c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
 					a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
 				},
 			})
