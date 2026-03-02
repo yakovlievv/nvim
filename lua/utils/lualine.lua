@@ -6,7 +6,6 @@ function M.format_hl(text, hl_group)
 	end
 	return "%#" .. hl_group .. "#" .. text .. "%*"
 end
-vim.opt.showmode = false
 
 -- Pretty path component
 function M.pretty_path()

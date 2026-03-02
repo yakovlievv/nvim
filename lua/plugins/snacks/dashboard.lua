@@ -22,24 +22,6 @@ return {
 				action = ":lua Snacks.dashboard.pick('oldfiles')",
 			},
 			{
-				icon = " ",
-				key = "y",
-				desc = "Open Yazi",
-				action = ":Yazi toggle",
-			},
-			{
-				icon = " ",
-				key = "g",
-				desc = "Lazygit",
-				action = ":lua Snacks.lazygit()",
-			},
-			{
-				icon = "󰆍 ",
-				key = "t",
-				desc = "Terminal",
-				action = ":lua Snacks.terminal.toggle(nil, {win={border='rounded'}})",
-			},
-			{
 				icon = "󰒲 ",
 				key = "l",
 				desc = "Lazy",

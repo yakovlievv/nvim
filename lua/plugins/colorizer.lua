@@ -3,9 +3,10 @@ return {
 	event = "BufReadPost",
 	config = function()
 		require("colorizer").setup({
-			user_default_options = {
-				names = false,
-				suppress_deprecation = true,
+			options = {
+				parsers = {
+					names = { enable = false },
+				},
 			},
 		})
 	end,

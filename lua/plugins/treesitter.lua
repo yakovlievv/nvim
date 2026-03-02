@@ -10,6 +10,10 @@ return {
 		local utils = require("utils.treesitter")
 		local available_parsers = ts.get_available()
 
+		vim.api.nvim_create_user_command("TSUninstallAll", function()
+			require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })
+		end, { desc = "Uninstall all installed parsers" })
+
 		-- Check treesitter cli
 		utils.ensure_treesitter_cli()
 		ts.install({

@@ -1,7 +1,6 @@
 return {
 	"catppuccin/nvim",
 	name = "catppuccin",
-	lazy = true,
 	event = "VimEnter",
 	priority = 1000,
 	config = function()
@@ -48,11 +47,11 @@ return {
 					MasonNormal = { bg = colors.mantle },
 					MasonBorder = { bg = colors.mantle, fg = colors.mantle },
 					-- Blink (completion menu, docs, signature)
-					BlinkCmpMenu                = { bg = colors.mantle },
-					BlinkCmpMenuBorder          = { bg = colors.mantle, fg = colors.mantle },
-					BlinkCmpDoc                 = { bg = colors.mantle },
-					BlinkCmpDocBorder           = { bg = colors.mantle, fg = colors.mantle },
-					BlinkCmpSignatureHelp       = { bg = colors.mantle },
+					BlinkCmpMenu = { bg = colors.mantle },
+					BlinkCmpMenuBorder = { bg = colors.mantle, fg = colors.mantle },
+					BlinkCmpDoc = { bg = colors.mantle },
+					BlinkCmpDocBorder = { bg = colors.mantle, fg = colors.mantle },
+					BlinkCmpSignatureHelp = { bg = colors.mantle },
 					BlinkCmpSignatureHelpBorder = { bg = colors.mantle, fg = colors.mantle },
 					-- Noice (LSP hover, command popup)
 					NoiceHover = { bg = colors.mantle, fg = colors.text },

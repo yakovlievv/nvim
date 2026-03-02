@@ -2,7 +2,18 @@ return {
 	"stevearc/oil.nvim",
 	---@module 'oil'
 	opts = {},
-	dependencies = { "nvim-mini/mini.icons", "antosha417/nvim-lsp-file-operations" },
+	dependencies = {
+		"nvim-mini/mini.icons",
+		{
+			"antosha417/nvim-lsp-file-operations",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+			},
+			config = function()
+				require("lsp-file-operations").setup()
+			end,
+		},
+	},
 	lazy = false,
 	config = function()
 		local open_with_preview = function()

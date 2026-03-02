@@ -64,10 +64,6 @@ opt.wrap = false -- disable line wrapping
 opt.termguicolors = true -- enable 24-bit colors
 -- opt.fillchars:append({ eob = " " })
 
-vim.api.nvim_create_user_command("TSUninstallAll", function()
-	require("nvim-treesitter").uninstall(require("nvim-treesitter").get_installed(), { summary = true })
-end, { desc = "Uninstall all installed parsers" })
-
 -- Scrolling & Signs
 opt.scrolloff = 5 -- keep 5 lines visible above/below cursor
 opt.signcolumn = "yes" -- always show sign column (avoid text shift)
@@ -76,8 +72,9 @@ opt.signcolumn = "yes" -- always show sign column (avoid text shift)
 opt.updatetime = 150 -- faster completion & diagnostic updates
 opt.timeoutlen = 400
 
-local undodir = vim.fn.stdpath("state") .. "/nvim/undo"
+local undodir = vim.fn.stdpath("state") .. "/undo"
 vim.fn.mkdir(undodir, "p") -- make sure it exists
+vim.opt.showmode = false
 opt.undodir = undodir
 opt.undofile = true -- enable persistent undo
 opt.hlsearch = true
@@ -104,9 +101,9 @@ vim.diagnostic.config({
 vim.filetype.add({
 	extension = { mdx = "markdown.mdx" },
 	filename = {
-		["docker-compose.yml"]  = "yaml.docker-compose",
+		["docker-compose.yml"] = "yaml.docker-compose",
 		["docker-compose.yaml"] = "yaml.docker-compose",
-		[".gitlab-ci.yml"]      = "yaml.gitlab",
+		[".gitlab-ci.yml"] = "yaml.gitlab",
 	},
 	pattern = {
 		[".*helm.*values.*%.ya?ml"] = "yaml.helm-values",
