@@ -21,7 +21,7 @@ return {
 					graphql = { "prettierd" },
 					liquid = { "prettierd" },
 					lua = { "stylua" },
-					python = { "isort", "black" },
+					python = { "ruff_organize_imports", "ruff_format" },
 					c = { "clang-format" },
 					cpp = { "clang-format" },
 					sh = { "shfmt" },

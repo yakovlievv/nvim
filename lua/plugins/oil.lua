@@ -208,7 +208,7 @@ return {
 				max_height = { 10, 0.9 },
 				min_height = { 5, 0.1 },
 				height = nil,
-				border = nil,
+				border = "rounded",
 				minimized_border = "none",
 				win_options = {
 					winblend = 0,
@@ -216,11 +216,11 @@ return {
 			},
 			-- Configuration for the floating SSH window
 			ssh = {
-				border = nil,
+				border = "rounded",
 			},
 			-- Configuration for the floating keymaps help window
 			keymaps_help = {
-				border = nil,
+				border = "rounded",
 			},
 		})
 	end,

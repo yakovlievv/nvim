@@ -70,13 +70,13 @@ map("n", "<leader>W", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
 
--- code group
-map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
-map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "<leader>ch", function()
-	Snacks.toggle.inlay_hints():toggle()
-end, { desc = "Toggle Inlay Hints" })
+-- diagnostics (works without LSP too)
+map("n", "<leader>cd", function()
+	local bufnr, winid = vim.diagnostic.open_float({ focusable = false })
+	if winid then
+		vim.wo[winid].winhighlight = "NormalFloat:NoiceHover"
+	end
+end, { desc = "Line Diagnostics" })
 
 -- simple write and quit
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })

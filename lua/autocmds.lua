@@ -81,10 +81,25 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("my.indenting", { clear = true }),
-	pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+	pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact", "css", "scss", "json", "yaml" },
 	callback = function()
 		vim.opt_local.shiftwidth = 2
 		vim.opt_local.tabstop = 2
 		vim.opt_local.softtabstop = 2
+		vim.opt_local.expandtab = true
+	end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("my.lsp-keymaps", { clear = true }),
+	callback = function(ev)
+		local map = function(mode, lhs, rhs, desc)
+			vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, silent = true, desc = desc })
+		end
+		map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
+		map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
+		map("n", "<leader>ch", function()
+			Snacks.toggle.inlay_hints():toggle()
+		end, "Toggle Inlay Hints")
 	end,
 })

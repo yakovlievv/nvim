@@ -79,6 +79,7 @@ opt.undodir = undodir
 opt.undofile = true -- enable persistent undo
 opt.hlsearch = true
 opt.incsearch = true
+opt.jumpoptions = "view"
 
 local icons = require("utils.icons")
 vim.diagnostic.config({
