@@ -62,7 +62,7 @@ opt.clipboard = "unnamedplus" -- sync with system clipboard
 opt.laststatus = 3 -- global statusline
 opt.wrap = false -- disable line wrapping
 opt.termguicolors = true -- enable 24-bit colors
--- opt.fillchars:append({ eob = " " })
+opt.fillchars:append({ fold = " " })
 
 -- Scrolling & Signs
 opt.scrolloff = 5 -- keep 5 lines visible above/below cursor

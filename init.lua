@@ -1,4 +1,5 @@
 require("options")
+require("utils.fold")
 require("keymaps")
 require("autocmds")
 require("lazy-init")

@@ -63,6 +63,7 @@ return {
 					vim.schedule(function()
 						vim.wo.foldmethod = "expr"
 						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+						vim.wo.foldtext = "v:lua.fold_text()"
 						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 					end)
 				end
