@@ -22,6 +22,12 @@ return {
 				action = ":ene | startinsert",
 			},
 			{
+				icon = " ",
+				key = "o",
+				desc = "Oil Nvim",
+				action = ":Oil",
+			},
+			{
 				icon = " ",
 				key = "r",
 				desc = "Recent Files",
