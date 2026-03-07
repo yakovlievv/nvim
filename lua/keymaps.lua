@@ -6,9 +6,9 @@ local function map(modes, key, action, opts)
 	vim.keymap.set(modes, key, action, final_opts)
 end
 
--- quickfix movements
-map("n", "<C-k>", vim.cmd.cprev, { desc = "Previous Quickfix" })
-map("n", "<C-j>", vim.cmd.cnext, { desc = "Next Quickfix" })
+-- line navigation (like + and -)
+map("n", "<C-j>", "+", { desc = "Next line first non-blank" })
+map("n", "<C-k>", "-", { desc = "Prev line first non-blank" })
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
