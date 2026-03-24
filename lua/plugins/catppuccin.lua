@@ -58,6 +58,9 @@ return {
 					NoicePopup = { bg = colors.mantle, fg = colors.text },
 					-- CursorLine
 					CursorLine = { bg = colors.mantle },
+					-- Treesitter Context
+					TreesitterContext = { bg = "NONE", fg = "NONE" },
+					TreesitterContextBottom = { fg = "NONE", bg = "NONE" },
 				}
 			end,
 			default_integrations = true,
