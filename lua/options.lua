@@ -1,7 +1,6 @@
 -- Disable unused built-in plugins
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_matchit = 1
 vim.g.loaded_tohtml = 1
 vim.g.loaded_tutor = 1
 vim.g.loaded_perl_provider = 0
@@ -25,7 +24,7 @@ opt.splitkeep = "cursor"
 
 opt.inccommand = "split"
 opt.breakindent = true
-
+opt.linebreak = true
 -- UI: line numbers
 opt.number = true
 opt.relativenumber = true

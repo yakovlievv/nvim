@@ -7,8 +7,9 @@ local function map(modes, key, action, opts)
 end
 
 -- line navigation (like + and -)
-map("n", "<C-j>", "+", { desc = "Next line first non-blank" })
-map("n", "<C-k>", "-", { desc = "Prev line first non-blank" })
+map("n", "<C-j>", "<Cmd>cn<Cr>", { desc = "Previous Quickfix" })
+map("n", "<C-k>", "<Cmd>cp<Cr>", { desc = "Next Quickfix" })
+
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
@@ -62,8 +63,10 @@ map("n", "<M-Left>", ":vertical resize -2<CR>", { desc = "Decrease width" })
 map("n", "<M-Right>", ":vertical resize +2<CR>", { desc = "Increase width" })
 
 -- make it similar to emacs org
-map("n", "<Tab>", "za")
-map("n", "<S-Tab>", "zA")
+-- map("n", "<Tab>", "za")
+-- map("n", "<S-Tab>", "zA")
+-- restore C-i as jumplist forward (distinguished from Tab via CSI u / kitty protocol)
+map("n", "<C-i>", "<C-i>")
 
 -- toggle wrap
 map("n", "<leader>W", function()
@@ -72,7 +75,7 @@ end, { desc = "Toggle wrap" })
 
 -- diagnostics (works without LSP too)
 map("n", "<leader>cd", function()
-	local bufnr, winid = vim.diagnostic.open_float({ focusable = false })
+	local bufnr, winid = vim.diagnostic.open_float({ focusable = true })
 	if winid then
 		vim.wo[winid].winhighlight = "NormalFloat:NoiceHover"
 	end
