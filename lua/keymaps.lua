@@ -63,15 +63,17 @@ map("n", "<M-Left>", ":vertical resize -2<CR>", { desc = "Decrease width" })
 map("n", "<M-Right>", ":vertical resize +2<CR>", { desc = "Increase width" })
 
 -- make it similar to emacs org
--- map("n", "<Tab>", "za")
--- map("n", "<S-Tab>", "zA")
--- restore C-i as jumplist forward (distinguished from Tab via CSI u / kitty protocol)
-map("n", "<C-i>", "<C-i>")
+map("n", "<Tab>", "za")
+map("n", "<S-Tab>", "zA")
+map("n", "<C-i>", "<C-i>", { desc = "Jumplist forward" })
+map("n", "<C-o>", "<C-o>", { desc = "Jumplist backward" })
 
 -- toggle wrap
 map("n", "<leader>W", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
+
+map("i", "<C-k>", vim.lsp.buf.hover, { desc = "LSP Hover" })
 
 -- diagnostics (works without LSP too)
 map("n", "<leader>cd", function()
@@ -98,6 +100,11 @@ map({ "n", "x", "o" }, "<C-u>", "<C-u>zz")
 -- better up and down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Down" })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Up" })
+
+-- directory-aware mark jump (oil dir marks for uppercase, normal for rest)
+map("n", "'", function()
+	require("utils.dir_marks").jump_mark()
+end, { desc = "Jump to mark (dir-aware)" })
 
 -- better n, N
 map("n", "n", "'Nn'[v:searchforward].'zvzz'", { expr = true, desc = "Next Search Result" })

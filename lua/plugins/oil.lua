@@ -94,6 +94,12 @@ return {
 				["gx"] = "actions.open_external",
 				["g."] = { "actions.toggle_hidden", mode = "n" },
 				["g\\"] = { "actions.toggle_trash", mode = "n" },
+				["m"] = {
+					callback = function()
+						require("utils.dir_marks").set_mark()
+					end,
+					desc = "Set directory mark",
+				},
 			},
 			-- Set to false to disable all of the above keymaps
 			use_default_keymaps = true,
@@ -222,6 +228,13 @@ return {
 			keymaps_help = {
 				border = "rounded",
 			},
+		})
+
+		vim.api.nvim_create_autocmd("BufEnter", {
+			pattern = "oil://*Downloads*",
+			callback = function()
+				require("oil").set_sort({ { "mtime", "desc" } })
+			end,
 		})
 	end,
 }

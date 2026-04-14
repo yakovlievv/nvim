@@ -9,6 +9,12 @@ return {
 	end,
 	config = function()
 		require("noice").setup({
+			routes = {
+				{
+					filter = { event = "notify", find = "No information available" },
+					opts = { skip = true },
+				},
+			},
 			messages = {
 				enabled = true,
 				view = "mini", -- default view for messages

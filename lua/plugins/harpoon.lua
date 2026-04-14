@@ -9,6 +9,7 @@ return {
 			"<leader>a",
 			function()
 				require("harpoon"):list():add()
+				vim.notify("󱡁 Added to Harpoon", vim.log.levels.INFO)
 			end,
 			desc = "Harpoon add",
 		},
@@ -21,49 +22,49 @@ return {
 			desc = "Harpoon menu",
 		},
 		{
-			"<leader>1",
+			"<C-1>",
 			function()
 				require("harpoon"):list():select(1)
 			end,
 		},
 		{
-			"<leader>2",
+			"<C-2>",
 			function()
 				require("harpoon"):list():select(2)
 			end,
 		},
 		{
-			"<leader>3",
+			"<C-3>",
 			function()
 				require("harpoon"):list():select(3)
 			end,
 		},
 		{
-			"<leader>4",
+			"<C-4>",
 			function()
 				require("harpoon"):list():select(4)
 			end,
 		},
 		{
-			"<leader>5",
+			"<C-5>",
 			function()
 				require("harpoon"):list():select(5)
 			end,
 		},
 		{
-			"<leader>6",
+			"<C-6>",
 			function()
 				require("harpoon"):list():select(6)
 			end,
 		},
 		{
-			"<leader>7",
+			"<C-7>",
 			function()
 				require("harpoon"):list():select(7)
 			end,
 		},
 		{
-			"<leader>8",
+			"<C-8>",
 			function()
 				require("harpoon"):list():select(8)
 			end,

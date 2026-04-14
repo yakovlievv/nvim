@@ -1,5 +1,7 @@
 return {
-	enabled = false,
+	enabled = true,
+	backend = "kitty",
+	tmux = true,
 	doc = {
 		-- enable image viewer for documents
 		-- a treesitter parser must be available for the enabled languages.

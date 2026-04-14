@@ -61,6 +61,14 @@ return {
 				},
 			})
 
+			vim.lsp.config("eslint", {
+				settings = {
+					rulesCustomizations = {
+						{ rule = "@typescript-eslint/no-unused-vars", severity = "off" },
+					},
+				},
+			})
+
 			vim.lsp.config("vtsls", {
 				settings = {
 					vtsls = {
