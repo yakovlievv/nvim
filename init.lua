@@ -1,5 +1,2 @@
-require("options")
-require("utils.fold")
-require("keymaps")
-require("autocmds")
-require("lazy-init")
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
