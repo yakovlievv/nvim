@@ -6,6 +6,11 @@ local function map(modes, key, action, opts)
 	vim.keymap.set(modes, key, action, final_opts)
 end
 
+map({ "x", "n", "o" }, "H", "_", { desc = "Begging of the line" })
+map({ "x", "n", "o" }, "L", "g_", { desc = "End of the line" })
+
+-- +/- and g+/g- are owned by dial.nvim (lua/plugins/dial.lua)
+
 -- line navigation (like + and -)
 map("n", "<C-j>", "<Cmd>cn<Cr>", { desc = "Previous Quickfix" })
 map("n", "<C-k>", "<Cmd>cp<Cr>", { desc = "Next Quickfix" })
@@ -127,4 +132,5 @@ map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
