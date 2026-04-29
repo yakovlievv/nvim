@@ -69,6 +69,34 @@ return {
 				},
 			})
 
+			vim.lsp.config("basedpyright", {
+				settings = {
+					basedpyright = {
+						disableOrganizeImports = true, -- ruff handles imports
+						analysis = {
+							typeCheckingMode = "standard",
+							autoImportCompletions = true,
+							autoSearchPaths = true,
+							useLibraryCodeForTypes = true,
+							diagnosticMode = "openFilesOnly",
+							inlayHints = {
+								variableTypes = true,
+								callArgumentNames = true,
+								functionReturnTypes = true,
+								genericTypes = false,
+							},
+						},
+					},
+				},
+			})
+
+			vim.lsp.config("ruff", {
+				on_attach = function(client, _)
+					-- let basedpyright own hover
+					client.server_capabilities.hoverProvider = false
+				end,
+			})
+
 			vim.lsp.config("vtsls", {
 				settings = {
 					vtsls = {
@@ -131,7 +159,8 @@ return {
 				"cssls", -- CSS
 				"jsonls", -- JSON
 				"marksman", -- Markdown
-				"pyright", -- Python
+				"basedpyright", -- Python (types, hover, completions)
+				"ruff", -- Python (lints, code actions, organize imports)
 				"lua_ls", -- Lua
 				"clangd", -- C/C++
 			},
@@ -147,12 +176,9 @@ return {
 					-- Formatters
 					"prettierd", -- JS/TS/HTML/CSS/JSON/Markdown etc.
 					"stylua", -- Lua
-					"black", -- Python
-					"isort", -- Python import sorter
 					"clang-format", -- C/C++
 					"shfmt", -- Shell scripts
 					-- Linters
-					"ruff", -- Python linter
 					"shellcheck", -- Shell scripts
 				},
 				auto_update = false,

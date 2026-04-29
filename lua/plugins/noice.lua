@@ -14,6 +14,17 @@ return {
 					filter = { event = "notify", find = "No information available" },
 					opts = { skip = true },
 				},
+				{
+					filter = {
+						event = "lsp",
+						kind = "progress",
+						cond = function(message)
+							local client = vim.tbl_get(message.opts, "progress", "client")
+							return client == "basedpyright" or client == "ruff"
+						end,
+					},
+					opts = { skip = true },
+				},
 			},
 			messages = {
 				enabled = true,

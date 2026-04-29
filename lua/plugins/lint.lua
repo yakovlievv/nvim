@@ -5,8 +5,7 @@ return {
 		local lint = require("lint")
 
 		lint.linters_by_ft = {
-			-- eslint already runs via LSP — no need to duplicate
-			python = { "ruff" },
+			-- eslint and ruff already run via LSP — no need to duplicate
 			sh = { "shellcheck" },
 			bash = { "shellcheck" },
 		}
