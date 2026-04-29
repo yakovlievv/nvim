@@ -37,7 +37,6 @@ opt.backspace = { "start", "eol", "indent" }
 opt.tabstop = 4 -- number of spaces a <Tab> counts for
 opt.shiftwidth = 4 -- number of spaces used for each step of (auto)indent
 opt.expandtab = true -- convert tabs to spaces
-opt.smartindent = true -- smart autoindenting on new lines
 opt.smarttab = true -- makes tab use shiftwidth instead of tabstop in new line
 
 opt.foldlevel = 99

@@ -18,6 +18,46 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Per-filetype indent so the editor matches what the formatter emits.
+-- Avoids cursor jumps / fake diffs caused by indent mismatch on save.
+local indent_groups = {
+	-- 2 spaces — prettier/standard defaults for the web stack
+	["2"] = {
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"vue",
+		"svelte",
+		"json",
+		"jsonc",
+		"json5",
+		"yaml",
+		"html",
+		"css",
+		"scss",
+		"less",
+		"graphql",
+		"markdown",
+	},
+	-- 4 spaces — python/clang/shell stay at the existing global
+}
+
+local indent_group = vim.api.nvim_create_augroup("my.indent-by-ft", { clear = true })
+for width, fts in pairs(indent_groups) do
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = fts,
+		group = indent_group,
+		callback = function()
+			local n = tonumber(width)
+			vim.bo.tabstop = n
+			vim.bo.shiftwidth = n
+			vim.bo.softtabstop = n
+			vim.bo.expandtab = true
+		end,
+	})
+end
+
 local folds_group = vim.api.nvim_create_augroup("my.folds", { clear = true })
 
 vim.api.nvim_create_autocmd("BufWinLeave", {

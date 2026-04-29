@@ -2,6 +2,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = true,
+		dependencies = {
+			{ "b0o/SchemaStore.nvim", lazy = true, version = false },
+		},
 		config = function()
 			local capabilities = vim.tbl_deep_extend(
 				"force",
@@ -97,6 +100,30 @@ return {
 				end,
 			})
 
+			vim.lsp.config("jsonls", {
+				settings = {
+					json = {
+						schemas = require("schemastore").json.schemas(),
+						validate = { enable = true },
+					},
+				},
+			})
+
+			vim.lsp.config("yamlls", {
+				settings = {
+					yaml = {
+						schemaStore = {
+							-- disable built-in store, use SchemaStore.nvim instead
+							enable = false,
+							url = "",
+						},
+						schemas = require("schemastore").yaml.schemas(),
+						validate = true,
+						format = { enable = true },
+					},
+				},
+			})
+
 			vim.lsp.config("vtsls", {
 				settings = {
 					vtsls = {
@@ -158,11 +185,14 @@ return {
 				"html", -- HTML
 				"cssls", -- CSS
 				"jsonls", -- JSON
+				"yamlls", -- YAML
 				"marksman", -- Markdown
 				"basedpyright", -- Python (types, hover, completions)
 				"ruff", -- Python (lints, code actions, organize imports)
 				"lua_ls", -- Lua
 				"clangd", -- C/C++
+				"bashls", -- Bash / zsh
+				"taplo", -- TOML (pyproject.toml, Cargo.toml, etc.)
 			},
 		},
 	},

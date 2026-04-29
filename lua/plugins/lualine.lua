@@ -67,7 +67,7 @@ return {
 						end,
 					},
 
-					--  Noice mode (macro recording, etc)
+					-- Noice mode (macro recording, etc)
 					{
 						function()
 							return require("noice").api.status.mode.get()

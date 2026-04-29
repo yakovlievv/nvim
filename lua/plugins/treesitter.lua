@@ -32,6 +32,7 @@ return {
 				"html",
 				"css",
 				"json",
+				"toml",
 				"latex",
 				"gitignore",
 				"scss",
@@ -67,15 +68,86 @@ return {
 							vim.notify("Treesitter failed for " .. lang, vim.log.levels.WARN)
 							return
 						end
+						-- Filetypes where Neovim's built-in indent is better than
+						-- nvim-treesitter's (main branch) — leave their indentexpr alone.
+						local skip_ts_indent = {
+							json = true,
+							jsonc = true,
+							yaml = true,
+							markdown = true,
+						}
 						vim.schedule(function()
 							vim.wo.foldmethod = "expr"
 							vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 							vim.wo.foldtext = "v:lua.fold_text()"
-							vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+							if not skip_ts_indent[vim.bo[event.buf].filetype] then
+								vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+							end
 						end)
 					end
 				end,
 			})
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-treesitter-textobjects").setup({})
+
+			local moves = {
+				goto_next_start = {
+					["]f"] = "@function.outer",
+					["]c"] = "@class.outer",
+					["]a"] = "@parameter.inner",
+				},
+				goto_next_end = {
+					["]F"] = "@function.outer",
+					["]C"] = "@class.outer",
+					["]A"] = "@parameter.inner",
+				},
+				goto_previous_start = {
+					["[f"] = "@function.outer",
+					["[c"] = "@class.outer",
+					["[a"] = "@parameter.inner",
+				},
+				goto_previous_end = {
+					["[F"] = "@function.outer",
+					["[C"] = "@class.outer",
+					["[A"] = "@parameter.inner",
+				},
+			}
+
+			local function attach(buf)
+				local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
+				if not lang or not vim.treesitter.query.get(lang, "textobjects") then
+					return
+				end
+				for method, keys in pairs(moves) do
+					for key, query in pairs(keys) do
+						local dir = key:sub(1, 1) == "[" and "Prev " or "Next "
+						local kind = query:gsub("@", ""):gsub("%..*", "")
+						kind = kind:sub(1, 1):upper() .. kind:sub(2)
+						local pos = key:sub(2, 2):match("%u") and " End" or " Start"
+						vim.keymap.set({ "n", "x", "o" }, key, function()
+							require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
+						end, { buffer = buf, desc = dir .. kind .. pos, silent = true })
+					end
+				end
+			end
+
+			vim.api.nvim_create_autocmd("FileType", {
+				group = vim.api.nvim_create_augroup("yako.ts-textobjects", { clear = true }),
+				callback = function(ev)
+					attach(ev.buf)
+				end,
+			})
+			for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+				if vim.api.nvim_buf_is_loaded(buf) then
+					attach(buf)
+				end
+			end
 		end,
 	},
 	{
