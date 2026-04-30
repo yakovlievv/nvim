@@ -79,6 +79,13 @@ opt.hlsearch = true
 opt.incsearch = true
 opt.jumpoptions = "view"
 
+-- Neovim 0.10+ quality-of-life
+opt.smoothscroll = true -- smooth <C-d>/<C-u> scrolling
+opt.virtualedit = "block" -- free block-select past end of line
+opt.conceallevel = 2 -- hide markup in markdown/org (render-markdown.nvim needs this)
+opt.pumblend = 10 -- slight transparency on completion popup
+opt.winblend = 10 -- slight transparency on floating windows
+
 local icons = require("utils.icons")
 vim.diagnostic.config({
 	virtual_text = true, -- show messages inline

@@ -1,4 +1,4 @@
--- Inlay hints available but disabled by default; toggle with <leader>ch
+-- Inlay hints available but disabled by default; toggle with <leader>ui
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlights text when yanking",
@@ -13,8 +13,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("my.markdown-wrap", { clear = true }),
 	desc = "Enable wrap for all Markdown files",
 	callback = function()
-		vim.wo.wrap = true -- turn on line wrapping
-		vim.wo.linebreak = true -- break lines at word boundaries (optional, nicer look)
+		vim.wo.wrap = true
+		vim.wo.linebreak = true
 	end,
 })
 
@@ -115,16 +115,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt.formatoptions:remove({ "r", "o" })
 	end,
 })
-vim.api.nvim_create_autocmd("FileType", {
-	group = vim.api.nvim_create_augroup("my.indenting", { clear = true }),
-	pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact", "css", "scss", "json", "yaml" },
-	callback = function()
-		vim.opt_local.shiftwidth = 2
-		vim.opt_local.tabstop = 2
-		vim.opt_local.softtabstop = 2
-		vim.opt_local.expandtab = true
-	end,
-})
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("my.lsp-keymaps", { clear = true }),
@@ -134,8 +124,62 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 		-- map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
 		map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
-		map("n", "<leader>ch", function()
-			Snacks.toggle.inlay_hints():toggle()
-		end, "Toggle Inlay Hints")
+	end,
+})
+
+-- Auto-reload files changed outside nvim when focus returns
+vim.api.nvim_create_autocmd({ "FocusGained", "TermLeave", "CursorHold" }, {
+	group = vim.api.nvim_create_augroup("my.checktime", { clear = true }),
+	callback = function()
+		if vim.o.buftype ~= "nofile" then
+			vim.cmd("silent! checktime")
+		end
+	end,
+})
+
+-- Auto-equalize split sizes when the terminal is resized
+vim.api.nvim_create_autocmd("VimResized", {
+	group = vim.api.nvim_create_augroup("my.resize-splits", { clear = true }),
+	callback = function()
+		local current_tab = vim.fn.tabpagenr()
+		vim.cmd("tabdo wincmd =")
+		vim.cmd("tabnext " .. current_tab)
+	end,
+})
+
+-- Close these UI panels with plain `q`
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("my.close-with-q", { clear = true }),
+	pattern = {
+		"help",
+		"lspinfo",
+		"startuptime",
+		"checkhealth",
+		"qf",
+		"git",
+		"query",
+		"notify",
+		"noice",
+		"DiffviewFiles",
+		"DiffviewFileHistory",
+		"neotest-output",
+		"neotest-output-panel",
+		"neotest-summary",
+	},
+	callback = function(ev)
+		vim.bo[ev.buf].buflisted = false
+		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = ev.buf, silent = true, nowait = true })
+	end,
+})
+
+-- Auto-create missing parent directories on :w
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = vim.api.nvim_create_augroup("my.auto-create-dir", { clear = true }),
+	callback = function(ev)
+		if ev.match:match("^%w%w+:[\\/][\\/]") then
+			return
+		end
+		local file = vim.uv.fs_realpath(ev.match) or ev.match
+		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })
