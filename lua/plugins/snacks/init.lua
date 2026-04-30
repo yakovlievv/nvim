@@ -18,6 +18,7 @@ return {
 		image = require("plugins.snacks.image"),
 		explorer = { enabled = false },
 		scroll = require("plugins.snacks.scroll"),
+		scratch = { enabled = true },
 	},
 
 	keys = {
@@ -72,6 +73,9 @@ return {
         { "<leader>fg", function() Snacks.picker.git_files() end,                               desc = "Find Git Files" },
         { "<leader>fp", function() Snacks.picker.projects() end,                                desc = "Projects" },
         { "<leader>fr", function() Snacks.picker.recent({ preview = false }) end,               desc = "Recent" },
+        { "<leader>fs", function() Snacks.scratch.select() end,                                 desc = "Select Scratch Buffer" },
+        -- scratch
+        { "<leader>.",  function() Snacks.scratch() end,                                        desc = "Toggle Scratch Buffer" },
         -- git
         { "<leader>gb", function() Snacks.picker.git_branches() end,                            desc = "Git Branches" },
         { "<leader>gl", function() Snacks.picker.git_log() end,                                 desc = "Git Log" },

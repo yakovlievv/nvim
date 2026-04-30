@@ -30,7 +30,24 @@ return {
 
 			sections = {
 				lualine_a = { "mode" },
-				lualine_b = { "branch" },
+				lualine_b = {
+					"branch",
+					{
+						function()
+							local venv = vim.env.VIRTUAL_ENV
+							if not venv or venv == "" then
+								return ""
+							end
+							return " " .. vim.fn.fnamemodify(venv, ":t")
+						end,
+						cond = function()
+							return vim.env.VIRTUAL_ENV ~= nil and vim.env.VIRTUAL_ENV ~= ""
+						end,
+						color = function()
+							return { fg = snacks.util.color("Special") }
+						end,
+					},
+				},
 
 				lualine_c = {
 					"diagnostics",

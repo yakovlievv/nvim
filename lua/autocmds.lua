@@ -125,6 +125,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			Snacks.toggle.inlay_hints():toggle()
 		end, "Toggle Inlay Hints")
 		map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
+
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client and client.name == "vtsls" then
+			local function ts_action(name)
+				return function()
+					vim.lsp.buf.code_action({
+						apply = true,
+						context = { only = { name }, diagnostics = {} },
+					})
+				end
+			end
+			map("n", "<leader>cM", ts_action("source.addMissingImports.ts"), "Add missing imports (TS)")
+			map("n", "<leader>cD", ts_action("source.fixAll.ts"), "Fix all (TS)")
+			map("n", "<leader>cR", ts_action("source.removeUnused.ts"), "Remove unused (TS)")
+		end
 	end,
 })
 
