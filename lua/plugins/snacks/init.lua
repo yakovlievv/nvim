@@ -168,8 +168,8 @@ return {
 			set = function(v) Snacks.config.image.enabled = v end,
 		}):toggle()
 	end, desc = "Toggle Image" },
-	{ "<leader>dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
-		{ "<leader>dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
+	{ "<leader>Dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
+		{ "<leader>Dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
 		--stylua: ignore end
 	},
 }

@@ -87,28 +87,24 @@ if vim.fn.has("mac") == 1 then
 		desc = "Re-sign native libs after lazy operations",
 		callback = function()
 			local data_dir = vim.fn.stdpath("data")
-			vim.system(
-				{
-					"sh",
-					"-c",
-					"find "
-						.. data_dir
-						.. "/site/parser "
-						.. data_dir
-						.. "/lazy/LuaSnip "
-						.. data_dir
-						.. "/lazy/blink.cmp/target/release "
-						.. '-name "*.so" -o -name "*.dylib" 2>/dev/null | xargs -I{} codesign --force --sign - {}',
-				},
-				{ text = true },
-				function(result)
-					if result.code == 0 then
-						vim.schedule(function()
-							vim.notify("Native libs re-signed (macOS)", vim.log.levels.DEBUG)
-						end)
-					end
+			vim.system({
+				"sh",
+				"-c",
+				"find "
+					.. data_dir
+					.. "/site/parser "
+					.. data_dir
+					.. "/lazy/LuaSnip "
+					.. data_dir
+					.. "/lazy/blink.cmp/target/release "
+					.. '-name "*.so" -o -name "*.dylib" 2>/dev/null | xargs -I{} codesign --force --sign - {}',
+			}, { text = true }, function(result)
+				if result.code == 0 then
+					vim.schedule(function()
+						vim.notify("Native libs re-signed (macOS)", vim.log.levels.DEBUG)
+					end)
 				end
-			)
+			end)
 		end,
 	})
 end
@@ -136,7 +132,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, silent = true, desc = desc })
 		end
-		map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
+		-- map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
 		map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
 		map("n", "<leader>ch", function()
 			Snacks.toggle.inlay_hints():toggle()
