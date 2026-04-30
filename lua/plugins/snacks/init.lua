@@ -7,6 +7,7 @@ return {
 		picker = require("plugins.snacks.picker"),
 		notifier = require("plugins.snacks.notifier"),
 		terminal = require("plugins.snacks.terminal"),
+		animate = { enabled = true },
 		bigfile = { enabled = true },
 		indent = { enabled = true },
 		input = { enabled = true },
@@ -168,6 +169,7 @@ return {
 			set = function(v) Snacks.config.image.enabled = v end,
 		}):toggle()
 	end, desc = "Toggle Image" },
+	{ "<leader>uI", function() Snacks.toggle.inlay_hints():toggle() end,          desc = "Toggle Inlay Hints" },
 	{ "<leader>dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
 		{ "<leader>dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
 		--stylua: ignore end
