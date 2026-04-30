@@ -6,10 +6,17 @@ local function map(modes, key, action, opts)
 	vim.keymap.set(modes, key, action, final_opts)
 end
 
+-- EXPERIMENTAL
+
 map({ "x", "n", "o" }, "H", "_", { desc = "Begging of the line" })
 map({ "x", "n", "o" }, "L", "g_", { desc = "End of the line" })
 
--- +/- and g+/g- are owned by dial.nvim (lua/plugins/dial.lua)
+map("n", "<leader>_", ":split<Cr>", { desc = "Horizontal split" })
+map("n", "<leader>|", ":vsplit<Cr>", { desc = "Vertical split" })
+
+map({ "n", "i", "x" }, "<C-b>", "<C-^>", { desc = "switch to previuos buffer" })
+
+-- +/- and g+/g- are owned by dial.nvim
 
 -- line navigation (like + and -)
 map("n", "<C-j>", "<Cmd>cn<Cr>", { desc = "Previous Quickfix" })
@@ -27,12 +34,12 @@ map("x", ">", ">gv")
 map("x", "<", "<gv")
 
 -- not use system clipboard
-map({ "x", "n", "o" }, "<leader>vp", [["_dp]], { desc = "Paste without yanking" })
-map({ "x", "n", "o" }, "<leader>vP", [["_dP]], { desc = "Paste before (no yank)" })
-map({ "x", "n", "o" }, "<leader>vc", [["_c]], { desc = "Change (no yank)" })
-map({ "x", "n", "o" }, "<leader>vC", [["_C]], { desc = "Change to EOL (no yank)" })
-map({ "x", "n", "o" }, "<leader>vd", [["_d]], { desc = "Delete (no yank)" })
-map({ "x", "n", "o" }, "<leader>vD", [["_D]], { desc = "Delete to EOL (no yank)" })
+map({ "x", "n", "o" }, "<leader>p", [["_dp]], { desc = "Paste without yanking" })
+map({ "x", "n", "o" }, "<leader>P", [["_dP]], { desc = "Paste before (no yank)" })
+map({ "x", "n", "o" }, "<leader>C", [["_C]], { desc = "Change (no yank)" })
+map({ "x", "n", "o" }, "<leader>c", [["_C]], { desc = "Change to EOL (no yank)" })
+map({ "x", "n", "o" }, "<leader>d", [["_d]], { desc = "Delete (no yank)" })
+map({ "x", "n", "o" }, "<leader>D", [["_D]], { desc = "Delete to EOL (no yank)" })
 
 -- change the word under the word or the highlight
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute word" })
@@ -95,7 +102,7 @@ map({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>", { desc = "Quit all" })
 -- escape disable search-highlight
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- this pisses me off
+-- this pisses me
 map("i", "<C-p>", "<Nop>")
 
 -- recentering viewport after actions

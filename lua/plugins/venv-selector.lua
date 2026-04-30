@@ -4,8 +4,8 @@ return {
 	ft = "python",
 	cmd = { "VenvSelect", "VenvSelectCached" },
 	keys = {
-		{ "<leader>vs", "<cmd>VenvSelect<cr>", desc = "Select python venv" },
-		{ "<leader>vc", "<cmd>VenvSelectCached<cr>", desc = "Select cached venv" },
+		{ "<leader>cv", "<cmd>VenvSelect<cr>", desc = "Select python venv" },
+		{ "<leader>cV", "<cmd>VenvSelectCached<cr>", desc = "Select cached venv" },
 	},
 	opts = {
 		settings = {

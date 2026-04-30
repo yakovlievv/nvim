@@ -1,5 +1,3 @@
--- Inlay hints available but disabled by default; toggle with <leader>ui
-
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlights text when yanking",
 	group = vim.api.nvim_create_augroup("my.yank-highlight", { clear = true }),
@@ -87,28 +85,24 @@ if vim.fn.has("mac") == 1 then
 		desc = "Re-sign native libs after lazy operations",
 		callback = function()
 			local data_dir = vim.fn.stdpath("data")
-			vim.system(
-				{
-					"sh",
-					"-c",
-					"find "
-						.. data_dir
-						.. "/site/parser "
-						.. data_dir
-						.. "/lazy/LuaSnip "
-						.. data_dir
-						.. "/lazy/blink.cmp/target/release "
-						.. '-name "*.so" -o -name "*.dylib" 2>/dev/null | xargs -I{} codesign --force --sign - {}',
-				},
-				{ text = true },
-				function(result)
-					if result.code == 0 then
-						vim.schedule(function()
-							vim.notify("Native libs re-signed (macOS)", vim.log.levels.DEBUG)
-						end)
-					end
+			vim.system({
+				"sh",
+				"-c",
+				"find "
+					.. data_dir
+					.. "/site/parser "
+					.. data_dir
+					.. "/lazy/LuaSnip "
+					.. data_dir
+					.. "/lazy/blink.cmp/target/release "
+					.. '-name "*.so" -o -name "*.dylib" 2>/dev/null | xargs -I{} codesign --force --sign - {}',
+			}, { text = true }, function(result)
+				if result.code == 0 then
+					vim.schedule(function()
+						vim.notify("Native libs re-signed (macOS)", vim.log.levels.DEBUG)
+					end)
 				end
-			)
+			end)
 		end,
 	})
 end
@@ -126,8 +120,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, silent = true, desc = desc })
 		end
-		map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
+
+		map("n", "<leader>ch", function()
+			Snacks.toggle.inlay_hints():toggle()
+		end, "Toggle Inlay Hints")
 		map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
+
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client and client.name == "vtsls" then
+			local function ts_action(name)
+				return function()
+					vim.lsp.buf.code_action({
+						apply = true,
+						context = { only = { name }, diagnostics = {} },
+					})
+				end
+			end
+			map("n", "<leader>cM", ts_action("source.addMissingImports.ts"), "Add missing imports (TS)")
+			map("n", "<leader>cD", ts_action("source.fixAll.ts"), "Fix all (TS)")
+			map("n", "<leader>cR", ts_action("source.removeUnused.ts"), "Remove unused (TS)")
+		end
 	end,
 })
 

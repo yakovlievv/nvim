@@ -4,21 +4,21 @@ return {
 	cmd = "Neogen",
 	keys = {
 		{
-			"<leader>nd",
+			"<leader>cgg",
 			function()
 				require("neogen").generate()
 			end,
 			desc = "Generate docstring",
 		},
 		{
-			"<leader>nf",
+			"<leader>cgf",
 			function()
 				require("neogen").generate({ type = "func" })
 			end,
 			desc = "Generate func docstring",
 		},
 		{
-			"<leader>nc",
+			"<leader>cgc",
 			function()
 				require("neogen").generate({ type = "class" })
 			end,

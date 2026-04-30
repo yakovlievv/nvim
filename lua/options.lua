@@ -84,7 +84,7 @@ opt.smoothscroll = true -- smooth <C-d>/<C-u> scrolling
 opt.virtualedit = "block" -- free block-select past end of line
 opt.conceallevel = 2 -- hide markup in markdown/org (render-markdown.nvim needs this)
 opt.pumblend = 10 -- slight transparency on completion popup
-opt.winblend = 10 -- slight transparency on floating windows
+-- opt.winblend = 10 -- slight transparency on floating windows
 
 local icons = require("utils.icons")
 vim.diagnostic.config({
