@@ -1,5 +1,3 @@
--- Inlay hints available but disabled by default; toggle with <leader>ui
-
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlights text when yanking",
 	group = vim.api.nvim_create_augroup("my.yank-highlight", { clear = true }),
@@ -122,7 +120,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, silent = true, desc = desc })
 		end
-		-- map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
+
+		map("n", "<leader>ch", function()
+			Snacks.toggle.inlay_hints():toggle()
+		end, "Toggle Inlay Hints")
 		map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
 	end,
 })
