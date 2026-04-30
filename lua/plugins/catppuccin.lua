@@ -21,7 +21,7 @@ return {
 			dim_inactive = {
 				enabled = false, -- dims the background color of inactive window
 				shade = "dark",
-				percentage = 0.15, -- percentage of the shade to apply to the inactive window
+				percentage = 0.50, -- percentage of the shade to apply to the inactive window
 			},
 			no_italic = false,
 			no_bold = false,
@@ -61,6 +61,8 @@ return {
 					-- Treesitter Context
 					TreesitterContext = { bg = "NONE", fg = "NONE" },
 					TreesitterContextBottom = { fg = "NONE", bg = "NONE" },
+					LazyNormal = { bg = colors.base },
+					SnacksPickerListVscode = { bg = colors.base },
 				}
 			end,
 			default_integrations = true,

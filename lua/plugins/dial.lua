@@ -9,10 +9,42 @@ end
 return {
 	"monaqa/dial.nvim",
 	keys = {
-		{ "+", function() return dial(true) end, expr = true, desc = "Increment", mode = { "n", "v" } },
-		{ "-", function() return dial(false) end, expr = true, desc = "Decrement", mode = { "n", "v" } },
-		{ "g+", function() return dial(true, true) end, expr = true, desc = "Increment (g)", mode = { "n", "x" } },
-		{ "g-", function() return dial(false, true) end, expr = true, desc = "Decrement (g)", mode = { "n", "x" } },
+		{
+			"+",
+			function()
+				return dial(true)
+			end,
+			expr = true,
+			desc = "Increment",
+			mode = { "n", "v" },
+		},
+		{
+			"-",
+			function()
+				return dial(false)
+			end,
+			expr = true,
+			desc = "Decrement",
+			mode = { "n", "v" },
+		},
+		{
+			"g+",
+			function()
+				return dial(true, true)
+			end,
+			expr = true,
+			desc = "Increment (g)",
+			mode = { "n", "x" },
+		},
+		{
+			"g-",
+			function()
+				return dial(false, true)
+			end,
+			expr = true,
+			desc = "Decrement (g)",
+			mode = { "n", "x" },
+		},
 	},
 	opts = function()
 		local augend = require("dial.augend")
@@ -31,8 +63,18 @@ return {
 
 		local months = augend.constant.new({
 			elements = {
-				"January", "February", "March", "April", "May", "June",
-				"July", "August", "September", "October", "November", "December",
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December",
 			},
 			word = true,
 			cyclic = true,

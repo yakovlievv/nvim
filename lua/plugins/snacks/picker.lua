@@ -30,24 +30,40 @@ return {
 	focus = "input",
 	show_delay = 0,
 	limit_live = 10000,
-	layout = {
-		preset = "default",
-		fullscreen = true,
-		layout = {
-			box = "horizontal",
-			width = 0.93,
-			min_width = 120,
-			height = 0.97,
-			{
-				box = "vertical",
-				border = true,
-				title = "{title} {live} {flags}",
-				{ win = "input", height = 1, border = "bottom" },
-				{ win = "list", border = "none" },
+	layouts = {
+		fancy = {
+			fullscreen = true,
+			layout = {
+				box = "horizontal",
+				width = 0.93,
+				min_width = 120,
+				height = 0.97,
+				{
+					box = "vertical",
+					border = true,
+					title = "{title} {live} {flags}",
+					{ win = "input", height = 1, border = "bottom" },
+					{ win = "list", border = "none" },
+				},
+				{ win = "preview", title = "{preview}", border = true, width = 0.5 },
 			},
-			{ win = "preview", title = "{preview}", border = true, width = 0.5 },
 		},
 	},
+	layout = {
+		preset = "fancy",
+	},
+	on_show = function(picker)
+		if picker.resolved_layout and picker.resolved_layout.preset == "vscode" then
+			local win = picker.list and picker.list.win and picker.list.win.win
+			if win and vim.api.nvim_win_is_valid(win) then
+				local cur = vim.wo[win].winhighlight
+				local new = cur
+					:gsub("NormalFloat:SnacksPickerList,", "NormalFloat:SnacksPickerListVscode,")
+					:gsub("NormalFloat:SnacksPickerList$", "NormalFloat:SnacksPickerListVscode")
+				vim.api.nvim_set_option_value("winhighlight", new, { win = win })
+			end
+		end
+	end,
 	previewers = {
 		diff = {
 			-- fancy: Snacks fancy diff (borders, multi-column line numbers, syntax highlighting)

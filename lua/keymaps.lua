@@ -14,6 +14,8 @@ map({ "x", "n", "o" }, "L", "g_", { desc = "End of the line" })
 map("n", "<leader>_", ":split<Cr>", { desc = "Horizontal split" })
 map("n", "<leader>|", ":vsplit<Cr>", { desc = "Vertical split" })
 
+map({ "n", "i", "x" }, "<C-b>", "<C-^>", { desc = "switch to previuos buffer" })
+
 -- +/- and g+/g- are owned by dial.nvim
 
 -- line navigation (like + and -)
