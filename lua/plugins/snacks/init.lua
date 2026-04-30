@@ -170,6 +170,16 @@ return {
 		}):toggle()
 	end, desc = "Toggle Image" },
 	{ "<leader>uI", function() Snacks.toggle.inlay_hints():toggle() end,          desc = "Toggle Inlay Hints" },
+	{ "<leader>uR", function()
+		local su = require("symbol-usage")
+		if vim.b.symbol_usage_enabled == false then
+			su.refresh()
+			vim.b.symbol_usage_enabled = true
+		else
+			su.buf_disable(0)
+			vim.b.symbol_usage_enabled = false
+		end
+	end, desc = "Toggle Symbol Usage" },
 	{ "<leader>dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
 		{ "<leader>dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
 		--stylua: ignore end
