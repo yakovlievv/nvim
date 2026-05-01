@@ -11,7 +11,7 @@ return {
 			},
 			{
 				icon = " ",
-				key = "g",
+				key = "/",
 				desc = "Grep",
 				action = ":lua Snacks.dashboard.pick('grep')",
 			},
@@ -22,8 +22,14 @@ return {
 				action = ":ene | startinsert",
 			},
 			{
+				icon = " ",
+				key = "g",
+				desc = "Lazygit",
+				action = ":lua Snacks.lazygit()",
+			},
+			{
 				icon = " ",
-				key = "o",
+				key = "e",
 				desc = "Oil Nvim",
 				action = ":Oil",
 			},
@@ -59,7 +65,7 @@ return {
 		{ section = "header" },
 		{ section = "keys", gap = 1, padding = 1 },
 		{ pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-		{ pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+		-- { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 		{
 			pane = 2,
 			icon = "󰊢 ",
