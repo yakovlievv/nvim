@@ -31,7 +31,6 @@ return {
 			sections = {
 				lualine_a = { "mode" },
 				lualine_b = {
-					"branch",
 					{
 						function()
 							local venv = vim.env.VIRTUAL_ENV
@@ -47,6 +46,7 @@ return {
 							return { fg = snacks.util.color("Special") }
 						end,
 					},
+					"branch",
 				},
 
 				lualine_c = {
