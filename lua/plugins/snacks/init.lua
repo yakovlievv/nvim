@@ -91,22 +91,22 @@ return {
         { "<leader>gp", function() Snacks.picker.gh_pr() end,                                   desc = "GitHub Pull Requests (open)" },
         { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end,                  desc = "GitHub Pull Requests (all)" },
         -- Grep
-        { "<leader>sb", function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
-        { "<leader>sB", function() Snacks.picker.grep_buffers() end,                            desc = "Grep Open Buffers" },
+        { "<leader>sl", function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
+        { "<leader>sb", function() Snacks.picker.grep_buffers() end,                            desc = "Grep Open Buffers" },
         { "<leader>sw", function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word",   mode = { "n", "x" } },
         -- search
         { "<leader>sr", function() Snacks.picker.registers({ preview = false }) end,            desc = "Registers" },
-        { "<leader>s/", function() Snacks.picker.search_history({ preview = false }) end,       desc = "Search History" },
-        { "<leader>fa", function() Snacks.picker.autocmds({ preview = false }) end,             desc = "Autocmds" },
+        -- { "<leader>s/", function() Snacks.picker.search_history({ preview = false }) end,       desc = "Search History" },
+        { "<leader>sa", function() Snacks.picker.autocmds({ preview = false }) end,             desc = "Autocmds" },
         { "<leader>sc", function() Snacks.picker.commands({ preview = false }) end,             desc = "Commands" },
         { "<leader>sd", function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
         { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end,                      desc = "Buffer Diagnostics" },
         { "<leader>sh", function() Snacks.picker.help() end,                                    desc = "Help Pages" },
         { "<leader>sH", function() Snacks.picker.highlights() end,                              desc = "Highlights" },
-        { "<leader>si", function() Snacks.picker.icons({ preview = false }) end,                desc = "Icons" },
+        { "<leader>si", function() Snacks.picker.icons() end,                desc = "Icons" },
         { "<leader>sj", function() Snacks.picker.jumps() end,                                   desc = "Jumps" },
-        { "<leader>sk", function() Snacks.picker.keymaps({ preview = false }) end,              desc = "Keymaps" },
-        { "<leader>sl", function() Snacks.picker.loclist() end,                                 desc = "Location List" },
+        { "<leader>sk", function() Snacks.picker.keymaps() end,              desc = "Keymaps" },
+        { "<leader>sL", function() Snacks.picker.loclist() end,                                 desc = "Location List" },
         { "<leader>sm", function() Snacks.picker.marks() end,                                   desc = "Marks" },
         { "<leader>sM", function() Snacks.picker.man() end,                                     desc = "Man Pages" },
         { "<leader>sp", function() Snacks.picker.lazy() end,                                    desc = "Search for Plugin Spec" },
@@ -139,45 +139,44 @@ return {
         -- Terminal
         { "<C-t>", function () Snacks.terminal.toggle(vim.o.shell, {win = { border = "rounded" }}) end, mode = { "n", "t" }, desc = "Toggle floating Snacks terminal", },
 
-		{ "<leader>us", function() Snacks.toggle.option("spell",      { name = "Spelling" }):toggle() end,   desc = "Toggle Spelling" },
-		{ "<leader>ud", function() Snacks.toggle.diagnostics():toggle() end,                                  desc = "Toggle Diagnostics" },
-		{ "<leader>ul", function() Snacks.toggle.line_number():toggle() end,                                  desc = "Toggle Line Number" },
-		{ "<leader>uT", function() Snacks.toggle.treesitter():toggle() end,                                   desc = "Toggle Treesitter" },
-		{ "<leader>ub", function() Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):toggle() end, desc = "Toggle Background" },
-		{ "<leader>uS", function() Snacks.toggle.scroll():toggle() end,                                       desc = "Toggle Scroll" },
-		{
-			"<leader>uc",
-			function()
-				Snacks.toggle.option("conceallevel", {
-					off = 0,
-					on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2,
-					name = "Conceal Level",
-				}):toggle()
-			end,
-			desc = "Toggle Conceal Level",
-		},
-		{
-			"<leader>uA",
-			function()
-				Snacks.toggle.option("showtabline", {
-					off = 0,
-					on = vim.o.showtabline > 0 and vim.o.showtabline or 2,
-					name = "Tabline",
-				}):toggle()
-			end,
-			desc = "Toggle Tabline",
-		},
-		{ "<leader>ui", function()
-		Snacks.toggle({
-			name = "Image",
-			get = function() return Snacks.config.image.enabled end,
-			set = function(v) Snacks.config.image.enabled = v end,
-		}):toggle()
-	end, desc = "Toggle Image" },
-	{ "<leader>uI", function() Snacks.toggle.inlay_hints():toggle() end,          desc = "Toggle Inlay Hints" },
-	{ "<leader>uR", function() require("symbol-usage").toggle() end, desc = "Toggle Symbol Usage" },
-	{ "<leader>dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
-		{ "<leader>dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
+        { "<leader>us", function() Snacks.toggle.option("spell",      { name = "Spelling" }):toggle() end,   desc = "Toggle Spelling" },
+        { "<leader>ud", function() Snacks.toggle.diagnostics():toggle() end,                                  desc = "Toggle Diagnostics" },
+        { "<leader>ul", function() Snacks.toggle.line_number():toggle() end,                                  desc = "Toggle Line Number" },
+        { "<leader>uT", function() Snacks.toggle.treesitter():toggle() end,                                   desc = "Toggle Treesitter" },
+        { "<leader>ub", function() Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):toggle() end, desc = "Toggle Background" },
+        { "<leader>uS", function() Snacks.toggle.scroll():toggle() end,                                       desc = "Toggle Scroll" },
+        {
+            "<leader>uc",
+            function()
+                Snacks.toggle.option("conceallevel", {
+                    off = 0,
+                    on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2,
+                    name = "Conceal Level",
+                }):toggle()
+            end,
+            desc = "Toggle Conceal Level",
+        },
+        { "<leader>uA", function()
+                Snacks.toggle.option("showtabline", {
+                    off = 0,
+                    on = vim.o.showtabline > 0 and vim.o.showtabline or 2,
+                    name = "Tabline",
+                }):toggle()
+            end,
+            desc = "Toggle Tabline",
+        },
+        { "<leader>ui", function()
+            Snacks.toggle({
+                name = "Image",
+                get = function() return Snacks.config.image.enabled end,
+                set = function(v) Snacks.config.image.enabled = v end,
+            }):toggle()
+        end, desc = "Toggle Image" },
+        { "<leader>uI", function() Snacks.toggle.inlay_hints():toggle() end,          desc = "Toggle Inlay Hints" },
+        { "<leader>uR", function() require("symbol-usage").toggle() end, desc = "Toggle Symbol Usage" },
+        { "<leader>dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
+        { "<leader>dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
+        { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode = {"n"} },
 
 		--stylua: ignore end
 	},

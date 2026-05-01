@@ -138,7 +138,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			end
 			map("n", "<leader>cM", ts_action("source.addMissingImports.ts"), "Add missing imports (TS)")
 			map("n", "<leader>cD", ts_action("source.fixAll.ts"), "Fix all (TS)")
-			map("n", "<leader>cR", ts_action("source.removeUnused.ts"), "Remove unused (TS)")
+			-- map("n", "<leader>cR", ts_action("source.removeUnused.ts"), "Remove unused (TS)")
 		end
 	end,
 })
