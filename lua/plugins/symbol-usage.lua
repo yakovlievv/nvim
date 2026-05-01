@@ -31,7 +31,10 @@ return {
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },
 			implementation = { enabled = true },
-			disable = { filetypes = { "dockerfile", "yaml", "json", "toml" } },
+			disable = {
+				filetypes = { "dockerfile", "yaml", "json", "toml" },
+				lsp = { "ruff", "eslint", "tailwindcss" },
+			},
 		})
 	end,
 }
