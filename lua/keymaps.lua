@@ -26,8 +26,17 @@ map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- Move selected lines
-map("x", "K", ":m '<-2<cr>gv=gv")
-map("x", "J", ":m '>+1<CR>gv=gv")
+-- Visual: move block up/down
+map("x", "<C-j>", ":m '>+1<CR>gv=gv")
+map("x", "<C-k>", ":m '<-2<CR>gv=gv")
+
+-- Normal: move current line up/down
+map("n", "<C-k>", ":m .-2<CR>==")
+map("n", "<C-j>", ":m .+1<CR>==")
+
+-- Insert: move current line up/down (escape, move, re-enter insert)
+-- map("i", "<C-k>", "<Esc>:m .-2<CR>==gi")
+-- map("i", "<C-j>", "<Esc>:m .+1<CR>==gi")
 
 -- indent witout reselecting everytime
 map("x", ">", ">gv")

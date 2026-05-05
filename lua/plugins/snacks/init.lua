@@ -67,7 +67,6 @@ return {
             })
         end, desc = "Notification History" },
         -- files
-        { "<leader>fb", function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
         { "<leader>,", function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
         { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
         { "<leader>ff", function() Snacks.picker.files() end,                                   desc = "Find Files" },
@@ -174,9 +173,10 @@ return {
         end, desc = "Toggle Image" },
         { "<leader>uI", function() Snacks.toggle.inlay_hints():toggle() end,          desc = "Toggle Inlay Hints" },
         { "<leader>uR", function() require("symbol-usage").toggle() end, desc = "Toggle Symbol Usage" },
-        { "<leader>dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
-        { "<leader>dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
+        { "<leader>Dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
+        { "<leader>Dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
         { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode = {"n"} },
+              { "<leader>cl", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
 
 		--stylua: ignore end
 	},

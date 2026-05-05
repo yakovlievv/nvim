@@ -31,26 +31,30 @@ return {
 			sections = {
 				lualine_a = { "mode" },
 				lualine_b = {
-					{
-						function()
-							local venv = vim.env.VIRTUAL_ENV
-							if not venv or venv == "" then
-								return ""
-							end
-							return " " .. vim.fn.fnamemodify(venv, ":t")
-						end,
-						cond = function()
-							return vim.env.VIRTUAL_ENV ~= nil and vim.env.VIRTUAL_ENV ~= ""
-						end,
-						color = function()
-							return { fg = snacks.util.color("Special") }
-						end,
-					},
 					"branch",
+					-- Git diff
 				},
 
 				lualine_c = {
-					"diagnostics",
+
+					{
+						"diff",
+						symbols = {
+							added = icons.git_diff.added,
+							modified = icons.git_diff.modified,
+							removed = icons.git_diff.removed,
+						},
+						source = function()
+							local gitsigns = vim.b.gitsigns_status_dict
+							if gitsigns then
+								return {
+									added = gitsigns.added,
+									modified = gitsigns.changed,
+									removed = gitsigns.removed,
+								}
+							end
+						end,
+					},
 					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 					{ utils.pretty_path },
 				},
@@ -105,45 +109,49 @@ return {
 							return { fg = "#fab387" }
 						end,
 					},
+				},
 
-					-- Git diff
+				lualine_y = {
 					{
-						"diff",
+						"diagnostics",
 						symbols = {
-							added = icons.git_diff.added,
-							modified = icons.git_diff.modified,
-							removed = icons.git_diff.removed,
+							error = icons.diagnostics.error,
+							warn = icons.diagnostics.warn,
+							info = icons.diagnostics.info,
+							hint = icons.diagnostics.hint,
 						},
-						source = function()
-							local gitsigns = vim.b.gitsigns_status_dict
-							if gitsigns then
-								return {
-									added = gitsigns.added,
-									modified = gitsigns.changed,
-									removed = gitsigns.removed,
-								}
+					},
+					{
+						function()
+							local venv = vim.env.VIRTUAL_ENV
+							if not venv or venv == "" then
+								return ""
 							end
+							return " " .. vim.fn.fnamemodify(venv, ":t")
+						end,
+						cond = function()
+							return vim.env.VIRTUAL_ENV ~= nil and vim.env.VIRTUAL_ENV ~= ""
+						end,
+						color = function()
+							return { fg = snacks.util.color("Special") }
 						end,
 					},
 				},
 
-				lualine_y = {
+				lualine_z = {
 					{ "progress", separator = " ", padding = { left = 1, right = 0 } },
 					{ "location", padding = { left = 0, right = 1 } },
-				},
-
-				lualine_z = {
-					{
-						"lsp_status",
-						icon = "",
-						symbols = {
-							spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
-							done = "✓",
-							separator = "  ",
-						},
-						ignore_lsp = {},
-						show_name = true,
-					},
+					-- {
+					-- 	"lsp_status",
+					-- 	icon = "",
+					-- 	symbols = {
+					-- 		spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+					-- 		done = "✓",
+					-- 		separator = "  ",
+					-- 	},
+					-- 	ignore_lsp = {},
+					-- 	show_name = true,
+					-- },
 				},
 			},
 			extensions = { "lazy", "mason", "quickfix" },
