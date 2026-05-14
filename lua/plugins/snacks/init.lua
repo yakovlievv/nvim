@@ -94,7 +94,7 @@ return {
         { "<leader>sb", function() Snacks.picker.grep_buffers() end,                            desc = "Grep Open Buffers" },
         { "<leader>sw", function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word",   mode = { "n", "x" } },
         -- search
-        { "<leader>sr", function() Snacks.picker.registers({ preview = false }) end,            desc = "Registers" },
+        { "<leader>sR", function() Snacks.picker.registers({ preview = false }) end,            desc = "Registers" },
         -- { "<leader>s/", function() Snacks.picker.search_history({ preview = false }) end,       desc = "Search History" },
         { "<leader>sa", function() Snacks.picker.autocmds({ preview = false }) end,             desc = "Autocmds" },
         { "<leader>sc", function() Snacks.picker.commands({ preview = false }) end,             desc = "Commands" },
@@ -110,7 +110,7 @@ return {
         { "<leader>sM", function() Snacks.picker.man() end,                                     desc = "Man Pages" },
         { "<leader>sp", function() Snacks.picker.lazy() end,                                    desc = "Search for Plugin Spec" },
         { "<leader>sq", function() Snacks.picker.qflist() end,                                  desc = "Quickfix List" },
-        { "<leader>sR", function() Snacks.picker.resume() end,                                  desc = "Resume" },
+        { "<leader>sr", function() Snacks.picker.resume() end,                                  desc = "Resume" },
         { "<leader>su", function() Snacks.picker.undo() end,                                    desc = "Undo History" },
         { "<leader>sC", function() Snacks.picker.colorschemes() end,                            desc = "Colorschemes" },
         -- LSP
@@ -156,12 +156,12 @@ return {
             desc = "Toggle Conceal Level",
         },
         { "<leader>uA", function()
-                Snacks.toggle.option("showtabline", {
-                    off = 0,
-                    on = vim.o.showtabline > 0 and vim.o.showtabline or 2,
-                    name = "Tabline",
-                }):toggle()
-            end,
+            Snacks.toggle.option("showtabline", {
+                off = 0,
+                on = vim.o.showtabline > 0 and vim.o.showtabline or 2,
+                name = "Tabline",
+            }):toggle()
+        end,
             desc = "Toggle Tabline",
         },
         { "<leader>ui", function()
@@ -176,7 +176,7 @@ return {
         { "<leader>Dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
         { "<leader>Dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
         { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode = {"n"} },
-              { "<leader>cl", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
+        { "<leader>cl", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
 
 		--stylua: ignore end
 	},

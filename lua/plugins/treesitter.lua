@@ -76,12 +76,18 @@ return {
 							yaml = true,
 							markdown = true,
 						}
+						local buf = event.buf
 						vim.schedule(function()
-							vim.wo.foldmethod = "expr"
-							vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-							vim.wo.foldtext = "v:lua.fold_text()"
-							if not skip_ts_indent[vim.bo[event.buf].filetype] then
-								vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+							if not vim.api.nvim_buf_is_valid(buf) then
+								return
+							end
+							if vim.api.nvim_get_current_buf() == buf then
+								vim.wo.foldmethod = "expr"
+								vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+								vim.wo.foldtext = "v:lua.fold_text()"
+							end
+							if not skip_ts_indent[vim.bo[buf].filetype] then
+								vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 							end
 						end)
 					end
