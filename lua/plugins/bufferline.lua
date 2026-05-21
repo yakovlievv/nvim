@@ -1,6 +1,6 @@
 return {
 	"akinsho/bufferline.nvim",
-	event = "BufReadPost",
+	event = "LazyFile",
 	version = "*",
 	dependencies = "nvim-mini/mini.icons",
 	keys = {

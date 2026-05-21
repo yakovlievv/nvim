@@ -132,7 +132,7 @@ return {
         { "]]",         function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",             mode = { "n", "t" } },
         { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",             mode = { "n", "t" } },
         -- bufdelete
-        { "<leader>bd", function() Snacks.bufdelete.delete() end, desc = "Delete the buffer"},
+        { "<leader>x", function() Snacks.bufdelete.delete() end, desc = "Delete the buffer"},
         { "<leader>ba", function() Snacks.bufdelete.all() end, desc = "Delete all buffers"},
         { "<leader>bo", function() Snacks.bufdelete.other() end, desc = "Delete other buffers"},
         -- Terminal

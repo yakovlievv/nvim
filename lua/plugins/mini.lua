@@ -2,28 +2,33 @@ return {
 	{
 		"nvim-mini/mini.surround",
 		version = "*",
-		event = "VeryLazy",
+		keys = {
+			{ "gsa", mode = { "n", "x" }, desc = "Add surrounding" },
+			{ "gsd", desc = "Delete surrounding" },
+			{ "gsf", desc = "Find surrounding (right)" },
+			{ "gsF", desc = "Find surrounding (left)" },
+			{ "gsh", desc = "Highlight surrounding" },
+			{ "gsr", desc = "Replace surrounding" },
+		},
 		config = function()
-			local surround = require("mini.surround")
-			surround.setup({
+			require("mini.surround").setup({
 				mappings = {
-					add = "gsa", -- ysa{motion}{char}  e.g. ysaW"
-					delete = "gsd", -- ysd{char}
+					add = "gsa",
+					delete = "gsd",
 					find = "gsf",
 					find_left = "gsF",
 					highlight = "gsh",
-					replace = "gsr", -- ysr{old}{new}
+					replace = "gsr",
 					suffix_last = "h",
 					suffix_next = "l",
 				},
 			})
-			-- vim.keymap.del("n", "sn")
 		end,
 	},
 	{
 		"nvim-mini/mini.ai",
 		version = "*",
-		event = "BufReadPost",
+		event = "LazyFile",
 		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 		config = function()
 			local ai = require("mini.ai")

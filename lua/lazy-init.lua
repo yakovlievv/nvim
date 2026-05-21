@@ -15,11 +15,31 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- LazyFile: fires after UIEnter for BufReadPost/BufNewFile/BufWritePre.
+-- Lets file-related plugins defer loading until the file is visible,
+-- so the buffer paints before the plugin cascade runs.
+local Event = require("lazy.core.handler.event")
+Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFile", "BufWritePre" } }
+Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+
 require("lazy").setup({
 	spec = { import = "plugins" },
-	-- ui = { border = "rounded" },
 	install = { colorscheme = { "catppuccin", "default" } },
-	change_detection = { enabled = true, notify = false },
-	checker = { enabled = true, notify = false },
+	change_detection = { enabled = false },
+	checker = { enabled = false },
 	rocks = { enabled = false },
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"matchit",
+				"matchparen",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
+	},
 })

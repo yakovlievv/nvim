@@ -6,41 +6,43 @@ local function map(modes, key, action, opts)
 	vim.keymap.set(modes, key, action, final_opts)
 end
 
--- EXPERIMENTAL
+-----------------
+---- MOTIONS ----
+-----------------
+-- This section changes some of the default motions
 
 map({ "x", "n", "o" }, "H", "_", { desc = "Begging of the line" })
 map({ "x", "n", "o" }, "L", "g_", { desc = "End of the line" })
 
-map("n", "<leader>_", ":split<Cr>", { desc = "Horizontal split" })
-map("n", "<leader>|", ":vsplit<Cr>", { desc = "Vertical split" })
+map("n", "M", "zz", { desc = "center the screen" })
 
 map({ "n", "i", "x" }, "<C-b>", "<C-^>", { desc = "switch to previuos buffer" })
 
--- +/- and g+/g- are owned by dial.nvim
+--------------------------
+---- EXPERIMENTAL QOL ----
+--------------------------
+-- Experimental stuff that might be better in theory
 
--- line navigation (like + and -)
-map("n", "<C-j>", "<Cmd>cn<Cr>", { desc = "Previous Quickfix" })
-map("n", "<C-k>", "<Cmd>cp<Cr>", { desc = "Next Quickfix" })
+map("n", "<leader>-", ":split<Cr>", { desc = "Horizontal split" })
+map("n", "<leader>|", ":vsplit<Cr>", { desc = "Vertical split" })
 
-map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
-map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+map("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
 
--- Move selected lines
--- Visual: move block up/down
+-------------
+---- QOL ----
+-------------
+-- amazing bindings that improve life
+
+map("x", ">", ">gv")
+map("x", "<", "<gv")
+
 map("x", "<C-j>", ":m '>+1<CR>gv=gv")
 map("x", "<C-k>", ":m '<-2<CR>gv=gv")
-
--- Normal: move current line up/down
 map("n", "<C-k>", ":m .-2<CR>==")
 map("n", "<C-j>", ":m .+1<CR>==")
 
--- Insert: move current line up/down (escape, move, re-enter insert)
--- map("i", "<C-k>", "<Esc>:m .-2<CR>==gi")
--- map("i", "<C-j>", "<Esc>:m .+1<CR>==gi")
-
--- indent witout reselecting everytime
-map("x", ">", ">gv")
-map("x", "<", "<gv")
+map("n", "<leader>S", ":%s/<<C-r><C-w>>/<C-r><C-w>/gI<Left><Left><Left>", { silent = false, desc = "Substitute word" })
+map("v", "<leader>S", ':%s/<C-r>"/<C-r>"/gI<Left><Left><Left>', { silent = false, desc = "Substitute selection" })
 
 -- not use system clipboard
 map({ "x", "n", "o" }, "<leader>p", [["_dp]], { desc = "Paste without yanking" })
@@ -50,19 +52,12 @@ map({ "x", "n", "o" }, "<leader>c", [["_C]], { desc = "Change to EOL (no yank)" 
 map({ "x", "n", "o" }, "<leader>d", [["_d]], { desc = "Delete (no yank)" })
 map({ "x", "n", "o" }, "<leader>D", [["_D]], { desc = "Delete to EOL (no yank)" })
 
--- change the word under the word or the highlight
-map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute word" })
-map("v", "<leader>S", [[y:%s/<C-r>"/<C-r>"/gI<Left><Left><Left>]], { desc = "Substitute selection" })
-
 -- join lines without moving the cursor
 map("n", "J", function()
 	local pos = vim.api.nvim_win_get_cursor(0)
 	vim.cmd("normal! J")
 	vim.api.nvim_win_set_cursor(0, pos)
 end, { desc = "Join lines and stay in place" })
-
--- call lazy
-map("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
 
 -- indent whole buffer
 map("n", "<leader>=", function()
@@ -75,13 +70,13 @@ end, { desc = "Reindent whole file and keep cursor" })
 map("n", "Q", "@q", { desc = "Replay macro q" })
 
 -- execute stuff
-map("n", "<leader>x", ":!chmod +x %<CR>", { silent = false, desc = "Make executable" })
+map("n", "<leader>X", ":!chmod +x %<CR>", { silent = false, desc = "Make executable" })
 
 -- resizin
 map("n", "<M-Up>", ":resize -2<CR>", { desc = "Decrease height" })
 map("n", "<M-Down>", ":resize +2<CR>", { desc = "Increase height" })
-map("n", "<M-Left>", ":vertical resize -2<CR>", { desc = "Decrease width" })
-map("n", "<M-Right>", ":vertical resize +2<CR>", { desc = "Increase width" })
+map("n", "<M-Right>", ":vertical resize -5<CR>", { desc = "Decrease width" })
+map("n", "<M-Left>", ":vertical resize +5<CR>", { desc = "Increase width" })
 
 -- make it similar to emacs org
 map("n", "<Tab>", "za")
@@ -150,3 +145,6 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })

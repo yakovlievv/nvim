@@ -176,7 +176,7 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
-		event = { "BufReadPre", "BufNewFile" },
+		event = "LazyFile",
 		opts = {
 			ensure_installed = {
 				"vtsls", -- TypeScript/JavaScript
@@ -199,7 +199,7 @@ return {
 
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		event = "VeryLazy",
+		cmd = { "MasonToolsInstall", "MasonToolsUpdate", "MasonToolsClean" },
 		config = function()
 			require("mason-tool-installer").setup({
 				ensure_installed = {
