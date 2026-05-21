@@ -1,7 +1,7 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		lazy = true,
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{ "b0o/SchemaStore.nvim", lazy = true, version = false },
 		},
@@ -176,7 +176,7 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
-		event = "LazyFile",
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			ensure_installed = {
 				"vtsls", -- TypeScript/JavaScript
