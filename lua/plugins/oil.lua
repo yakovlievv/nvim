@@ -14,13 +14,21 @@ return {
 			end,
 		},
 	},
-	lazy = false,
-	config = function()
-		local open_with_preview = function()
-			vim.cmd("Oil --preview")
+	cmd = "Oil",
+	keys = {
+		{ "<C-e>", function() vim.cmd("Oil --preview") end, desc = "Open parent directory" },
+	},
+	init = function()
+		-- Hijack directory args (e.g. `nvim .`) by loading oil eagerly only in that case
+		if vim.fn.argc(-1) == 1 then
+			local arg = vim.fn.argv(0) --[[@as string]]
+			local stat = vim.uv.fs_stat(arg)
+			if stat and stat.type == "directory" then
+				require("lazy").load({ plugins = { "oil.nvim" } })
+			end
 		end
-
-		vim.keymap.set("n", "<C-e>", open_with_preview, { desc = "Open parent directory" })
+	end,
+	config = function()
 		require("oil").setup({
 			default_file_explorer = true,
 			columns = {
