@@ -29,7 +29,6 @@ return {
 			{ "<leader>gx", group = "conflicts" },
 			{ "<leader>h", group = "hunks" },
 			{ "<leader>s", group = "search" },
-			{ "<leader>y", group = "yanky" },
 			-- { "<leader>v", group = "void (no yank)" },
 			{ "<leader>u", group = "ui toggles" },
 			{ "<leader>cg", group = "generate docstrings" },

@@ -35,19 +35,19 @@ return {
 		},
 		{
 			-- Open in the current working directory
-			"<leader>yc",
+			"<leader>y",
 			"<cmd>Yazi cwd<cr>",
 			desc = "Open the file manager in nvim's working directory",
 		},
 		{
-			"<leader>-",
+			"<leader>Y",
 			"<cmd>Yazi toggle<cr>",
 			desc = "Resume the last yazi session",
 		},
 	},
 	opts = {
 		open_for_directories = false,
-		floating_window_scaling_factor = 0.90,
+		floating_window_scaling_factor = 1,
 		keymaps = {
 			show_help = "<f1>",
 			open_file_in_vertical_split = "<c-v>",

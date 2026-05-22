@@ -16,7 +16,13 @@ return {
 	},
 	cmd = "Oil",
 	keys = {
-		{ "<C-e>", function() vim.cmd("Oil --preview") end, desc = "Open parent directory" },
+		{
+			"<C-e>",
+			function()
+				vim.cmd("Oil --preview")
+			end,
+			desc = "Open parent directory",
+		},
 	},
 	init = function()
 		-- Hijack directory args (e.g. `nvim .`) by loading oil eagerly only in that case

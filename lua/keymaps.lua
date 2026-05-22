@@ -14,7 +14,7 @@ end
 map({ "x", "n", "o" }, "H", "_", { desc = "Begging of the line" })
 map({ "x", "n", "o" }, "L", "g_", { desc = "End of the line" })
 
-map("n", "M", "zz", { desc = "center the screen" })
+map({ "n", "v" }, "M", "zz", { desc = "center the screen" })
 
 map({ "n", "i", "x" }, "<C-b>", "<C-^>", { desc = "switch to previuos buffer" })
 
@@ -85,7 +85,7 @@ map("n", "<C-i>", "<C-i>", { desc = "Jumplist forward" })
 map("n", "<C-o>", "<C-o>", { desc = "Jumplist backward" })
 
 -- toggle wrap
-map("n", "<leader>W", function()
+map("n", "<leader>uw", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
 
@@ -101,7 +101,7 @@ end, { desc = "Line Diagnostics" })
 
 -- simple write and quit
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
-map({ "n", "v", "i" }, "<C-q>", "<Cmd>qa<Cr>", { desc = "Quit all" })
+map({ "n", "v", "i" }, "<C-q>", "<Cmd>q<Cr>", { desc = "Quit all" })
 
 -- escape disable search-highlight
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -138,6 +138,7 @@ local diagnostic_goto = function(next, severity)
 		})
 	end
 end
+
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
