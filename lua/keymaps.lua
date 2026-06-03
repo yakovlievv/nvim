@@ -16,7 +16,8 @@ map({ "x", "n", "o" }, "L", "g_", { desc = "End of the line" })
 
 map({ "n", "v" }, "M", "zz", { desc = "center the screen" })
 
-map({ "n", "i", "x" }, "<C-b>", "<C-^>", { desc = "switch to previuos buffer" })
+map({ "n", "x" }, "<C-b>", "<C-^>", { desc = "switch to previuos buffer" })
+map("i", "<C-b>", "<Esc><C-^>", { desc = "switch to previuos buffer" })
 
 --------------------------
 ---- EXPERIMENTAL QOL ----
@@ -52,6 +53,7 @@ map({ "x", "n", "o" }, "<leader>c", [["_C]], { desc = "Change to EOL (no yank)" 
 map({ "x", "n", "o" }, "<leader>d", [["_d]], { desc = "Delete (no yank)" })
 map({ "x", "n", "o" }, "<leader>D", [["_D]], { desc = "Delete to EOL (no yank)" })
 
+
 -- join lines without moving the cursor
 map("n", "J", function()
 	local pos = vim.api.nvim_win_get_cursor(0)
@@ -72,6 +74,26 @@ map("n", "Q", "@q", { desc = "Replay macro q" })
 -- execute stuff
 map("n", "<leader>X", ":!chmod +x %<CR>", { silent = false, desc = "Make executable" })
 
+-- delete current file (with confirmation)
+map("n", "<leader>fD", function()
+	local file = vim.api.nvim_buf_get_name(0)
+	if file == "" then
+		vim.notify("No file to delete", vim.log.levels.WARN)
+		return
+	end
+	local choice = vim.fn.confirm("Delete " .. vim.fn.fnamemodify(file, ":~:.") .. "?", "&Yes\n&No", 2)
+	if choice ~= 1 then
+		return
+	end
+	local ok, err = pcall(vim.fn.delete, file)
+	if not ok or err == -1 then
+		vim.notify("Failed to delete file", vim.log.levels.ERROR)
+		return
+	end
+	require("snacks").bufdelete()
+	vim.notify("Deleted " .. vim.fn.fnamemodify(file, ":~:."), vim.log.levels.INFO)
+end, { desc = "Delete current file (confirm)" })
+
 -- resizin
 map("n", "<M-Up>", ":resize -2<CR>", { desc = "Decrease height" })
 map("n", "<M-Down>", ":resize +2<CR>", { desc = "Increase height" })
@@ -90,6 +112,18 @@ map("n", "<leader>uw", function()
 end, { desc = "Toggle wrap" })
 
 map("i", "<C-k>", vim.lsp.buf.hover, { desc = "LSP Hover" })
+
+vim.keymap.set({ "n", "i", "s" }, "<m-j>", function()
+  if not require("noice.lsp").scroll(4) then
+    return "<c-f>"
+  end
+end, { silent = true, expr = true })
+
+vim.keymap.set({ "n", "i", "s" }, "<m-k>", function()
+  if not require("noice.lsp").scroll(-4) then
+    return "<c-b>"
+  end
+end, { silent = true, expr = true })
 
 -- diagnostics (works without LSP too)
 map("n", "<leader>cd", function()
