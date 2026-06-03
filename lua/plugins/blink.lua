@@ -18,17 +18,6 @@ return {
 			end,
 		},
 		"folke/lazydev.nvim",
-		{
-			"supermaven-inc/supermaven-nvim",
-			config = function()
-				require("supermaven-nvim").setup({
-					disable_keymaps = true,
-				})
-				-- Disable inline ghost text; blink-cmp-supermaven handles completions
-				require("supermaven-nvim.completion_preview").disable_inline_completion = true
-			end,
-		},
-		"huijiro/blink-cmp-supermaven",
 	},
 
 	config = function()
@@ -90,18 +79,12 @@ return {
 			},
 
 			sources = {
-				default = { "lazydev", "lsp", "supermaven", "path", "snippets", "buffer" },
+				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 				providers = {
 					lazydev = {
 						name = "[Dev]",
 						module = "lazydev.integrations.blink",
 						score_offset = 100,
-					},
-					supermaven = {
-						name = "[AI]",
-						module = "blink-cmp-supermaven",
-						async = true,
-						score_offset = 90,
 					},
 					lsp = { name = "[LSP]" },
 					path = { name = "[Path]" },
