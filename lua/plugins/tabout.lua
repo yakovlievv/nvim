@@ -3,7 +3,7 @@ return {
 		"abecodes/tabout.nvim",
 		config = function()
 			require("tabout").setup({
-				tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
+				tabkey = "", -- <Tab> is owned by supermaven.lua, which falls back to <Plug>(Tabout)
 				backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
 				act_as_tab = true, -- shift content if tab out is not possible
 				act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)

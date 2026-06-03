@@ -27,7 +27,7 @@ require("lazy").setup({
 	install = { colorscheme = { "catppuccin", "default" } },
 	change_detection = { enabled = false },
 	checker = { enabled = false },
-	rocks = { enabled = false },
+	rocks = { enabled = false }, -- luarocks handled by vhyrro/luarocks.nvim instead
 	performance = {
 		rtp = {
 			disabled_plugins = {

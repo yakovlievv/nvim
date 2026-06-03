@@ -1,5 +1,8 @@
 return {
 	"chrisgrieser/nvim-spider",
+	-- Unicode-aware motions (Cyrillic, etc.) require the luautf8 rock, installed
+	-- via lua/plugins/luarocks.lua. Without it spider's ASCII-only Lua patterns
+	-- skip non-ASCII runs entirely.
 	keys = {
 		{
 			"w",
