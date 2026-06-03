@@ -23,6 +23,12 @@ return {
 			-- },
 			{
 				icon = " ",
+				key = "y",
+				desc = "Yazi",
+				action = ":Yazi",
+			},
+			{
+				icon = " ",
 				key = "g",
 				desc = "Lazygit",
 				action = ":lua Snacks.lazygit()",
