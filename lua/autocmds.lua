@@ -125,6 +125,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			Snacks.toggle.inlay_hints():toggle()
 		end, "Toggle Inlay Hints")
 		map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
+		map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
 
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		if client and client.name == "vtsls" then

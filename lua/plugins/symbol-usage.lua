@@ -1,6 +1,15 @@
 return {
 	"Wansmer/symbol-usage.nvim",
 	event = "LspAttach",
+	keys = {
+		{
+			"<leader>ur",
+			function()
+				require("symbol-usage").toggle()
+			end,
+			desc = "Toggle Symbol Usage",
+		},
+	},
 	config = function()
 		local function text_format(symbol)
 			local fragments = {}
@@ -36,5 +45,7 @@ return {
 				lsp = { "ruff", "eslint", "tailwindcss" },
 			},
 		})
+
+		require("symbol-usage").toggle()
 	end,
 }

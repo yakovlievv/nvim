@@ -94,8 +94,7 @@ return {
         { "<leader>sb", function() Snacks.picker.grep_buffers() end,                            desc = "Grep Open Buffers" },
         { "<leader>sw", function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word",   mode = { "n", "x" } },
         -- search
-        { "<leader>sR", function() Snacks.picker.registers({ preview = false }) end,            desc = "Registers" },
-        -- { "<leader>s/", function() Snacks.picker.search_history({ preview = false }) end,       desc = "Search History" },
+        { "<leader>sr", function() Snacks.picker.registers({ preview = false }) end,            desc = "Registers" },
         { "<leader>sa", function() Snacks.picker.autocmds({ preview = false }) end,             desc = "Autocmds" },
         { "<leader>sc", function() Snacks.picker.commands({ preview = false }) end,             desc = "Commands" },
         { "<leader>sd", function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
@@ -110,11 +109,11 @@ return {
         { "<leader>sM", function() Snacks.picker.man() end,                                     desc = "Man Pages" },
         { "<leader>sp", function() Snacks.picker.lazy() end,                                    desc = "Search for Plugin Spec" },
         { "<leader>sq", function() Snacks.picker.qflist() end,                                  desc = "Quickfix List" },
-        { "<leader>sr", function() Snacks.picker.resume() end,                                  desc = "Resume" },
+        { "<leader>r", function() Snacks.picker.resume() end,                                  desc = "Resume" },
         { "<leader>su", function() Snacks.picker.undo() end,                                    desc = "Undo History" },
         { "<leader>sC", function() Snacks.picker.colorschemes() end,                            desc = "Colorschemes" },
         -- LSP
-        { "gd",         function() Snacks.picker.lsp_definitions() end,                         desc = "Goto Definition" },
+        -- { "gd",         function() Snacks.picker.lsp_definitions() end,                         desc = "Goto Definition" },
         { "gD",         function() Snacks.picker.lsp_declarations() end,                        desc = "Goto Declaration" },
         { "gr",         function() Snacks.picker.lsp_references() end,                          nowait = true,                       desc = "References" },
         { "gI",         function() Snacks.picker.lsp_implementations() end,                     desc = "Goto Implementation" },
@@ -172,10 +171,9 @@ return {
             }):toggle()
         end, desc = "Toggle Image" },
         { "<leader>uI", function() Snacks.toggle.inlay_hints():toggle() end,          desc = "Toggle Inlay Hints" },
-        { "<leader>uR", function() require("symbol-usage").toggle() end, desc = "Toggle Symbol Usage" },
         { "<leader>Dpp", function() Snacks.toggle.profiler():toggle() end,            desc = "Toggle Profiler" },
         { "<leader>Dph", function() Snacks.toggle.profiler_highlights():toggle() end, desc = "Toggle Profiler Highlights" },
-        { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode = {"n"} },
+        { "<leader>fR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode = {"n"} },
         { "<leader>cl", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
 
 		--stylua: ignore end

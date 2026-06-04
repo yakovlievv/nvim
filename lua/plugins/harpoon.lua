@@ -6,7 +6,7 @@ return {
 	},
 	keys = {
 		{
-			"<leader>a",
+			"<leader>A",
 			function()
 				require("harpoon"):list():add()
 				vim.notify("󱡁 Added to Harpoon", vim.log.levels.INFO)
