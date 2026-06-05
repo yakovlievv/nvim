@@ -243,6 +243,23 @@ return {
 				["<c-k>"] = function(win)
 					win:prev({ focus = true })
 				end,
+				-- Resize edges with the same <M-arrows> you use everywhere else.
+				-- edgebars ignore plain :resize (they're winfix*), so these call
+				-- edgy's own resize. Directions/steps mirror your global maps:
+				-- Up=shrink height, Down=grow height (2); Right=shrink width,
+				-- Left=grow width (5).
+				["<M-Up>"] = function(win)
+					win:resize("height", -2)
+				end,
+				["<M-Down>"] = function(win)
+					win:resize("height", 2)
+				end,
+				["<M-Right>"] = function(win)
+					win:resize("width", -5)
+				end,
+				["<M-Left>"] = function(win)
+					win:resize("width", 5)
+				end,
 			},
 
 			-- Don't let leftover edgebar windows trap you in nvim: if only edgy

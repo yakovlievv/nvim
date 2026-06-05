@@ -17,6 +17,16 @@ return {
 		local utils = require("utils.lualine")
 		local icons = require("utils.icons")
 
+		-- Breadcrumbs via trouble.nvim symbols (same approach as LazyVim)
+		local symbols = require("trouble").statusline({
+			mode = "lsp_document_symbols",
+			groups = {},
+			title = false,
+			filter = { range = true },
+			format = "{kind_icon}{symbol.name:Icon}",
+			hl_group = "lualine_c_normal",
+		})
+
 		vim.opt.laststatus = 3
 
 		require("lualine").setup({
@@ -57,6 +67,14 @@ return {
 					},
 					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 					{ utils.pretty_path },
+
+					-- Breadcrumbs (LSP document symbols via trouble.nvim)
+					{
+						symbols.get,
+						cond = function()
+							return vim.b.trouble_lualine ~= false and symbols.has()
+						end,
+					},
 				},
 
 				lualine_x = {
