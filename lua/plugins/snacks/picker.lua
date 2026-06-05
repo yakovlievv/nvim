@@ -32,12 +32,12 @@ return {
 	limit_live = 10000,
 	layouts = {
 		fancy = {
-			fullscreen = true,
+			fullscreen = false,
 			layout = {
 				box = "horizontal",
-				width = 0.93,
+				width = 0.85,
 				min_width = 120,
-				height = 0.97,
+				height = 0.85,
 				{
 					box = "vertical",
 					border = true,
@@ -57,8 +57,7 @@ return {
 			local win = picker.list and picker.list.win and picker.list.win.win
 			if win and vim.api.nvim_win_is_valid(win) then
 				local cur = vim.wo[win].winhighlight
-				local new = cur
-					:gsub("NormalFloat:SnacksPickerList,", "NormalFloat:SnacksPickerListVscode,")
+				local new = cur:gsub("NormalFloat:SnacksPickerList,", "NormalFloat:SnacksPickerListVscode,")
 					:gsub("NormalFloat:SnacksPickerList$", "NormalFloat:SnacksPickerListVscode")
 				vim.api.nvim_set_option_value("winhighlight", new, { win = win })
 			end

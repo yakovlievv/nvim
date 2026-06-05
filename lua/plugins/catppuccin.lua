@@ -69,6 +69,8 @@ return {
 					TreesitterContextBottom = { fg = "NONE", bg = "NONE" },
 					LazyNormal = { bg = colors.base },
 					SnacksPickerListVscode = { bg = colors.base },
+					-- Bufferline neo-tree offset header
+					BufferlineOffsetDim = { fg = colors.surface0 },
 				}
 			end,
 			default_integrations = true,

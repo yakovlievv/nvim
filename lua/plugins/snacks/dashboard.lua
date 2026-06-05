@@ -15,12 +15,12 @@ return {
 				desc = "Grep",
 				action = ":lua Snacks.dashboard.pick('grep')",
 			},
-			-- {
-			-- 	icon = " ",
-			-- 	key = "n",
-			-- 	desc = "New File",
-			-- 	action = ":ene | startinsert",
-			-- },
+			{
+				icon = " ",
+				key = "n",
+				desc = "New File",
+				action = ":ene | startinsert",
+			},
 			{
 				icon = " ",
 				key = "y",
@@ -33,12 +33,12 @@ return {
 				desc = "Lazygit",
 				action = ":lua Snacks.lazygit()",
 			},
-			-- {
-			-- 	icon = " ",
-			-- 	key = "e",
-			-- 	desc = "Oil Nvim",
-			-- 	action = ":Oil",
-			-- },
+			{
+				icon = " ",
+				key = "e",
+				desc = "Oil Nvim",
+				action = ":Oil",
+			},
 			-- {
 			-- 	icon = " ",
 			-- 	key = "r",
@@ -71,7 +71,6 @@ return {
 		{ section = "header" },
 		{ section = "keys", gap = 1, padding = 1 },
 		{ pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-		-- { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 		{
 			function()
 				if vim.fn.has("mac") == 1 then
@@ -93,6 +92,15 @@ return {
 					return {}
 				end
 			end,
+		},
+		{
+			section = "terminal",
+			cmd = 'fortune -s | cowsay | awk \'BEGIN{e=sprintf("%c",27); ftn=e"[38;2;203;166;247m"; cow=e"[38;2;127;132;156m"; rst=e"[0m"} {if(inc)print cow $0 rst; else print ftn $0 rst; if($0 ~ /^ *-+ *$/)inc=1}\'',
+			ttl = 0,
+			height = 15,
+			padding = 1,
+			indent = 4,
+			pane = 2,
 		},
 		{ section = "startup" },
 	},

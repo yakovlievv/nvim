@@ -45,6 +45,13 @@ return {
 				{
 					filetype = "snacks_layout_box",
 				},
+				{
+					filetype = "neo-tree",
+					text = "neovim btw",
+					highlight = "BufferlineOffsetDim",
+					text_align = "left",
+					separator = true,
+				},
 			},
 		},
 	},

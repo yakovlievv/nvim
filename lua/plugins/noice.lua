@@ -11,6 +11,10 @@ return {
 		require("noice").setup({
 			routes = {
 				{
+					view = "notify",
+					filter = { event = "msg_show", kind = { "", "echo", "echomsg" } },
+				},
+				{
 					filter = { event = "notify", find = "No information available" },
 					opts = { skip = true },
 				},

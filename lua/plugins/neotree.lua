@@ -7,7 +7,9 @@ return {
 		"MunifTanjim/nui.nvim",
 		"nvim-mini/mini.icons",
 	},
-
+	keys = {
+		{ "<leader>e", "<cmd>Neotree reveal<cr>", desc = "Reveal in file explorer" },
+	},
 	opts = function(_, opts)
 		local function on_move(data)
 			Snacks.rename.on_rename_file(data.source, data.destination)
@@ -20,6 +22,7 @@ return {
 		})
 	end,
 	config = function()
+		local icons = require("utils.icons")
 		-- Wrap Neotree "j" behavior to loop to top
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = "neo-tree",
@@ -51,7 +54,7 @@ return {
 			popup_border_style = "rounded",
 			enable_git_status = true,
 			enable_diagnostics = true,
-			open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
+			open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "edgy" }, -- when opening files, do not use windows containing these filetypes or buftypes (added "edgy" so the tree never hijacks an edgebar window)
 			open_files_using_relative_paths = false,
 			sort_case_insensitive = false, -- used when sorting files and directories in the tree
 			default_component_configs = {
@@ -81,19 +84,27 @@ return {
 					use_git_status_colors = true,
 					highlight = "NeoTreeFileName",
 				},
+				diagnostics = {
+					symbols = {
+						hint = icons.diagnostics.hint,
+						info = icons.diagnostics.info,
+						warn = icons.diagnostics.warn,
+						error = icons.diagnostics.error,
+					},
+				},
 				git_status = {
 					symbols = {
 						-- Change type
-						added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-						modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
-						deleted = "✖", -- this can only be used in the git_status source
-						renamed = "󰁕", -- this can only be used in the git_status source
+						added = "", --  plus-square
+						modified = "", --  dot-circle
+						deleted = "", --  trash
+						renamed = "󰓡", -- 󰓡 swap
 						-- Status type
-						untracked = "",
-						ignored = "",
-						unstaged = "󰄮", -- 󰄱
-						staged = "", -- 
-						conflict = "",
+						untracked = "", --  question
+						ignored = "", --  eye-slash
+						unstaged = "", --  exclamation
+						staged = "", --  check
+						conflict = "", --  conflict
 					},
 				},
 				file_size = {
