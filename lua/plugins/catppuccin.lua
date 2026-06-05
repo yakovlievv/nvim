@@ -43,6 +43,12 @@ return {
 			color_overrides = {},
 			custom_highlights = function(colors)
 				return {
+					-- Squiggly (undercurl) diagnostics, like LazyVim/VSCode
+					DiagnosticUnderlineError = { undercurl = true, sp = colors.red },
+					DiagnosticUnderlineWarn = { undercurl = true, sp = colors.yellow },
+					DiagnosticUnderlineInfo = { undercurl = true, sp = colors.sky },
+					DiagnosticUnderlineHint = { undercurl = true, sp = colors.teal },
+					DiagnosticUnderlineOk = { undercurl = true, sp = colors.green },
 					-- Mason
 					MasonNormal = { bg = colors.mantle },
 					MasonBorder = { bg = colors.mantle, fg = colors.mantle },

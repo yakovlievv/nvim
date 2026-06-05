@@ -1,15 +1,7 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
-	keys = {
-		{
-			"<leader>e",
-			function()
-				require("neo-tree.command").execute({ toggle = true })
-			end,
-			desc = "Toggle NeoTree",
-		},
-	},
+	cmd = "Neotree",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
@@ -281,7 +273,7 @@ return {
 			},
 			git_status = {
 				window = {
-					position = "float",
+					position = "left",
 					mappings = {
 						["A"] = "git_add_all",
 						["gu"] = "git_unstage_file",
