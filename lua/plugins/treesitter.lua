@@ -81,11 +81,7 @@ return {
 							if not vim.api.nvim_buf_is_valid(buf) then
 								return
 							end
-							if vim.api.nvim_get_current_buf() == buf then
-								vim.wo.foldmethod = "expr"
-								vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-								vim.wo.foldtext = "v:lua.fold_text()"
-							end
+							-- Folding is owned by nvim-ufo (see plugins/ufo.lua).
 							if not skip_ts_indent[vim.bo[buf].filetype] then
 								vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 							end
@@ -159,6 +155,10 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		event = "VeryLazy",
+		keys = {
+			{ "<leader>ut", "<cmd>TSContextToggle<cr>", desc = "Toggle Treesitter Context" },
+		},
 		config = function()
 			require("treesitter-context").setup({
 				enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)

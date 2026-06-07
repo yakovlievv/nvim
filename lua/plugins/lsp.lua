@@ -12,6 +12,11 @@ return {
 				require("blink.cmp").get_lsp_capabilities(),
 				require("lsp-file-operations").default_capabilities()
 			)
+			-- nvim-ufo: advertise folding range support so the lsp fold provider works.
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			}
 			vim.lsp.config("*", { capabilities = capabilities })
 			vim.lsp.config("cssls", {
 				settings = {

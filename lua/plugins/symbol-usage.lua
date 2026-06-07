@@ -1,6 +1,5 @@
 return {
 	"Wansmer/symbol-usage.nvim",
-	event = "LspAttach",
 	keys = {
 		{
 			"<leader>ur",

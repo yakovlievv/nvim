@@ -8,7 +8,7 @@ return {
 		"nvim-mini/mini.icons",
 	},
 	keys = {
-		{ "<leader>e", "<cmd>Neotree reveal<cr>", desc = "Reveal in file explorer" },
+		{ "<leader>e", "<cmd>Neotree reveal toggle<cr>", desc = "Reveal/toggle file explorer" },
 	},
 	opts = function(_, opts)
 		local function on_move(data)

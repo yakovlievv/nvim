@@ -70,9 +70,14 @@ vim.api.nvim_create_autocmd("BufWinLeave", {
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	group = folds_group,
 	callback = function()
-		if vim.bo.buftype == "" and vim.api.nvim_buf_get_name(0) ~= "" then
-			vim.cmd("silent! loadview")
-		end
+		-- nvim-ufo computes & applies folds asynchronously (all open) on read.
+		-- Defer loadview one tick so it restores the saved fold state *after*
+		-- ufo's apply, instead of being clobbered by it.
+		vim.schedule(function()
+			if vim.bo.buftype == "" and vim.api.nvim_buf_get_name(0) ~= "" then
+				vim.cmd("silent! loadview")
+			end
+		end)
 	end,
 })
 
