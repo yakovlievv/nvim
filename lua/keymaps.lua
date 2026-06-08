@@ -1,4 +1,4 @@
-  i ngith-- wrapper function
+-- wrapper function
 local function map(modes, key, action, opts)
 	local default_opts = { silent = true, noremap = true }
 	-- merge tables, user opts override defaults
@@ -52,7 +52,6 @@ map({ "x", "n", "o" }, "<leader>C", [["_C]], { desc = "Change (no yank)" })
 map({ "x", "n", "o" }, "<leader>c", [["_C]], { desc = "Change to EOL (no yank)" })
 map({ "x", "n", "o" }, "<leader>d", [["_d]], { desc = "Delete (no yank)" })
 map({ "x", "n", "o" }, "<leader>D", [["_D]], { desc = "Delete to EOL (no yank)" })
-
 
 -- join lines without moving the cursor
 map("n", "J", function()
@@ -113,15 +112,15 @@ end, { desc = "Toggle wrap" })
 map("i", "<C-k>", vim.lsp.buf.hover, { desc = "LSP Hover" })
 
 vim.keymap.set({ "n", "i", "s" }, "<m-j>", function()
-  if not require("noice.lsp").scroll(4) then
-    return "<c-f>"
-  end
+	if not require("noice.lsp").scroll(4) then
+		return "<c-f>"
+	end
 end, { silent = true, expr = true })
 
 vim.keymap.set({ "n", "i", "s" }, "<m-k>", function()
-  if not require("noice.lsp").scroll(-4) then
-    return "<c-b>"
-  end
+	if not require("noice.lsp").scroll(-4) then
+		return "<c-b>"
+	end
 end, { silent = true, expr = true })
 
 -- diagnostics (works without LSP too)
@@ -182,10 +181,3 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
-
-----------------
----- TERMINAL --
-----------------
-
--- C-w in terminal: leave terminal mode and start a window command in one press
-map("t", "<C-w>", [[<C-\><C-n><C-w>]], { desc = "Exit terminal mode + window command" })

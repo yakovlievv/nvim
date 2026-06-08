@@ -6,6 +6,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- Restore the cursor to its last position when reopening a file (reads the `"`
+-- mark from shada). Not session/view persistence — just a one-shot jump on open.
+vim.api.nvim_create_autocmd("BufReadPost", {
+	group = vim.api.nvim_create_augroup("my.last-cursor", { clear = true }),
+	desc = "Restore last cursor position",
+	callback = function(ev)
+		local exclude = { "gitcommit", "gitrebase", "commit" }
+		if vim.tbl_contains(exclude, vim.bo[ev.buf].filetype) then
+			return
+		end
+		local mark = vim.api.nvim_buf_get_mark(ev.buf, '"')
+		local lcount = vim.api.nvim_buf_line_count(ev.buf)
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
+	end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	group = vim.api.nvim_create_augroup("my.markdown-wrap", { clear = true }),
@@ -55,31 +73,6 @@ for width, fts in pairs(indent_groups) do
 		end,
 	})
 end
-
-local folds_group = vim.api.nvim_create_augroup("my.folds", { clear = true })
-
-vim.api.nvim_create_autocmd("BufWinLeave", {
-	group = folds_group,
-	callback = function()
-		if vim.bo.buftype == "" and vim.api.nvim_buf_get_name(0) ~= "" then
-			vim.cmd("silent! mkview")
-		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufWinEnter", {
-	group = folds_group,
-	callback = function()
-		-- nvim-ufo computes & applies folds asynchronously (all open) on read.
-		-- Defer loadview one tick so it restores the saved fold state *after*
-		-- ufo's apply, instead of being clobbered by it.
-		vim.schedule(function()
-			if vim.bo.buftype == "" and vim.api.nvim_buf_get_name(0) ~= "" then
-				vim.cmd("silent! loadview")
-			end
-		end)
-	end,
-})
 
 -- macOS: re-sign native .so/.dylib files after lazy installs/updates to prevent
 -- code signature crashes (EXC_BAD_ACCESS / SIGKILL Code Signature Invalid)
