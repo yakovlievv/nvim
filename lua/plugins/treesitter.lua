@@ -157,7 +157,7 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		event = "VeryLazy",
 		keys = {
-			{ "<leader>ut", "<cmd>TSContextToggle<cr>", desc = "Toggle Treesitter Context" },
+			{ "<leader>ut", "<cmd>TSContext toggle<cr>", desc = "Toggle Treesitter Context" },
 		},
 		config = function()
 			require("treesitter-context").setup({

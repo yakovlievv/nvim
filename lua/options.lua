@@ -77,6 +77,7 @@ opt.undodir = undodir
 opt.undofile = true -- enable persistent undo
 opt.hlsearch = true
 opt.incsearch = true
+opt.confirm = true -- prompt to save instead of erroring on unsaved quit
 opt.jumpoptions = "view"
 
 -- Neovim 0.10+ quality-of-life

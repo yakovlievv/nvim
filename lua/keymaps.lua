@@ -1,4 +1,4 @@
--- wrapper function
+  i ngith-- wrapper function
 local function map(modes, key, action, opts)
 	local default_opts = { silent = true, noremap = true }
 	-- merge tables, user opts override defaults
@@ -73,7 +73,6 @@ map("n", "Q", "@q", { desc = "Replay macro q" })
 
 -- execute stuff
 map("n", "<leader>X", ":!chmod +x %<CR>", { silent = false, desc = "Make executable" })
-
 -- delete current file (with confirmation)
 map("n", "<leader>fD", function()
 	local file = vim.api.nvim_buf_get_name(0)
@@ -183,3 +182,10 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+
+----------------
+---- TERMINAL --
+----------------
+
+-- C-w in terminal: leave terminal mode and start a window command in one press
+map("t", "<C-w>", [[<C-\><C-n><C-w>]], { desc = "Exit terminal mode + window command" })

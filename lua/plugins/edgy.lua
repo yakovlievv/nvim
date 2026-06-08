@@ -32,6 +32,19 @@ local function is_claude(buf)
 	return vim.api.nvim_buf_get_name(buf):lower():find("claude", 1, true) ~= nil
 end
 
+-- edgy treats each edge's configured `size` (options.<edge>.size) as a HARD
+-- MINIMUM for the edge's shared dimension: edgebar:resize() does
+-- `math.max(bounds, M.size(self.size))`, so the built-in per-window
+-- win:resize() can GROW an edge but never shrink it below that size. To
+-- resize BOTH ways we move the floor itself (mutate edgebar.size) and re-run
+-- edgy's layout. Clamped to an integer >= 10 (edgy reads a value < 1 as a
+-- fraction of the screen, which we never want here).
+local function grow_edge(win, amount)
+	local bar = win.view.edgebar
+	bar.size = math.max(math.floor((tonumber(bar.size) or 0) + amount), 10)
+	require("edgy.layout").update()
+end
+
 return {
 	-- =====================================================================
 	-- 1) edgy.nvim itself
@@ -54,6 +67,39 @@ return {
 			-- manually inside undotree. Set back to 1 (default) if you'd rather
 			-- dock both. Lives here so deleting this file restores default.
 			vim.g.undotree_DiffAutoOpen = 0
+			-- edgy registers its edgebar keymaps in NORMAL mode only
+			-- (actions.lua uses mode "n"). The claudecode / bottom split
+			-- terminals start in TERMINAL mode, so the <M-arrow> resize maps
+			-- wouldn't reach edgy until you pressed <C-\><C-n>. Mirror them into
+			-- terminal mode, buffer-locally, for edgy-docked terminals ONLY (a
+			-- global `t` map would also hijack the <C-t> floating terminal).
+			vim.api.nvim_create_autocmd("WinEnter", {
+				group = vim.api.nvim_create_augroup("edgy_term_resize", { clear = true }),
+				callback = function()
+					local buf = vim.api.nvim_get_current_buf()
+					if vim.bo[buf].buftype ~= "terminal" or vim.b[buf].edgy_term_resize then
+						return
+					end
+					-- only an edgy-docked window resolves here; floats / normal
+					-- terminals return nil and are left untouched.
+					if not require("edgy.editor").get_win() then
+						return
+					end
+					vim.b[buf].edgy_term_resize = true
+					local function tmap(lhs, amount)
+						vim.keymap.set("t", lhs, function()
+							local w = require("edgy.editor").get_win()
+							if w then
+								grow_edge(w, amount)
+							end
+						end, { buffer = buf, silent = true })
+					end
+					tmap("<M-Up>", -2)
+					tmap("<M-Down>", 2)
+					tmap("<M-Right>", -5)
+					tmap("<M-Left>", 5)
+				end,
+			})
 		end,
 		opts = {
 			-- Prototype: no animation, snappier and easier to reason about.
@@ -244,21 +290,23 @@ return {
 					win:prev({ focus = true })
 				end,
 				-- Resize edges with the same <M-arrows> you use everywhere else.
-				-- edgebars ignore plain :resize (they're winfix*), so these call
-				-- edgy's own resize. Directions/steps mirror your global maps:
+				-- edgebars ignore plain :resize (winfix*); the built-in win:resize only
+				-- grows, so these go through
+				-- grow_edge (moves the edge's floor, so it shrinks too). Steps mirror
+				-- your global maps:
 				-- Up=shrink height, Down=grow height (2); Right=shrink width,
 				-- Left=grow width (5).
 				["<M-Up>"] = function(win)
-					win:resize("height", -2)
+					grow_edge(win, -2)
 				end,
 				["<M-Down>"] = function(win)
-					win:resize("height", 2)
+					grow_edge(win, 2)
 				end,
 				["<M-Right>"] = function(win)
-					win:resize("width", -5)
+					grow_edge(win, -5)
 				end,
 				["<M-Left>"] = function(win)
-					win:resize("width", 5)
+					grow_edge(win, 5)
 				end,
 			},
 
