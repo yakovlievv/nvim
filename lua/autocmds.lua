@@ -6,24 +6,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- Restore the cursor to its last position when reopening a file (reads the `"`
--- mark from shada). Not session/view persistence — just a one-shot jump on open.
-vim.api.nvim_create_autocmd("BufReadPost", {
-	group = vim.api.nvim_create_augroup("my.last-cursor", { clear = true }),
-	desc = "Restore last cursor position",
-	callback = function(ev)
-		local exclude = { "gitcommit", "gitrebase", "commit" }
-		if vim.tbl_contains(exclude, vim.bo[ev.buf].filetype) then
-			return
-		end
-		local mark = vim.api.nvim_buf_get_mark(ev.buf, '"')
-		local lcount = vim.api.nvim_buf_line_count(ev.buf)
-		if mark[1] > 0 and mark[1] <= lcount then
-			pcall(vim.api.nvim_win_set_cursor, 0, mark)
-		end
-	end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	group = vim.api.nvim_create_augroup("my.markdown-wrap", { clear = true }),
@@ -184,6 +166,48 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ev)
 		vim.bo[ev.buf].buflisted = false
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = ev.buf, silent = true, nowait = true })
+	end,
+})
+
+-- Persist cursor, scroll and fold state per file via view files (viewoptions in
+-- options.lua). loadview restores ONCE per buffer load, guarded by a buffer-local
+-- flag, and runs SYNCHRONOUSLY (no vim.schedule). That guard is the fix for the
+-- old jumping bug: without it, loadview re-fired on every window re-entry and
+-- snapped the cursor/scroll back after you'd moved. It also replaces the old
+-- shada-mark cursor restore — one source of truth, so nothing fights over the
+-- cursor.
+local view_ignore_ft = { gitcommit = true, gitrebase = true, commit = true }
+
+local function view_eligible(buf)
+	-- Only real, on-disk, editable file buffers — skip terminals/nofile/help/etc.
+	if vim.bo[buf].buftype ~= "" or not vim.bo[buf].modifiable or vim.bo[buf].filetype == "" then
+		return false
+	end
+	if view_ignore_ft[vim.bo[buf].filetype] then
+		return false
+	end
+	local name = vim.api.nvim_buf_get_name(buf)
+	return name ~= "" and vim.fn.filereadable(name) == 1
+end
+
+local view_group = vim.api.nvim_create_augroup("my.view", { clear = true })
+vim.api.nvim_create_autocmd({ "BufWinLeave", "BufWritePost" }, {
+	group = view_group,
+	desc = "Save cursor/scroll/fold view",
+	callback = function(ev)
+		if vim.b[ev.buf].view_activated then
+			vim.cmd.mkview({ mods = { emsg_silent = true } })
+		end
+	end,
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	group = view_group,
+	desc = "Restore cursor/scroll/fold view (once per buffer load)",
+	callback = function(ev)
+		if not vim.b[ev.buf].view_activated and view_eligible(ev.buf) then
+			vim.b[ev.buf].view_activated = true
+			vim.cmd.loadview({ mods = { emsg_silent = true } })
+		end
 	end,
 })
 

@@ -79,6 +79,10 @@ opt.hlsearch = true
 opt.incsearch = true
 opt.confirm = true -- prompt to save instead of erroring on unsaved quit
 opt.jumpoptions = "view"
+-- Persist cursor, scroll and fold state per file in view files. Deliberately
+-- NOT curdir/options/localoptions: those change cwd and override buffer-local
+-- config on load, which is a separate class of view bugs.
+opt.viewoptions = "cursor,folds"
 
 -- Neovim 0.10+ quality-of-life
 opt.smoothscroll = true -- smooth <C-d>/<C-u> scrolling
