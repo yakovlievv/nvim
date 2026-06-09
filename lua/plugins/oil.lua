@@ -18,9 +18,7 @@ return {
 	keys = {
 		{
 			"<C-e>",
-			function()
-				vim.cmd("Oil --preview")
-			end,
+			"<cmd>Oil<CR>",
 			desc = "Open parent directory",
 		},
 	},
@@ -108,12 +106,6 @@ return {
 				["gx"] = "actions.open_external",
 				["g."] = { "actions.toggle_hidden", mode = "n" },
 				["g\\"] = { "actions.toggle_trash", mode = "n" },
-				["m"] = {
-					callback = function()
-						require("utils.dir_marks").set_mark()
-					end,
-					desc = "Set directory mark",
-				},
 			},
 			-- Set to false to disable all of the above keymaps
 			use_default_keymaps = true,
