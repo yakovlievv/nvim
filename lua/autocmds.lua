@@ -222,3 +222,28 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })
+
+
+-- <leader>w (visual): instantly wrap a JSX selection in a tag, no menu.
+-- Stashes the selection via LuaSnip's cut_keys, then expands a tag snippet
+-- that reads it back -- the appended <cmd> fires after the stash completes.
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "javascriptreact", "typescriptreact" },
+	group = vim.api.nvim_create_augroup("my.jsx-wrap", { clear = true }),
+	desc = "<leader>w wraps a visual JSX selection in a tag",
+	callback = function(ev)
+		vim.keymap.set("x", "<leader>w", function()
+			-- LuaSnip is lazy-loaded on InsertEnter; ensure it's available
+			if not package.loaded["luasnip"] then
+				require("lazy").load({ plugins = { "LuaSnip" } })
+			end
+			local keys = require("luasnip.util.select").cut_keys
+				.. "<cmd>lua require('utils.jsxwrap')()<cr>"
+			vim.api.nvim_feedkeys(
+				vim.api.nvim_replace_termcodes(keys, true, true, true),
+				"n",
+				false
+			)
+		end, { buffer = ev.buf, desc = "Wrap JSX selection in tag" })
+	end,
+})

@@ -12,7 +12,7 @@ return {
 			routes = {
 				{
 					view = "notify",
-					filter = { event = "msg_show", kind = { "", "echo", "echomsg" } },
+					filter = { event = "msg_show", kind = { "echo", "echomsg" } },
 				},
 				{
 					filter = { event = "notify", find = "No information available" },
@@ -38,6 +38,7 @@ return {
 				view_history = "messages", -- view for :messages
 			},
 			lsp = {
+				signature = { enabled = false },
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,

@@ -88,7 +88,7 @@ map("n", "<leader>fD", function()
 		vim.notify("Failed to delete file", vim.log.levels.ERROR)
 		return
 	end
-	require("snacks").bufdelete()
+	require("snacks").bufdelete({ force = true })
 	vim.notify("Deleted " .. vim.fn.fnamemodify(file, ":~:."), vim.log.levels.INFO)
 end, { desc = "Delete current file (confirm)" })
 
@@ -108,8 +108,6 @@ map("n", "<C-o>", "<C-o>", { desc = "Jumplist backward" })
 map("n", "<leader>uw", function()
 	vim.opt.wrap = not vim.opt.wrap:get()
 end, { desc = "Toggle wrap" })
-
-map("i", "<C-k>", vim.lsp.buf.hover, { desc = "LSP Hover" })
 
 vim.keymap.set({ "n", "i", "s" }, "<m-j>", function()
 	if not require("noice.lsp").scroll(4) then

@@ -66,7 +66,9 @@ return {
 					CursorLine = { bg = colors.mantle },
 					-- Treesitter Context
 					TreesitterContext = { bg = "NONE", fg = "NONE" },
-					TreesitterContextBottom = { fg = "NONE", bg = "NONE" },
+					-- Bottom separator line is an underline; color comes from `sp`
+					TreesitterContextBottom = { bg = "NONE", underline = true, sp = colors.surface0 },
+					TreesitterContextLineNumberBottom = { bg = "NONE", underline = true, sp = colors.surface0 },
 					LazyNormal = { bg = colors.base },
 					SnacksPickerListVscode = { bg = colors.base },
 					-- Bufferline neo-tree offset header

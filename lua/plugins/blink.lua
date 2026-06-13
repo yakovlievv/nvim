@@ -11,6 +11,11 @@ return {
 			version = "v2.*",
 			build = "make install_jsregexp",
 			config = function()
+				require("luasnip").setup({
+					-- visual-select text, press this key to stash it into
+					-- TM_SELECTED_TEXT, then type the snippet trigger
+					store_selection_keys = "<Tab>",
+				})
 				require("luasnip.loaders.from_vscode").lazy_load()
 				require("luasnip.loaders.from_lua").lazy_load({
 					paths = { vim.fn.stdpath("config") .. "/luasnippets" },
@@ -34,7 +39,19 @@ return {
 			keymap = {
 				preset = "none",
 				["<C-d>"] = { "show_documentation", "hide_documentation" },
-				["<C-e>"] = { "hide" },
+				-- one key to hide everything (menu + docs + signature); shows it back when nothing is open
+				["<C-e>"] = {
+					function(cmp)
+						if cmp.is_visible() or cmp.is_signature_visible() then
+							cmp.hide()
+							cmp.hide_signature()
+							return true
+						end
+						cmp.show()
+						cmp.show_signature()
+						return true
+					end,
+				},
 				["<C-y>"] = { "select_and_accept", "show" },
 				["<Up>"] = { "select_prev", "fallback" },
 				["<Down>"] = { "select_next", "fallback" },
