@@ -1,6 +1,21 @@
 return {
 	"supermaven-inc/supermaven-nvim",
 	event = "InsertEnter",
+	keys = {
+		{
+			"<leader>at",
+			function()
+				local api = require("supermaven-nvim.api")
+				api.toggle()
+				if api.is_running() then
+					vim.notify("Supermaven enabled", vim.log.levels.INFO, { title = "Supermaven" })
+				else
+					vim.notify("Supermaven disabled", vim.log.levels.WARN, { title = "Supermaven" })
+				end
+			end,
+			desc = "Toggle Supermaven",
+		},
+	},
 	config = function()
 		require("supermaven-nvim").setup({
 			-- We map keys ourselves below so <Tab> can fall back to tabout.nvim.
