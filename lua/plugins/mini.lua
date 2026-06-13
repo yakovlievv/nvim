@@ -51,4 +51,18 @@ return {
 			require("mini.icons").mock_nvim_web_devicons()
 		end,
 	},
+	{
+		"nvim-mini/mini.bracketed",
+		version = "*",
+		event = "VeryLazy",
+		config = function()
+			require("mini.bracketed").setup({
+				-- disabled: handled by dedicated plugins/keymaps
+				buffer = { suffix = "" }, -- bufferline ([b/]b)
+				conflict = { suffix = "" }, -- git-conflict ([x/]x)
+				diagnostic = { suffix = "" }, -- vim.diagnostic ([d/]d)
+				quickfix = { suffix = "" }, -- cprev/cnext ([q/]q)
+			})
+		end,
+	},
 }
