@@ -23,6 +23,10 @@ return {
 			end,
 		},
 		"folke/lazydev.nvim",
+		{
+			"Kaiser-Yang/blink-cmp-dictionary",
+			dependencies = { "nvim-lua/plenary.nvim" },
+		},
 	},
 
 	config = function()
@@ -96,7 +100,7 @@ return {
 			},
 
 			sources = {
-				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+				default = { "lazydev", "lsp", "path", "snippets", "buffer", "dictionary" },
 				providers = {
 					lazydev = {
 						name = "[Dev]",
@@ -107,6 +111,21 @@ return {
 					path = { name = "[Path]" },
 					snippets = { name = "[Snip]" },
 					buffer = { name = "[Buf]" },
+					dictionary = {
+						name = "[Dict]",
+						module = "blink-cmp-dictionary",
+						min_keyword_length = 3,
+						-- only pull dictionary words in prose-y filetypes
+						enabled = function()
+							return vim.tbl_contains(
+								{ "markdown", "text", "gitcommit", "tex", "" },
+								vim.bo.filetype
+							)
+						end,
+						opts = {
+							dictionary_files = { "/usr/share/dict/words" },
+						},
+					},
 				},
 			},
 		})
