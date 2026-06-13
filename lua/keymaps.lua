@@ -11,47 +11,45 @@ end
 -----------------
 -- This section changes some of the default motions
 
+-- I'm not sure whether to keep it. It's clashing with my muscle memory
+-- even thought it's actually in theory much more comfortable
 map({ "x", "n", "o" }, "H", "_", { desc = "Begging of the line" })
 map({ "x", "n", "o" }, "L", "g_", { desc = "End of the line" })
 
+-- This one is a big interesting too. i'm still getting used to it
 map({ "n", "v" }, "M", "zz", { desc = "center the screen" })
 
+-- this one is acutally good. C-^ is usefull but it's located at a very weird place. This one solves it completely
 map({ "n", "x" }, "<C-b>", "<C-^>", { desc = "switch to previuos buffer" })
 map("i", "<C-b>", "<Esc><C-^>", { desc = "switch to previuos buffer" })
-
---------------------------
----- EXPERIMENTAL QOL ----
---------------------------
--- Experimental stuff that might be better in theory
-
-map("n", "<leader>-", ":split<Cr>", { desc = "Horizontal split" })
-map("n", "<leader>|", ":vsplit<Cr>", { desc = "Vertical split" })
-
-map("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
 
 -------------
 ---- QOL ----
 -------------
 -- amazing bindings that improve life
 
+-- Making splits is an often action. And i wanted to match my tmux
+-- muscle memory. and those bindings are very intuitive
+map("n", "<leader>-", ":split<Cr>", { desc = "Horizontal split" })
+map("n", "<leader>|", ":vsplit<Cr>", { desc = "Vertical split" })
+
+-- Use this all the time
+map("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
+
+-- This seriously just have to be the default
 map("x", ">", ">gv")
 map("x", "<", "<gv")
 
+-- This one might be a bit weird cause i used to use J,K in visual for that, but C-j/C-k
+-- were just empty slots so i thought this might be a bit better.
 map("x", "<C-j>", ":m '>+1<CR>gv=gv")
 map("x", "<C-k>", ":m '<-2<CR>gv=gv")
 map("n", "<C-k>", ":m .-2<CR>==")
 map("n", "<C-j>", ":m .+1<CR>==")
 
+-- Usefull sometimes, not very much tbh
 map("n", "<leader>S", ":%s/<<C-r><C-w>>/<C-r><C-w>/gI<Left><Left><Left>", { silent = false, desc = "Substitute word" })
 map("v", "<leader>S", ':%s/<C-r>"/<C-r>"/gI<Left><Left><Left>', { silent = false, desc = "Substitute selection" })
-
--- not use system clipboard
-map({ "x", "n", "o" }, "<leader>p", [["_dp]], { desc = "Paste without yanking" })
-map({ "x", "n", "o" }, "<leader>P", [["_dP]], { desc = "Paste before (no yank)" })
-map({ "x", "n", "o" }, "<leader>C", [["_C]], { desc = "Change (no yank)" })
-map({ "x", "n", "o" }, "<leader>c", [["_C]], { desc = "Change to EOL (no yank)" })
-map({ "x", "n", "o" }, "<leader>d", [["_d]], { desc = "Delete (no yank)" })
-map({ "x", "n", "o" }, "<leader>D", [["_D]], { desc = "Delete to EOL (no yank)" })
 
 -- join lines without moving the cursor
 map("n", "J", function()
