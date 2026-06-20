@@ -57,7 +57,7 @@ The lazy-loading architecture is close to textbook:
 
 ```vim
 :Lazy profile
-```
+``gona`
 ```sh
 nvim --startuptime /tmp/st.log +q && tail -40 /tmp/st.log
 ```
@@ -72,11 +72,11 @@ Breadth and consistency are excellent: a clean `map()` wrapper, logical `<leader
 
 **Two real problems:**
 
-1. **`<leader>c` collides with the entire `<leader>c…` code group.** `keymaps.lua:52` maps `<leader>c` directly to `[["_C]]`, and line 51 maps `<leader>C` to the *same* `[["_C]]`. So:
+1. (FIXED) **`<leader>c` collides with the entire `<leader>c…` code group.** `keymaps.lua:52` maps `<leader>c` directly to `[["_C]]`, and line 51 maps `<leader>C` to the *same* `[["_C]]`. So:
    - `<leader>c` and `<leader>C` are duplicates (line 52 is almost certainly meant to be `[["_c]]`).
    - Because `<leader>c` is a *complete* mapping, every `<leader>c…` code action (`cd`, `ca`, `ch`, `cl`, `cM`, `cD` from `autocmds.lua` + `keys/lsp.lua`) now has to wait out `timeoutlen` (400ms) before firing, and `<leader>c` alone will fire a no-yank change-to-EOL. This is the one binding I'd fix today: either remove the `<leader>c` map or move no-yank change to a non-prefix key.
 
-2. **Insert-mode `<C-k>` is ambiguous.** `keymaps.lua:112` maps insert `<C-k>` to `vim.lsp.buf.hover`, while `blink.lua:41` maps `<C-k>` to `select_prev`. When the completion menu is open, blink wins (so hover is unreachable); when it's closed, you get hover. Pick one — most people want `<C-k>`/`<C-j>` as menu navigation and put hover elsewhere.
+2. (FIXED) **Insert-mode `<C-k>` is ambiguous.** `keymaps.lua:112` maps insert `<C-k>` to `vim.lsp.buf.hover`, while `blink.lua:41` maps `<C-k>` to `select_prev`. When the completion menu is open, blink wins (so hover is unreachable); when it's closed, you get hover. Pick one — most people want `<C-k>`/`<C-j>` as menu navigation and put hover elsewhere.
 
 **Smaller notes:**
 - `<C-q>` is described "Quit all" but runs `:q` (single window) (`keymaps.lua:136`).
@@ -96,8 +96,6 @@ Curation is strong and current. No abandonware, no deprecated forks, versions pi
 - **Editing:** mini.ai/surround, treesj, dial, yanky, spider, tabout, autopairs, ts-comments, matchup — a complete text-manipulation kit with no overlap.
 
 **Gaps worth considering:**
-- **No DAP.** lualine already has a guarded DAP status component (`lualine.lua:84`) and `autocmds.lua` whitelists `neotest-*` filetypes for `q`-to-close — so the *intent* is there but neither `nvim-dap` nor `neotest` is installed. If you debug or test in-editor, this is the biggest functional gap. If you don't, delete the dead component/whitelist entries to reduce confusion.
-- **No test runner** (`neotest`), per above.
 - **No structured notes/markdown-editing beyond render-markdown** — fine if you don't need it.
 - `luarocks.nvim` is pulled in but only `vhyrro/luarocks.nvim` — confirm something actually needs it (rocks are disabled in lazy config), else it's a removable dependency.
 
@@ -116,24 +114,10 @@ Nothing here is bloated. The set is large because your workflow is broad, not be
 - Auto-create-parent-dirs on `:w`, auto-`checktime` on focus, `wincmd =` on resize, `q`-to-close for UI panels — all standard-but-correct.
 
 **Tiny nits:**
-- `linebreak = true` (`options.lua:27`) is a no-op while `wrap = false` (it only affects wrapped lines). Harmless, but your memory notes record it as "removed" — it's back. The markdown autocmd sets both locally anyway.
 - The `close-with-q` filetype list (`autocmds.lua:148`) includes `neotest-*` panels for plugins you don't have installed yet. Cosmetic.
 
 ---
 
 ## Prioritized recommendations
-
-**Fix now (5 minutes):**
-1. `keymaps.lua:52` — `<leader>c` shouldn't be a standalone map; it duplicates `<leader>C` and stalls the whole `<leader>c…` LSP group behind `timeoutlen`. Change to `"_c` on a non-prefix key, or drop it.
-2. Resolve the insert-mode `<C-k>` hover-vs-completion ambiguity (`keymaps.lua:112` vs `blink.lua:41`).
-
-**Consider (worth a think):**
-3. Decide whether you actually use both oil *and* neo-tree; drop one if not.
-4. Either install `nvim-dap`(+`neotest`) to match the lualine/autocmd hooks, or remove the dead DAP/neotest references.
-5. Bump `blink` doc `auto_show_delay_ms` from 10 to ~150 if you ever see doc-window flicker.
-
-**Optional polish:**
-6. Fix the `<C-q>` "Quit all" description (it's single-window).
-7. Re-remove the no-op `linebreak = true` if you care about the memory note staying accurate.
 
 **Verify performance empirically:** run the two commands in the [Performance](#performance) section (or toggle `<leader>Dpp`) and I'll turn the A- estimate into measured hotspots.

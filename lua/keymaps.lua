@@ -40,12 +40,27 @@ map("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
 map("x", ">", ">gv")
 map("x", "<", "<gv")
 
--- This one might be a bit weird cause i used to use J,K in visual for that, but C-j/C-k
--- were just empty slots so i thought this might be a bit better.
-map("x", "<C-j>", ":m '>+1<CR>gv=gv")
-map("x", "<C-k>", ":m '<-2<CR>gv=gv")
-map("n", "<C-k>", ":m .-2<CR>==")
-map("n", "<C-j>", ":m .+1<CR>==")
+-- This one is still better than the other version using C-j/k
+map("x", "J", ":m '>+1<CR>gv=gv")
+map("x", "K", ":m '<-2<CR>gv=gv")
+
+local function hover_scroll(dir)
+	local win = vim.api.nvim_get_current_win()
+	local cfg = vim.api.nvim_win_get_config(win)
+
+	-- only scroll if we're inside a float
+	if cfg.relative ~= "" then
+		vim.cmd(("normal! %s<C-e>"):format(dir > 0 and "" or "1"))
+	end
+end
+
+vim.keymap.set("n", "<C-j>", function()
+	hover_scroll(1)
+end)
+
+vim.keymap.set("n", "<C-k>", function()
+	hover_scroll(-1)
+end)
 
 -- Usefull sometimes, not very much tbh
 map("n", "<leader>S", ":%s/<<C-r><C-w>>/<C-r><C-w>/gI<Left><Left><Left>", { silent = false, desc = "Substitute word" })
@@ -129,7 +144,7 @@ end, { desc = "Line Diagnostics" })
 
 -- simple write and quit
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
-map({ "n", "v", "i" }, "<C-q>", "<Cmd>q<Cr>", { desc = "Quit all" })
+map({ "n", "v", "i" }, "<C-q>", "<Cmd>q<Cr>", { desc = "Close window" })
 
 -- escape disable search-highlight
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
